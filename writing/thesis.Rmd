@@ -1,0 +1,58 @@
+---
+title: 'Thesis -- will need a more descriptive title!'
+subtitle: "Master's Thesis"
+author: 'Stefano Mezzini'
+date: 'April 2023'
+# bibliography: 'masters-thesis.bib'
+# csl: unsure.csl
+header-includes:
+    - \usepackage{setspace}\doublespacing
+    # - \usepackage{gensymb}
+    # - \usepackage{geometry} \geometry{margin=1in, lmargin=1.5in}
+    # - \pagenumbering{gobble}
+    # - \usepackage{float}
+    # - \usepackage{indentfirst}
+    # - \usepackage{afterpage}
+    # - \usepackage{ragged2e}
+output:
+  bookdown::pdf_document2:
+    latex_engine: xelatex
+    number_sections: true
+    toc: true
+    fig_caption: true
+    keep_tex: false
+---
+
+<!--
+
+refer to the style guideline at https://github.com/jepa/ubcdown
+
+add:
+- headers
+- references
+- how classes are going & how I can apply what I've leaned
+- how TAing is going
+-->
+
+# Introduction
+
+- spend time reading papers initially to do a review, get a review paper out of it
+- make preditions/hypotheses for project
+- what influences stochasticity: what is it and what is affecting it
+- very little testing has been done on effects of stochasticity
+
+# Methods
+
+<!-- - look at HPAMs? -->
+
+# Evnironmental stochasticity map
+
+- currently don't have a raster of stochasticity => paper / product
+- PCA on main drivers/causes of stochasticity
+
+# Movement analysis
+
+- add HFI to analysis
+
+# Synthesis chapter
+<!-- why is this  work important? so what? now what?-->
