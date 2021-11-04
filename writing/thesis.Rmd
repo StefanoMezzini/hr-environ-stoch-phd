@@ -3,15 +3,15 @@ title: 'Thesis -- will need a more descriptive title!'
 subtitle: "Master's Thesis"
 author: 'Stefano Mezzini'
 date: 'April 2023'
-# bibliography: 'masters-thesis.bib'
+bibliography: 'masters-refs.bib'
 # csl: unsure.csl
 header-includes:
     - \usepackage{setspace}\doublespacing
+    - \usepackage{indentfirst} # add indent to first line of each paragraph
     # - \usepackage{gensymb}
     # - \usepackage{geometry} \geometry{margin=1in, lmargin=1.5in}
     # - \pagenumbering{gobble}
     # - \usepackage{float}
-    # - \usepackage{indentfirst}
     # - \usepackage{afterpage}
     # - \usepackage{ragged2e}
 output:
@@ -30,20 +30,42 @@ refer to the style guideline at https://github.com/jepa/ubcdown
 add:
 - headers
 - references
-- how classes are going & how I can apply what I've leaned
-- how TAing is going
+- what I can apply from classes
 -->
+
+\newpage
 
 # Introduction
 
 - spend time reading papers initially to do a review, get a review paper out of it
-- make preditions/hypotheses for project
+- make predictions/hypotheses for project
 - what influences stochasticity: what is it and what is affecting it
 - very little testing has been done on effects of stochasticity
+
+## Importance and recognition of Traditional Indigenous Knowledge
+
+- calls to action for scientists: @wong_towards_2020
+- weaving TIK and Western knowledge: @tengo_weaving_2017
+- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
+- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
+- fish conservation, Indigenous perspectives [@bowles_threepronged_2021]
+- Inform priors and simulation distributions using Indigenous Traditional Knowledge:
+    - A Bayesian framework with Indigenous Knowledge-informed priors [@girondot_bayesian_2015]
+    - *Local knowledge in ecological modeling* [@belisle_local_2018]
+    - https://focus.science.ubc.ca/stats-660805dd930a
+
+## Time scale of stochasticity
+
+Organisms are most affected by stochastic events and processes which occur on time scales which are shorter than the organism's life span [@ref]. Weekly heavy rains which alter a lake's salinity [@ref] are more likely to affect the lake's inhabitants than a multi-centennial drought, and high-salinity conditions may be perceived as the (stressful) standard by organisms which were born during periods of drought. However, stochastic processes and events which occur on time scales that are longer than an organism's lifespan may still cause significant effects on a population's fitness and stability. Droughts which occur on the time scale of centuries or millennia (@haig_assessment_2013) are unlikely to affect organisms directly, but such events could still alter the population's habitat or breeding grounds enough to cause a population collapse or prevent individuals from reproducing in their habitual breeding grounds (or reproduce altogether).
+
+For an event or process to be recognized as deterministic by an individual, it must occur multiple times during the individual's lifetime (but the converse is not true). *some animals can develop memory* [@foley_severe_2008]
 
 # Methods
 
 <!-- - look at HPAMs? -->
+
+Inform priors and simulation distributions using Indigenous Traditional Knowledge
+
 
 # Evnironmental stochasticity map
 
@@ -56,3 +78,7 @@ add:
 
 # Synthesis chapter
 <!-- why is this  work important? so what? now what?-->
+
+\newpage
+
+# References
