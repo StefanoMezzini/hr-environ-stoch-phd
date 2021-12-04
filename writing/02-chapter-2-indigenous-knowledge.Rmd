@@ -1,0 +1,25 @@
+\newpage
+
+# Chapter 2: Two-Eyed Seeing
+
+## Importance and recognition of Traditional Indigenous Knowledge
+
+The ancestral and traditional Knowledge of Indigenous and colonized Peoples is often dismissed, ignored, and contradicted by Western institutions [@smith_decolonizing_2012]. **...** The development of Western science is often assumed to clash with the sacred Knowledge many colonized People hold. Western science is also often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such it is believed by Western institutions to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved. <!-- *damage to generations to come* -->
+
+The concept of *two-eye seeing* [@ref] refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple. One possibility, however, is to use Traditional Knowledge to create well-informed Bayesian priors [@ref]. The validity of the priors can be ensured using prior predictive modeling to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
+
+- Inform priors and simulation distributions using Indigenous Traditional Knowledge:
+    - A Bayesian framework with Indigenous Knowledge-informed priors [@girondot_bayesian_2015]
+    - *Local knowledge in ecological modeling* [@belisle_local_2018]
+    - https://focus.science.ubc.ca/stats-660805dd930a
+
+- *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
+- *Native knowledge for native ecosystems*
+- *Searching for synergy integrating traditional and scientific ecological knowledge in environmental science education*
+- *The Role of Indigenous Burning in Land Management*
+- calls to action for scientists: @wong_towards_2020
+- weaving TIK and Western knowledge: @tengo_weaving_2017
+- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
+- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
+- fish conservation, Indigenous perspectives [@bowles_threepronged_2021]
+- Vertebrate biodiversity in Indigenous-managed lands in Australia, Brazil, and Canada is equal to or greater biodiversity in protected areas [@schuster_vertebrate_2019]

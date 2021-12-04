@@ -1,0 +1,7 @@
+\newpage
+
+# Appendix 1 {-}
+
+```{r}
+plot(1:10, pch = 1:10)
+```

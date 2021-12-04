@@ -1,0 +1,150 @@
+---
+title: 'Linking environmental stochasticity with animal space use using continuous-time stochastic processes'
+subtitle: "Master's Thesis"
+author: 'Stefano Mezzini'
+date: 'April 2023'
+bibliography: 'masters-refs.bib'
+csl: 'freshwater-biology.csl'
+header-includes:
+    - \usepackage{setspace}\doublespacing
+    - \usepackage{indentfirst} # add indent to first line of each paragraph
+    # - \usepackage{gensymb}
+    # - \usepackage{geometry} \geometry{margin=1in, lmargin=1.5in}
+    # - \pagenumbering{gobble}
+    # - \usepackage{float}
+    # - \usepackage{afterpage}
+    # - \usepackage{ragged2e}
+output:
+  bookdown::pdf_document2:
+    number_sections: true
+    toc: false
+    fig_caption: true
+
+# bookdown-specific arguments
+site: bookdown::bookdown_site # needed to build the book
+config_file: '_bookdown.yml'
+---
+
+<!-- 
+\newpage
+
+\begin{align}{center}
+
+**LINKING ENVIRONMENTAL STOCHASTICITY WITH ANIMAL SPACE USE USING CONTINUOUS-TIME STOCHASTIC PROCESSES**
+
+by
+
+Stefano Mezzini
+
+B.Sc. Hons. Biology, University of Regina, 2021
+
+B.Sc. Statistics, University of Regina, 2021
+
+A THESIS SUBMITTED IN PARTIAL FULFILLMENT OF
+
+THE REQUIREMENTS FOR THE DEGREE OF
+
+MASTER OF SCIENCE
+
+in
+
+THE COLLEGE OF GRADUATE STUDIES
+
+(Biology)
+
+THE UNIVERSITY OF BRITISH COLUMBIA
+
+(Okanagan)
+
+`r paste(month.name[lubridate::month(Sys.Date())], lubridate::year(Sys.Date()))`
+
+© Stefano Mezzini, `r lubridate::year(Sys.Date())`
+
+\begin{align}{left}
+-->
+
+\newpage
+
+***NOTES:***
+
+- refer to the style guideline at https://github.com/jepa/ubcdown
+- UBC-V style: https://faculty.washington.edu/mforbes/projects/ubcthesis/
+- TU Delft, Netherlands, template https://www.tudelft.nl/huisstijl/downloads
+- contact Sunil and Kristy Baxter once I've made a template
+
+\newpage
+
+\setcounter{page}{1} <!-- start numbering from 1 -->
+
+\pagenumbering{roman} <!-- use roman numerals -->
+
+The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis/dissertation entitled:
+Click or tap here to enter text.
+submitted by Click or tap here to enter text. in partial fulfillment of the requirements of
+the degree of Click or tap here to enter text. .
+
+
+Click or tap here to enter text.
+Supervisor
+Click or tap here to enter text.
+Supervisory Committee Member
+Click or tap here to enter text.
+Supervisory Committee Member
+Click or tap here to enter text.
+University Examiner
+Click or tap here to enter text.
+External Examiner
+
+Additional Committee Members include:
+Click or tap here to enter text.
+Supervisory Committee Member
+Click or tap here to enter text.
+Supervisory Committee Member.
+
+\newpage
+
+# Abstract {-}
+
+
+
+\newpage
+
+# Lay Summary {-}
+
+
+
+\newpage
+
+# Preface {-}
+
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\listoftables
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+# Acknowledgements {-}
+
+
+
+\newpage
+
+# Dedication {-}
+
+
+
+\newpage
+
+\pagenumbering{arabic}
+
+<!-- to refer to a section, add {#section-name} after the heading, and reference using \@ref(section-name) -->

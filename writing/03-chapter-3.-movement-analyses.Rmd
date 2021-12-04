@@ -1,0 +1,17 @@
+\newpage
+
+# Chapter 3: Movement analyses
+
+## Movement simulations
+
+- Inform priors and simulation distributions using Indigenous Traditional Knowledge
+
+## Stochasticity map
+
+- currently there's no raster of stochasticity => paper / product
+- PCA on main drivers/causes of stochasticity
+
+## Movement analysis
+
+- add HFI to analysis (but it's temporally static)
+- look at HPAMs?
