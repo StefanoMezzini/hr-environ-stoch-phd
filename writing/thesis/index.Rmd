@@ -4,7 +4,7 @@ subtitle: "Master's Thesis"
 author: 'Stefano Mezzini'
 date: 'April 2023'
 bibliography: 'masters-refs.bib'
-csl: 'freshwater-biology.csl'
+csl: '../freshwater-biology.csl'
 header-includes:
     - \usepackage{setspace}\doublespacing
     - \usepackage{indentfirst} # add indent to first line of each paragraph

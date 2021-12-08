@@ -1,0 +1,17 @@
+---
+title: "Proposal"
+author: "Stefano Mezzini"
+date: "06/12/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+write by end of Jan
+
+15-20 pages intro
+
+10 pages of methods
+

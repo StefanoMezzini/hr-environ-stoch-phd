@@ -2,6 +2,19 @@
 
 # Chapter 1: Introduction
 
+<!-- write paragraph(s) on energetics -->
+
+- animals with short generation times, $\tau$, (e.g. mice) will be impacted more by a stochastic year than larger animals (e.g. elephant)
+
+See figures in *Southwood 1977*
+
+*Southwood 1977*:
+- *durational stability* of a habitat (period favorable for reproduction and survival): $H = F + L$; number of generations per period: $H / \tau$
+- in stable environments (i.e., with low to no stochasticity), $H >> \tau \implies$ organisms perceive $H \rightarrow \infty$ 
+- greater survival of the residents may simply derive from their knowledge of the geography of the habitat with the corresponding advantages for feeding and predator avoidance, noticed in animals ranging from Heliconius butterflies (Gilbert 1975; Cook, Thomason & Young 1976) to primates (MacKinnon 1974).
+- Cope's law? (Southwood et al. 1974, see Southwood 1977)
+- animals living in an area with high temporal stochasticity should ehibit more polymorhpism to be able to adapt to unpredictable habitats (Southwood 1977). In areas where temporal stochasticity has or will increase as a result of climate change, we expect species will need to adopt new behaviors or become more polymorphic to survive.
+
 - spend time reading papers initially to do a review, get a review paper out of it
 - make predictions/hypotheses for project
 - what influences stochasticity: what is it and what is affecting it
@@ -10,7 +23,7 @@
 Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce[@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity, stochasticity, and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance[@chevin_adaptation_2010], which, in turn, would decrease animals' fitness. Therefore, we expect animals living in unpredictable environments to require more space than those in stable environments (Fig. 1). Although this hypothesis is supported by a few recent studies[@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events[@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species[@wilson_habitat_2016], who struggle to move in fragmented[@fahrig_non-optimal_2007], human-dominated landscapes[@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future[@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
 
 ```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments."}
-knitr::include_graphics('../figures/first-presentation/stochasticity-figure-light.png')
+knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
 ```
 
 ## Timescale of stochasticity
