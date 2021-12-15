@@ -1,0 +1,5 @@
+\newpage
+
+# Chapter 2: A new measure of environmental stochasticity
+
+quantify levels and stability of green light wave (see NDVI) with and without human modification/activity, include citizen science data (e.g., flowering phenology)

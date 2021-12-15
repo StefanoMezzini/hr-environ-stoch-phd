@@ -1,10 +1,41 @@
 \newpage
 
-# Chapter 1: Introduction
+# Chapter 1: Summarizing the current knowledge
+
+## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge
+
+The ancestral and traditional Knowledge of Indigenous and colonized Peoples is often dismissed, ignored, and contradicted by Western institutions [@smith_decolonizing_2012]. **...** The development of Western science is often assumed to clash with the sacred Knowledge many colonized People hold. Western science is also often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such it is believed by Western institutions to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved. <!-- *damage to generations to come* -->
+
+The concept of *two-eye seeing* [@ref] refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple. One possibility, however, is to use Traditional Knowledge to create well-informed Bayesian priors [@ref]. The validity of the priors can be ensured using prior predictive modeling to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
+
+- Inform priors and simulation distributions using Indigenous Traditional Knowledge:
+    - A Bayesian framework with Indigenous Knowledge-informed priors [@girondot_bayesian_2015]
+    - *Local knowledge in ecological modeling* [@belisle_local_2018]
+    - https://focus.science.ubc.ca/stats-660805dd930a
+
+- *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
+- *Native knowledge for native ecosystems*
+- *Searching for synergy integrating traditional and scientific ecological knowledge in environmental science education*
+- *The Role of Indigenous Burning in Land Management*
+- calls to action for scientists: @wong_towards_2020
+- weaving TIK and Western knowledge: @tengo_weaving_2017
+- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
+- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
+- fish conservation, Indigenous perspectives [@bowles_threepronged_2021]
+- Vertebrate biodiversity in Indigenous-managed lands in Australia, Brazil, and Canada is equal to or greater biodiversity in protected areas [@schuster_vertebrate_2019]
+
+## "Non-Indigenous academic knowledge"?
+
+- spend time reading papers initially to do a review, get a review paper out of it
+- make predictions/hypotheses for project
+- what influences stochasticity: what is it and what is affecting it
+- very little testing has been done on effects of stochasticity
 
 <!-- write paragraph(s) on energetics -->
 
-- animals with short generation times, $\tau$, (e.g. mice) will be impacted more by a stochastic year than larger animals (e.g. elephant)
+<!-- don't use tau for generation times because it's used for autocorrelation parameters -->
+
+Animals with short generation times (e.g., mice) are more likely to be be severely impacted by a stochastic event than larger animals (e.g. elephants) since larger animals can have bigger energy reserves, and larger animals tend to have longer generation times, which allows them to develop memory about the frequency of such events [@elephants-and-droughts-ref].
 
 See figures in *Southwood 1977*
 
@@ -14,11 +45,6 @@ See figures in *Southwood 1977*
 - greater survival of the residents may simply derive from their knowledge of the geography of the habitat with the corresponding advantages for feeding and predator avoidance, noticed in animals ranging from Heliconius butterflies (Gilbert 1975; Cook, Thomason & Young 1976) to primates (MacKinnon 1974).
 - Cope's law? (Southwood et al. 1974, see Southwood 1977)
 - animals living in an area with high temporal stochasticity should ehibit more polymorhpism to be able to adapt to unpredictable habitats (Southwood 1977). In areas where temporal stochasticity has or will increase as a result of climate change, we expect species will need to adopt new behaviors or become more polymorphic to survive.
-
-- spend time reading papers initially to do a review, get a review paper out of it
-- make predictions/hypotheses for project
-- what influences stochasticity: what is it and what is affecting it
-- very little testing has been done on effects of stochasticity
 
 Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce[@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity, stochasticity, and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance[@chevin_adaptation_2010], which, in turn, would decrease animals' fitness. Therefore, we expect animals living in unpredictable environments to require more space than those in stable environments (Fig. 1). Although this hypothesis is supported by a few recent studies[@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events[@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species[@wilson_habitat_2016], who struggle to move in fragmented[@fahrig_non-optimal_2007], human-dominated landscapes[@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future[@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
 
@@ -34,10 +60,14 @@ For an event or process to be recognized as deterministic by an individual, it m
 
 Trees that have drought resilience have higher mortality [@desoto_low_2020] *check the stats & causation from this reference*
 
-## Objectives
+## Simulations
 
-This project will produce a global raster of a new environmental stochasticity index, and new quantitative methods for animal movement. Findings will inform design of protected areas and assist in conserving Canada's wildlife, particularly in light of Canada's pledge to protect 30% of its landmass and oceans by 2030[@ryan_patrick_jones_pm_2021], although only 13% of Canada’s area is currently protected[@government_of_canada_canadian_2021]. Local Indigenous groups will be included in the research process, in the hope of forming long-lasting co-operative relationships.
+Look at mechanistic models & energetics
 
-I will use simulation studies and an unprecedented and conservation-relevant animal tracking dataset (>1500 animals, 77 globally-distributed species) to provide the most detailed investigation into how animal spatial needs change with environmental stochasticity to date. This work has four key objectives: (i) estimating individuals' spatial requirements in a way which is insensitive to variation in sampling protocols and data quality; (ii) quantifying environmental stochasticity and its effects; (iii) estimating between-species trends using models that are robust to commonly-found issues (e.g., correlations within species); and (iv) understanding how Traditional Indigenous Knowledge can be integrated into large-scale ecological research and conservation planning within a framework that acknowledges both Traditional Indigenous Knowledge and Western science[@kutz_two-eyed_2019].
+Include:
 
-To achieve these aims: (i) I will use continuous-time models [@johnson_continuous-time_2008] that do not depend on sampling frequency. Such models will allow me to use the entirety of the data rather than aggregated data (e.g., daily averages), as aggregated data contain less information on sample variance and can lead to biased estimates. (ii) I will produce a global, time-varying raster of environmental stochasticity which accounts for productivity[@nilsen_can_2005], weather, and climate (e.g., precipitation, temperature), as well as the frequency of extreme events (e.g., heat domes, flooding, forest fires). I will then use the raster to estimate the effect of stochasticity on home range sizes. (iii) I will use a hierarchical approach[@pedersen_hierarchical_2019] to estimate common trends and variances within and between populations, species, and data collection methods. (iv) I will collaborate closely with with various Indigenous groups and include any Traditional Knowledge and practices they wish to include in my project. The research will be published in open-access journals and all code will be publicly available.
+* effects of animal mass,
+* resistance to/ease of movement (e.g., wolves and clear-cut gas lines)
+* "state-space model" with 2 spaces: within a patch (slow-moving) and between patches (faster movement)
+
+See `R` packages for meta-community simulations

@@ -1,23 +1,20 @@
 ---
-title: 'Linking environmental stochasticity with animal space use using continuous-time stochastic processes'
-subtitle: "Master's Thesis"
-author: 'Stefano Mezzini'
-date: 'April 2023'
 bibliography: 'masters-refs.bib'
 csl: '../freshwater-biology.csl'
 header-includes:
-    - \usepackage{setspace}\doublespacing
+    - \usepackage{setspace}\doublespacing # change default spacing
     - \usepackage{indentfirst} # add indent to first line of each paragraph
+    - \pagenumbering{gobble} # remove numbering from title page
+    # not currently needed, but keeping for reference
     # - \usepackage{gensymb}
     # - \usepackage{geometry} \geometry{margin=1in, lmargin=1.5in}
-    # - \pagenumbering{gobble}
     # - \usepackage{float}
     # - \usepackage{afterpage}
     # - \usepackage{ragged2e}
 output:
   bookdown::pdf_document2:
     number_sections: true
-    toc: false
+    toc: false # added manually later
     fig_caption: true
 
 # bookdown-specific arguments
@@ -25,20 +22,27 @@ site: bookdown::bookdown_site # needed to build the book
 config_file: '_bookdown.yml'
 ---
 
-<!-- 
-\newpage
+<!-- http://www.personal.ceu.hu/tex/breaking.htm for breaking lines and pages-->
 
-\begin{align}{center}
+<!-- center text, triple spacing, leave blank lines between sections -->
 
-**LINKING ENVIRONMENTAL STOCHASTICITY WITH ANIMAL SPACE USE USING CONTINUOUS-TIME STOCHASTIC PROCESSES**
+\begin{center}
+
+\setstretch{3}
+
+\textbf{LINKING ENVIRONMENTAL STOCHASTICITY WITH ANIMAL SPACE USE USING CONTINUOUS-TIME STOCHASTIC PROCESSES}
 
 by
 
 Stefano Mezzini
 
+\bigskip
+
 B.Sc. Hons. Biology, University of Regina, 2021
 
 B.Sc. Statistics, University of Regina, 2021
+
+\bigskip
 
 A THESIS SUBMITTED IN PARTIAL FULFILLMENT OF
 
@@ -60,8 +64,9 @@ THE UNIVERSITY OF BRITISH COLUMBIA
 
 © Stefano Mezzini, `r lubridate::year(Sys.Date())`
 
-\begin{align}{left}
--->
+\end{center}
+
+\doublespacing
 
 \newpage
 
@@ -70,36 +75,42 @@ THE UNIVERSITY OF BRITISH COLUMBIA
 - refer to the style guideline at https://github.com/jepa/ubcdown
 - UBC-V style: https://faculty.washington.edu/mforbes/projects/ubcthesis/
 - TU Delft, Netherlands, template https://www.tudelft.nl/huisstijl/downloads
-- contact Sunil and Kristy Baxter once I've made a template
+- contact Sunil Suresh, Kristy Baxter, and Mathew Vis-Dunbar once I've made a template
+- see https://gradstudies.ok.ubc.ca/theses-supplementary-deposit/ for how to submit and store supplementary materials to support transparency and reproducibility, as well as SI from other theses
+- underline entire lines with committee members and examiners for them to sign
 
 \newpage
 
-\setcounter{page}{1} <!-- start numbering from 1 -->
-
 \pagenumbering{roman} <!-- use roman numerals -->
 
-The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis/dissertation entitled:
-Click or tap here to enter text.
-submitted by Click or tap here to enter text. in partial fulfillment of the requirements of
-the degree of Click or tap here to enter text. .
+\setcounter{page}{2} <!-- start numbering from 1 -->
 
+**The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis/dissertation entitled:**\newline
+***TITLE***\newline
+**submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.**
 
-Click or tap here to enter text.
+Michael J. Noonan\newline
 Supervisor
-Click or tap here to enter text.
+
+Adam T. Ford\newline
 Supervisory Committee Member
-Click or tap here to enter text.
+
+Jason ***?***. Pither\newline
 Supervisory Committee Member
-Click or tap here to enter text.
+
+Click or tap here to enter text.\newline
 University Examiner
-Click or tap here to enter text.
+
+Click or tap here to enter text.\newline
 External Examiner
 
-Additional Committee Members include:
+<!--Additional Committee Members include:
+
 Click or tap here to enter text.
 Supervisory Committee Member
+
 Click or tap here to enter text.
-Supervisory Committee Member.
+Supervisory Committee Member.-->
 
 \newpage
 
@@ -144,6 +155,8 @@ Supervisory Committee Member.
 
 
 \newpage
+
+\setcounter{page}{1} <!-- start numbering from 1 -->
 
 \pagenumbering{arabic}
 

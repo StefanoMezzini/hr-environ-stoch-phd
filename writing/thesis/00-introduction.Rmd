@@ -1,0 +1,69 @@
+# Introduction
+
+## Objectives
+
+This project will produce a global raster of a new environmental stochasticity index, and new quantitative methods for animal movement. Findings will inform design of protected areas and assist in conserving Canada's wildlife, particularly in light of Canada's pledge to protect 30% of its landmass and oceans by 2030[@ryan_patrick_jones_pm_2021], although only 13% of Canada’s area is currently protected[@government_of_canada_canadian_2021]. Local Indigenous groups will be included in the research process, in the hope of forming long-lasting co-operative relationships.
+
+I will use simulation studies and an unprecedented and conservation-relevant animal tracking dataset (>1500 animals, 77 globally-distributed species) to provide the most detailed investigation into how animal spatial needs change with environmental stochasticity to date. This work has four key objectives: (i) estimating individuals' spatial requirements in a way which is insensitive to variation in sampling protocols and data quality; (ii) quantifying environmental stochasticity and its effects; (iii) estimating between-species trends using models that are robust to commonly-found issues (e.g., correlations within species); and (iv) understanding how Traditional Indigenous Knowledge can be integrated into large-scale ecological research and conservation planning within a framework that acknowledges both Traditional Indigenous Knowledge and Western science[@kutz_two-eyed_2019].
+
+To achieve these aims: (i) I will use continuous-time models [@johnson_continuous-time_2008] that do not depend on sampling frequency. Such models will allow me to use the entirety of the data rather than aggregated data (e.g., daily averages), as aggregated data contain less information on sample variance and can lead to biased estimates. (ii) I will produce a global, time-varying raster of environmental stochasticity which accounts for productivity[@nilsen_can_2005], weather, and climate (e.g., precipitation, temperature), as well as the frequency of extreme events (e.g., heat domes, flooding, forest fires). I will then use the raster to estimate the effect of stochasticity on home range sizes. (iii) I will use a hierarchical approach[@pedersen_hierarchical_2019] to estimate common trends and variances within and between populations, species, and data collection methods. (iv) I will collaborate closely with with various Indigenous groups and include any Traditional Knowledge and practices they wish to include in my project. The research will be published in open-access journals and all code will be publicly available.
+
+## Environmental stochasticity
+
+### The time scale of stochastic events
+
+Different types of environmental stochasticity:
+
+* spatial stochasticity:
+  - environmental patches and niches,
+  - habitat heterogeneity
+* temporal stochasticity:
+  - events (heat domes, fires, tornadoes, storms)
+  - events are hard to predict when:
+    - they do not occur frequently within an organism's generation time
+    - they occur frequently but unpredictably
+common but stochastic (i.e., $p \approx 0.5$) 
+* spatio-temporal stochasticity (in the inclusive sense, not just the interaction):
+  - alternate stable states
+  - ephemeral habitats following stochastic events (e.g. burned forest, flooded area -- but compare to yearly flooded areas such as temperate forests)
+
+The severity and frequency of events should be scaled relative to an organism's generation time [@ref]. Events which are stochastic but occur frequently will lead an organism to develop defense mechanisms, particularly if such events cause severe damage or pose a high risk of mortality or injury. *How do animals from areas with frequent extreme events (e.g., sand storms) avoid damage? Do they use dens or develop a resistance?* Bison (*Bison bison*) have fur to protect them from cold winds, and they stand in groups facing the wind to decrease heat loss and damage from the cold.
+
+As the occurrence of an event become more unpredictable (i.e., less common), the effect of such events may be very destructive in the moment, but recovery may be possible. In contrast, if the magnitude of an event and its damage become more stochastic, recovery may be harder to achieve. As extreme events become more frequent, the variance in occurrence increases until the events become common. For a Bernoulli random variable with probability of occurrence $p$, $Y \sim Ber(p)$, the variance (i.e., stochasticity) is maximized when $p = 0.5$ and lowest when the event occurs almost never ($p \approx 0$) or or almost always ($p \approx 1$).
+
+As a extreme events becomes more common, organisms may begin to adapt to their occurrence, as long as the change in frequency is sufficiently gradual to allow adaptation.
+
+If stochastic events become common, animals may learn to "store for a rainy day". For instance, if the probability of a downpour at night in a desert is high but highly unpredictable ($p \approx 0.5$), animals and plants may develop protective mechanisms [e.g. cacti closing their flowers at sunset; @ref]. When extreme events occur frequently, . If a dangerous event becomes more frequent and unpredictable, organisms may tend to take advantage of favorable times so they can resist more adverse times. Frequent destructive events may be less dangerous than infrequent destructive events. Events which do not occur frequently during an organism's generation time or lifespan (e.g., 2 times or less) may not be considered as threats worth preparing for. In contrast, stochastic and destructive events which happen frequently become part of an organism's habitat, and such organisms may adapt to their occurrence and even learn to predict them [@ref].
+
+The time to re-colonization of a habitat [also see the *rescue effect* sensu @ref] will not necessarily be proportional to the organisms' generation times. The movement of organisms with short generation times tends to be shorter because generation time correlates with mass [@ref]. Thus, organisms with short generation times [e.g., aquatic invertebrates, see @kolasa_rapoports_1998] are more likely to move slowly or be moved by large and potentially unpredictable events (e.g., waves, tides, sea currents, storms). 
+
+
+```{r, echo = FALSE, eval = FALSE}
+library('ggplot2')
+library('tibble')
+theme_set(theme_bw())
+x <- tibble(p = seq(1e-4, 1 - 1e-4, by = 1e-4),
+            var = 1 * p * (1 - p)) # a single Ber(p) event
+ggplot(x) +
+  geom_line(aes(p, var)) +
+  labs(x = 'Probabilty of the event occuring (p)',
+       y = expression(Event~variance~(sigma^2~'='~1%*%p%*%(1-p))))
+```
+
+```{r, echo = FALSE, eval = TRUE}
+library('ggplot2')
+library('dplyr')
+library('tidyr')
+theme_set(theme_bw())
+expand_grid(t = 1:50,
+            p = seq(0, 1, by = 0.1)) %>%
+  mutate(var = 1 * p * (1 - p),
+         y = rbinom(n = n(), size = 1, prob = p)) %>%
+  ggplot() +
+  geom_hline(aes(yintercept = p), alpha = 0.1) +
+  geom_point(aes(t, p, alpha = y), show.legend = FALSE) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Probability of occurrence (p)', limits = c(0, 1)) +
+  scale_alpha_continuous(range = c(0, 1)) +
+  theme(panel.grid = element_blank())
+```
