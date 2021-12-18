@@ -10,7 +10,11 @@ To achieve these aims: (i) I will use continuous-time models [@johnson_continuou
 
 ## Environmental stochasticity
 
-### The time scale of stochastic events
+- Chaotic Markov chains?
+- https://www.greensensefarms.com/home
+- https://onlinelibrary.wiley.com/doi/10.1111/plb.12085
+- https://spinoff.nasa.gov/Spinoff2018/cg_7.html
+- predictable events: lizard's alternating gate to minimize contact time on hot sand
 
 Different types of environmental stochasticity:
 
@@ -27,16 +31,17 @@ common but stochastic (i.e., $p \approx 0.5$)
   - alternate stable states
   - ephemeral habitats following stochastic events (e.g. burned forest, flooded area -- but compare to yearly flooded areas such as temperate forests)
 
-The severity and frequency of events should be scaled relative to an organism's generation time [@ref]. Events which are stochastic but occur frequently will lead an organism to develop defense mechanisms, particularly if such events cause severe damage or pose a high risk of mortality or injury. *How do animals from areas with frequent extreme events (e.g., sand storms) avoid damage? Do they use dens or develop a resistance?* Bison (*Bison bison*) have fur to protect them from cold winds, and they stand in groups facing the wind to decrease heat loss and damage from the cold.
+### The time scale of stochastic events
+
+When quantifying stochastic events, the severity and frequency of the events should be scaled relative to an organism's generation time [@ref]. Events which are stochastic but occur frequently will lead an organism to develop protective mechanisms, particularly if such events pose a high risk of mortality or injury. *How do animals from areas with frequent extreme events (e.g., sand storms) avoid damage? Do they use dens or develop a resistance?* Bison (*Bison bison*) have fur to protect them from cold winds, and they stand in groups facing the wind to decrease heat loss and damage from the cold.
 
 As the occurrence of an event become more unpredictable (i.e., less common), the effect of such events may be very destructive in the moment, but recovery may be possible. In contrast, if the magnitude of an event and its damage become more stochastic, recovery may be harder to achieve. As extreme events become more frequent, the variance in occurrence increases until the events become common. For a Bernoulli random variable with probability of occurrence $p$, $Y \sim Ber(p)$, the variance (i.e., stochasticity) is maximized when $p = 0.5$ and lowest when the event occurs almost never ($p \approx 0$) or or almost always ($p \approx 1$).
 
 As a extreme events becomes more common, organisms may begin to adapt to their occurrence, as long as the change in frequency is sufficiently gradual to allow adaptation.
 
-If stochastic events become common, animals may learn to "store for a rainy day". For instance, if the probability of a downpour at night in a desert is high but highly unpredictable ($p \approx 0.5$), animals and plants may develop protective mechanisms [e.g. cacti closing their flowers at sunset; @ref]. When extreme events occur frequently, . If a dangerous event becomes more frequent and unpredictable, organisms may tend to take advantage of favorable times so they can resist more adverse times. Frequent destructive events may be less dangerous than infrequent destructive events. Events which do not occur frequently during an organism's generation time or lifespan (e.g., 2 times or less) may not be considered as threats worth preparing for. In contrast, stochastic and destructive events which happen frequently become part of an organism's habitat, and such organisms may adapt to their occurrence and even learn to predict them [@ref].
+If stochastic events become common, animals may learn to "store for a rainy day". For instance, if the probability of a downpour at night in a desert is high but highly unpredictable ($p \approx 0.5$), animals and plants may develop protective mechanisms [e.g. cacti closing their flowers at sunset; @stanton_light_2010]. When extreme events occur frequently, . If a dangerous event becomes more frequent and unpredictable, organisms may tend to take advantage of favorable times so they can resist more adverse times. Frequent destructive events may be less dangerous than infrequent destructive events. Events which do not occur frequently during an organism's generation time or lifespan (e.g., 2 times or less) may not be considered as threats worth preparing for. In contrast, stochastic and destructive events which happen frequently become part of an organism's habitat, and such organisms may adapt to their occurrence and even learn to predict them [@ref].
 
 The time to re-colonization of a habitat [also see the *rescue effect* sensu @ref] will not necessarily be proportional to the organisms' generation times. The movement of organisms with short generation times tends to be shorter because generation time correlates with mass [@ref]. Thus, organisms with short generation times [e.g., aquatic invertebrates, see @kolasa_rapoports_1998] are more likely to move slowly or be moved by large and potentially unpredictable events (e.g., waves, tides, sea currents, storms). 
-
 
 ```{r, echo = FALSE, eval = FALSE}
 library('ggplot2')
@@ -50,7 +55,7 @@ ggplot(x) +
        y = expression(Event~variance~(sigma^2~'='~1%*%p%*%(1-p))))
 ```
 
-```{r, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.cap= "Realizations of Bernoulli processes for different probability parameters, $p$. At low values of $p$, successes occur unpredictably", fig.align='center'}
 library('ggplot2')
 library('dplyr')
 library('tidyr')
@@ -59,11 +64,18 @@ expand_grid(t = 1:50,
             p = seq(0, 1, by = 0.1)) %>%
   mutate(var = 1 * p * (1 - p),
          y = rbinom(n = n(), size = 1, prob = p)) %>%
+  filter(y == 1) %>% # remove failures
   ggplot() +
-  geom_hline(aes(yintercept = p), alpha = 0.1) +
-  geom_point(aes(t, p, alpha = y), show.legend = FALSE) +
+  geom_hline(yintercept = seq(0, 1, by = 0.1), alpha = 0.1) +
+  geom_point(aes(t, p), shape = 1, size = 2) +
+  geom_point(aes(t, p, color = var)) +
   scale_x_continuous('Time', breaks = NULL) +
   scale_y_continuous('Probability of occurrence (p)', limits = c(0, 1)) +
-  scale_alpha_continuous(range = c(0, 1)) +
+  scale_color_gradient(expression(sigma^2~'='~p(1-p)), low = 'white', high = 'black') +
   theme(panel.grid = element_blank())
 ```
+
+In the case of obligate symbiosis or interaction, a species' ability to change its range or adapt will likely depend strongly on its associate's ability to move or adapt, too.
+
+Large-scale studies such as this one are useful to detect general and common trends, while small scale studies such as the work of @kolasa_rapoports_1998 can provide more information on the small-scale drivers of phenomena.
+
