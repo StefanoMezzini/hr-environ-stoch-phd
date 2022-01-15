@@ -13,6 +13,7 @@ source('analysis/default-figure-styling.R') # default figure parameters
 source('functions/rgamma2.R') # rgamma parameterized by mean and variance
 
 # habitat types (adapted from figure 7 of Southwood 1977) ---
+add generation times (tau)
 types <-
   expand_grid(t = seq(4, 45, length.out = 200),
               type = c('Predictable', 'Unpredictable', 'Ephemeral')) %>%

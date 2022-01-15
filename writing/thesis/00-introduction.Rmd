@@ -1,5 +1,7 @@
 # Introduction
 
+- animals who have their needs met in a given area minimize their movement to avoid wasting energy. movement to a new area is often caused by inferior resource availability
+
 ## Objectives
 
 This project will produce a global raster of a new environmental stochasticity index, and new quantitative methods for animal movement. Findings will inform design of protected areas and assist in conserving Canada's wildlife, particularly in light of Canada's pledge to protect 30% of its landmass and oceans by 2030[@ryan_patrick_jones_pm_2021], although only 13% of Canada’s area is currently protected[@government_of_canada_canadian_2021]. Local Indigenous groups will be included in the research process, in the hope of forming long-lasting co-operative relationships.

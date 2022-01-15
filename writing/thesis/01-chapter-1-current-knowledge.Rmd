@@ -2,6 +2,122 @@
 
 # Chapter 1: Summarizing the current knowledge
 
+***NOTES:***
+
+- spend time reading papers initially to do a review, get a review paper out of it
+- make predictions/hypotheses for project
+- what influences stochasticity: what is it and what is affecting it
+- very little testing has been done on effects of stochasticity
+- write paragraph(s) on energetics
+- don't use tau for generation times because it's used for autocorrelation parameters
+
+## Resource availability and productivity
+
+<!-- from NSERC proposal: -->
+
+Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce[@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity, stochasticity, and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance[@chevin_adaptation_2010], which, in turn, would decrease animals' fitness. Therefore, we expect animals living in unpredictable environments to require more space than those in stable environments (Fig. 1). Although this hypothesis is supported by a few recent studies[@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events[@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species[@wilson_habitat_2016], who struggle to move in fragmented[@fahrig_non-optimal_2007], human-dominated landscapes[@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future[@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
+
+## Envrironmental stochasticity
+
+### Temporal stochasticity
+
+How an organism responds to a stochastic event broadly depends on a variety of correlated factors, including the organism's size, ability to move, lifespan, and generation time [@ref]. Smaller organisms (e.g., mice) are more likely to be be severely impacted by a stochastic event than larger ones (e.g. elephants), since larger organisms can have bigger energy reserves, can move longer distances over short periods of time, and tend to have longer lifespans, generation times, and developmental periods, which allow them to develop or memory about the frequency and severity of such events [@elephants-and-droughts-ref]. However, the short generation time and high fertility of smaller *r-limited* species [@ref] can allow them to develop traits that increase the chances of survival following an extreme event. For instance, while most large trees are able to survive small-scale fires (and some even depend on them, as in the case of ***pines with serotinous cones***), many grasses survive fires by keeping most of their biomass below ground, where it is unaffected by most superficial fires.
+
+See figures in *Southwood 1977*
+
+*Southwood 1977*:
+- *durational stability* of a habitat (period favorable for reproduction and survival): $H = F + L$; number of generations per period: $H / \tau$
+- in stable environments (i.e., with low to no stochasticity), $H >> \tau \implies$ organisms perceive $H \rightarrow \infty$ 
+- greater survival of the residents may simply derive from their knowledge of the geography of the habitat with the corresponding advantages for feeding and predator avoidance, noticed in animals ranging from Heliconius butterflies (Gilbert 1975; Cook, Thomason & Young 1976) to primates (MacKinnon 1974).
+- Cope's law? (Southwood et al. 1974, see Southwood 1977)
+- animals living in an area with high temporal stochasticity should ehibit more polymorhpism to be able to adapt to unpredictable habitats (Southwood 1977). In areas where temporal stochasticity has or will increase as a result of climate change, we expect species will need to adopt new behaviors or become more polymorphic to survive.
+
+Organisms are most affected by stochastic events and processes which occur on time scales which are in the order of the organisms' life spans or generation times [@ref]. Weekly heavy rains which alter a lake's salinity [@ref] are more likely to affect an individual than a multi-centennial drought, and the high salinity that follows the drought may be perceived as the (stressful) standard by individuals which were born during the drought. In contrast, organisms can adapt to unpredictable heavy rains if they occur on a daily frequency. However, stochastic processes and events which occur on time scales that are longer than an organism's lifespan may still cause significant effects on a population's fitness and stability. Droughts which occur on the time scale of centuries or millennia (@haig_assessment_2013) are unlikely to affect organisms directly, but such events could still alter the population's habitat or breeding grounds enough to cause a population collapse or prevent individuals from reproducing in their habitual breeding region (or reproduce altogether).
+
+For an event or process to be recognized as deterministic by an individual, it must occur multiple times during the individual's lifetime (but the converse is not true). *some animals can develop memory* [@foley_severe_2008]
+
+Trees that have drought resilience have higher mortality [@desoto_low_2020] *check the stats & causation from this reference*
+
+### Spatial stochasticity
+
+```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments."}
+knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
+```
+
+To measure the spatial stochasticity of an ecosystem, it is necessary to first define extent of the ecosystem of interest. A lake may seem like a simple and self-contained space to define, but it is often not as simple as deciding the lake's boundaries using a map or satellite pictures. Should one include the shores of the lake? And if so, which region do we consider the lake's shores? Are they the area of land which are currently covered by water, including the sections hit daily by waves, or should we also include the parts of land which are currently not wet but are covered during seasons with more rain? One could base their definition on the species of interest, since coastal areas are not frequented by large fish, but they would likely include them in the ecosystem if they are studying benthic litoral species. Thus, how one measures stochasticity should also depend on which organisms are of most interest. The repetitive and cyclical motion of waves may not concern most vertebrates that live along the coast, but it is much more turbulent and chaotic for smaller organisms, such as crustaceans or diatoms. Therefore, the scale at which we consider spatial stochasticity should depend on the size of the organisms of interest as well as the size of their habitat or home range.
+
+
+
+@bell_spatial_1993:
+
+* Believe "environmental variance increases indefinitely with distance or over time, so that ***environments can be regarded neither as ~uniform at small spatial scales nor as random at large spatial scales~"???***.
+* Regions with high spatial (or spatio-temporal) variance can result in offspring experiencing conditions very different from those their parents experienced
+* The scale at which we consider spatio-temporal variance is important. @bell_spatial_1993 were unable to find a maximum value of spatio-temporal stochasticity as the distance between locations increased from the order of meters to that of hundreds of kilometers.
+* Spatially autocorrelated and temporally homogeneous landscapes favor sedentary specialists, spatially independent and temporally homogeneous areas favor nomadic specialists, temporally heterogeneous favor generalist or plastic species.
+* Variation can occur on multiple axes (light, food, temperature, water availability, etc.), so there can be different types of adaptations and plasticity, some of which can be more advantageous.
+* Spatial variation will favor movement and behavioral adaptations faster than temporal variation will. Species in a heterogeneous landscape can move to more favorable locations, but it is harder to adapt to an unpredictable or highly variable environment.
+* temporal variation should promote plasticity over diversity
+* Although @bell_spatial_1993 couldn't find a scale at which variance stopped increasing, it seems reasonable to assume that variance cannot increase infinitely. The variance of a finite system (e.g., a lake or a well-defined habitat), should reach a finite maximum somewhere between our smallest scale of interest and the scale of the entire system, even if the maximum is reached when the entire system is considered. This does not imply that a somewhat larger system that contains the first one (e.g. the lake and its coasts) will have the same variance. Variance between lake and coast is high because they are different types of habitats, and the area where they meet (the coast) is potentially even more variable because the mixture of the two creates a third habitat for litoral benthic animals which is subject to high stochasticity due to waves and changing water levels.
+
+***non sequitur***
+
+The same idea (*that variance is finite if we consider the entire ecosystem*) would likely also apply for larger-scale systems, such as continents or a planet. And while stochasticity of a system may also vary over time, it is not reasonable to expect it to increase monotonically through time because that would imply it has been increasing monotonically until the current moment. Still, stochasticity does vary over time, and its estimation depends on the data available, so it may be useful to view it as a random variable with an estimated, conditional posterior distribution through a Bayesian framework [@bolstad_introduction_2017].
+* @bell_spatial_1993 state that they expect environmental variables to vary more than population sizes or fitness. While this may make sense conceptually, quantitatively it depends on the units used. Movement measured in miles will differ less than movement measured in meters, so comparing the two variances to the variance in resources (e.g., food, precipitation) may be futile.
+
+Note that highly variable $\ne$ unpredictable. E.g.: temperature change within each year can be highly variable (-40 to +40), but it is still predictable:
+
+```{r}
+plot(2 * sinpi(seq(1, 8, length.out = 400)) + rnorm(400))
+```
+
+For organisms to evolve, some need to survive. If habitats are so unpredictable that most individuals cannot survive a stochastic event (whether it be as short as a fire or as long as a centennial drought), then species will not be able to evolve and adapt.
+
+```{r}
+library('tibble')
+library('tidyr')
+library('ggplot2')
+theme_set(theme_bw())
+n <- 100
+t <- 1:n
+
+# instantaneous variance increases over time
+plot(t, rnorm(n, sd = t))
+
+# variance between time points t and t-k increases over time
+plot(t, cumsum(rnorm(n, sd = 1)), type = 'l')
+
+x <- expand_grid(t = 1:n,
+                 i = 1:100) %>%
+  group_by(i) %>%
+  mutate(x = cumsum(rnorm(n, sd = 1)),
+         var_tk = purrr::map_dbl(t, \(k) var(x - lag(x, k), na.rm = TRUE)))
+
+ggplot(x) +
+  geom_smooth(aes(t, var_tk, group = i), method = 'gam',
+              formula = y ~ s(x, k = 20), color = '#00000030') +
+  geom_smooth(aes(t, var_tk), method = 'gam',
+              formula = y ~ s(x, k = 20), color = 'red') +
+  xlim(c(NA, n/2)) + # 2nd half of a variogram is not useful
+  ylab(expression(sigma^2[tk]))
+```
+
+### Frontiers  Hierarchical, Memory-Based Movement Models for Translocated Elk (Cervus canadensis)  Ecology and Evolution
+
+Refs to check:
+
+* humans, nonhuman primates and other large-brained vertebrates make movement decisions based on spatial representations of their environments (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B50)
+* 2010). These representations may allow animals to move directly to important sites in their environment that lie outside of their perceptual range (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B40, https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B35)
+* Attribute memory, i.e., non-spatial memory, e.g., food type and abundance (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B13)
+* Bison remember valuable information about the location and quality of meadows (spatial and attribute memory) and use this information to revisit profitable locations (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B29)
+* Roe deer an spatial memory for foraging in absence of territorility (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B41)
+* memory in capuchin monkeys (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B8)
+* memory in bison (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B18)
+* memory in sheep (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B18)
+* memory in woodland caribou (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B1)
+* memory in chimpanzees (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B20)
+* memory constitutes an important
+mechanism for home range emergence (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B6, Börger et al., 2008; Van Moorter et al., 2009)
+
 ## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge
 
 The ancestral and traditional Knowledge of Indigenous and colonized Peoples is often dismissed, ignored, and contradicted by Western institutions [@smith_decolonizing_2012]. **...** The development of Western science is often assumed to clash with the sacred Knowledge many colonized People hold. Western science is also often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such it is believed by Western institutions to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved. <!-- *damage to generations to come* -->
@@ -9,9 +125,9 @@ The ancestral and traditional Knowledge of Indigenous and colonized Peoples is o
 The concept of *two-eye seeing* [@ref] refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple. One possibility, however, is to use Traditional Knowledge to create well-informed Bayesian priors [@ref]. The validity of the priors can be ensured using prior predictive modeling to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
 
 - Inform priors and simulation distributions using Indigenous Traditional Knowledge:
-    - A Bayesian framework with Indigenous Knowledge-informed priors [@girondot_bayesian_2015]
-    - *Local knowledge in ecological modeling* [@belisle_local_2018]
-    - https://focus.science.ubc.ca/stats-660805dd930a
+- A Bayesian framework with Indigenous Knowledge-informed priors [@girondot_bayesian_2015]
+- *Local knowledge in ecological modeling* [@belisle_local_2018]
+- https://focus.science.ubc.ca/stats-660805dd930a
 
 - *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
 - *Native knowledge for native ecosystems*
@@ -23,42 +139,6 @@ The concept of *two-eye seeing* [@ref] refers to an approach to knowledge and gr
 - *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
 - fish conservation, Indigenous perspectives [@bowles_threepronged_2021]
 - Vertebrate biodiversity in Indigenous-managed lands in Australia, Brazil, and Canada is equal to or greater biodiversity in protected areas [@schuster_vertebrate_2019]
-
-## "Non-Indigenous academic knowledge"?
-
-- spend time reading papers initially to do a review, get a review paper out of it
-- make predictions/hypotheses for project
-- what influences stochasticity: what is it and what is affecting it
-- very little testing has been done on effects of stochasticity
-
-<!-- write paragraph(s) on energetics -->
-
-<!-- don't use tau for generation times because it's used for autocorrelation parameters -->
-
-Animals with short generation times (e.g., mice) are more likely to be be severely impacted by a stochastic event than larger animals (e.g. elephants) since larger animals can have bigger energy reserves, and larger animals tend to have longer generation times, which allows them to develop memory about the frequency of such events [@elephants-and-droughts-ref].
-
-See figures in *Southwood 1977*
-
-*Southwood 1977*:
-- *durational stability* of a habitat (period favorable for reproduction and survival): $H = F + L$; number of generations per period: $H / \tau$
-- in stable environments (i.e., with low to no stochasticity), $H >> \tau \implies$ organisms perceive $H \rightarrow \infty$ 
-- greater survival of the residents may simply derive from their knowledge of the geography of the habitat with the corresponding advantages for feeding and predator avoidance, noticed in animals ranging from Heliconius butterflies (Gilbert 1975; Cook, Thomason & Young 1976) to primates (MacKinnon 1974).
-- Cope's law? (Southwood et al. 1974, see Southwood 1977)
-- animals living in an area with high temporal stochasticity should ehibit more polymorhpism to be able to adapt to unpredictable habitats (Southwood 1977). In areas where temporal stochasticity has or will increase as a result of climate change, we expect species will need to adopt new behaviors or become more polymorphic to survive.
-
-Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce[@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity, stochasticity, and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance[@chevin_adaptation_2010], which, in turn, would decrease animals' fitness. Therefore, we expect animals living in unpredictable environments to require more space than those in stable environments (Fig. 1). Although this hypothesis is supported by a few recent studies[@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events[@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species[@wilson_habitat_2016], who struggle to move in fragmented[@fahrig_non-optimal_2007], human-dominated landscapes[@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future[@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
-
-```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments."}
-knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
-```
-
-## Timescale of stochasticity
-
-Organisms are most affected by stochastic events and processes which occur on time scales which are shorter than the organism's life span [@ref]. Weekly heavy rains which alter a lake's salinity [@ref] are more likely to affect the lake's inhabitants than a multi-centennial drought, and high-salinity conditions may be perceived as the (stressful) standard by organisms which were born during periods of drought. However, stochastic processes and events which occur on time scales that are longer than an organism's lifespan may still cause significant effects on a population's fitness and stability. Droughts which occur on the time scale of centuries or millennia (@haig_assessment_2013) are unlikely to affect organisms directly, but such events could still alter the population's habitat or breeding grounds enough to cause a population collapse or prevent individuals from reproducing in their habitual breeding grounds (or reproduce altogether).
-
-For an event or process to be recognized as deterministic by an individual, it must occur multiple times during the individual's lifetime (but the converse is not true). *some animals can develop memory* [@foley_severe_2008]
-
-Trees that have drought resilience have higher mortality [@desoto_low_2020] *check the stats & causation from this reference*
 
 ## Simulations
 
