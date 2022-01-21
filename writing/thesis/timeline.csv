@@ -1,0 +1,28 @@
+﻿section,task,start,end
+Chapter 1,Chapter 1,,
+Chapter 1,"Literature review: survey the current knowledge on animal movement, environmental stochasticity, and their relationship",2021-12-01,2022-04-01
+Chapter 1,Develop simulation models with theoretical framework to be tested with empirical models,2022-01-01,2022-05-01
+Chapter 1,Write chapter 1,2022-01-01,2022-06-01
+Chapter 2,Chapter 2,,
+Chapter 2,Collect data for the the global stochasticity raster,2022-02-01,2022-03-15
+Chapter 2,"Clean, merge, and analyze the data for the stochasticity raster",2022-03-01,2022-05-01
+Chapter 2,Write chapter 2,2022-03-01,2022-10-01
+Chapter 3,Chapter 3,,
+Chapter 3,"Clean, organize, and merge movement data",2022-03-01,2022-05-01
+Chapter 3,Model animal tracking data,2022-04-01,2022-10-01
+Chapter 3,Estimate stochasticity effects,2022-08-01,2022-11-01
+Chapter 3,Write chapter 3,2022-09-01,2023-03-01
+Coursework,Coursework,,
+Coursework,Living Data Project Working group (2 credits): calculate the Canadian Living Planet Index (cLPI) using the latest dataset and create additional working groups,2021-08-30,2021-09-03
+Coursework,"BIOL 501 Biology Seminar Course (3 credits): required for a MSc in Biology Topics: various guest spekers, presenting research, creating salient presentations",2021-09-01,2021-12-07
+Coursework,"Productivity and Reproducibility in Ecology and Evolution (1 credit): open science, transparency, replicable and reproducible science",2021-09-07,2021-09-28
+Coursework,"Scientific Collaboration in Ecology and Evolution (1 credit): collaborating with academic and non-academic groups (eg, Indigenous Nations, NGOs)",2021-09-07,2021-09-28
+Coursework,"Scientific Data Management for Ecology and Evolution (1 credit): how to set up, manage, and archive data transparently and efficiently",2021-10-05,2021-11-04
+Coursework,Synthesis Statistics for Ecology and Evolution (1 credit): how to synthesize large datasets and perform meta-analyses,2021-10-05,2021-11-04
+Other,Other,,
+Other,TAship (BIOL 202 Intro to Biostatistics),2021-09-01,2021-12-15
+Other,TAship (BIOL 125 Biology for Science majors II),2022-01-01,2022-04-15
+Other,Data analyst: estimated effects of anthropogenic activity on the movement of tapirs in Brazil; manuscript is under review,2021-05-01,2022-01-31
+Other,LDP Minimum sample working group; estimating the minimum sample size necessary to obtain a sufficiently accurate cLPI,2021-08-30,2022-03-31
+Preparatory,Preparatory,,
+Preparatory,Write proposal,2022-01-01,2022-03-01

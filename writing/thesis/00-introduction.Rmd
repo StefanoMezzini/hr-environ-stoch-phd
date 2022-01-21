@@ -1,5 +1,6 @@
 # Introduction
 
+- write section of progress to date
 - animals who have their needs met in a given area minimize their movement to avoid wasting energy. movement to a new area is often caused by inferior resource availability
 
 ## Objectives
@@ -17,6 +18,7 @@ To achieve these aims: (i) I will use continuous-time models [@johnson_continuou
 - https://onlinelibrary.wiley.com/doi/10.1111/plb.12085
 - https://spinoff.nasa.gov/Spinoff2018/cg_7.html
 - predictable events: lizard's alternating gate to minimize contact time on hot sand
+- The $\gamma$-variance between spatiotemporal points at a given (spatiotemporal, multidimensional) lag $\vec h$ is calculated as $$\gamma(\vec h) = \frac 12 \mathbb E\left[Z(\vec x + \vec h) - Z(\vec x) \right]^2 = \frac 12 Var\left[Z(\vec x + \vec h) - Z(\vec x) \right]$$ [@bachmaier_variogram_2011]. The $\frac 12$ is because we don't need to repeat each pair (e.g., $V((a, b), (b, a)) = 2 V((a, b))$). View $\gamma(\vec h)$ as a function of $\vec h$ rather than a fixed value.
 
 Different types of environmental stochasticity:
 
@@ -32,6 +34,10 @@ common but stochastic (i.e., $p \approx 0.5$)
 * spatio-temporal stochasticity (in the inclusive sense, not just the interaction):
   - alternate stable states
   - ephemeral habitats following stochastic events (e.g. burned forest, flooded area -- but compare to yearly flooded areas such as temperate forests)
+
+**Small-scale patch structure in North American and South**:
+* Alone, fire homogenizes while herbivory diversifies, but together they diversify the most (Fuhlendorf and Engle 2004; Archibald
+et al. 2005; Collins and Smith 2006)
 
 ### The time scale of stochastic events
 
@@ -81,3 +87,16 @@ In the case of obligate symbiosis or interaction, a species' ability to change i
 
 Large-scale studies such as this one are useful to detect general and common trends, while small scale studies such as the work of @kolasa_rapoports_1998 can provide more information on the small-scale drivers of phenomena.
 
+An animal's ability to alter its behavior and movement in response to environmental conditions is essential in stochastic or changing landscapes. Whether the changes be due to highly variable but (potentially) predictable changes such as climate change and the weather, or whether they be due to more stochastic events (e.g., fires, floods, oil spills), an animal's ability to adapt increases its odds of survival. @rickbeil_plasticity_2019 showed that the yearly migration of elk (*Cervus canadensis*) depends on variable environmental events and cues such as available forage biomass, hunting pressure, snow fall, and snow melt. Birds have also shown to change their their migration as the climate changes, including trans-Saharian migrants [@jonzen_rapid_2006].
+
+An organism's dependence on stochastic cycles such as changes in temperature, precipitation, and resource availability is more efficient and more plastic than depending on purely deterministic cycles (e.g., photoperiod). While this thesis focuses on the movement and spatial use of animals, the adaptability (or lack thereof) of non-animal organisms is also crucial. The ability of most animals to rely on visual cues and move accordingly greatly increases their adaptability and plasticity, particularly for those animals that are able to move large distances over short periods of time (e.g., birds, large vertebrates). Since plants and fungi cannot rely on visual cues nor move as easily, they must depend more on effective reproduction timing, seed dispersal, and evolution of the species rather than the fitness of the individual [@ref?]. Recent changes in flowering and leafing times of plants have been estimated, but changes are occurring faster than predicted by experimental estimates by as much as 4.0-8.5 times [@wolkovich_warming_2012]. This discrepancy between experimental and observational estimates indicates the importance of interpreting experimental results carefully and conditionally on the model and data. The underestimation suggests experimental models fail to account for important factors, such as changes in wind disturbance and soil moisture, shifts in genotypes, and community structure, as well as loss of species diversity [@ref on the change in phenology with species loss].
+
+See *The effects of phenological mismatches on demography*.
+
+@rickbeil_plasticity_2019:
+* Many species use seasonal migration to track emerging resources (Fryxell, Greever, & Sinclair, 1988), reduce predation risk (Hebblewhite & Merrill, 2009), or avoid disease and parasites (Altizer, Bartel, & Han, 2011).
+* Migrations to track resources are often timed to coincide with peak plant and insect emergence (Aikens et al., 2017; Jonzén et al., 2006; Merkle et al., 2016)
+* there is growing evidence that some [bird] populations are adjusting their behavior, suggesting that migration, specifically migration timing, may be more plastic than previously expected (Jonzén, Hedenstrom, & Lundberg, 2007; Jonzén et al., 2006; Lameris et al., 2018) and highlighting a potential measure of resilience in the face of climate change
+* Elk departer earlier from highly-productive areas? This goes against the idea that animals move as a consequence of need. This could be a spurious correlation or maybe a correlation to an unaccounted effect?
+* Elk left early when exposed to hunting more
+* 

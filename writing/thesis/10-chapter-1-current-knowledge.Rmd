@@ -1,6 +1,6 @@
 \newpage
 
-# Chapter 1: Summarizing the current knowledge
+# Chapter 1: Theorerical and empirical movement models
 
 ***NOTES:***
 
@@ -151,3 +151,124 @@ Include:
 * "state-space model" with 2 spaces: within a patch (slow-moving) and between patches (faster movement)
 
 See `R` packages for meta-community simulations
+
+### Extreme events and population stability
+
+Figures adapted from a presentation from a presentation I gave on extreme events and mammals for an undergrad course (BIOL385):
+
+```{r}
+# density plots ---
+d.dens <-
+  tibble(x = seq(10, 20, length.out = 400),
+         pop.x = dnorm(x, mean = 15, sd = 0.5),
+         pop.y = dnorm(x, mean = 15, sd = 1.5),
+         pop.z = dweibull(x, 15.53, 15)) %>%
+  pivot_longer(cols = c('pop.x', 'pop.y', 'pop.z'), names_to = 'pop', values_to = 'p')
+
+# populations with same means but different shapes and variances
+ggplot(d.dens) +
+  facet_grid(pop ~ .) +
+  geom_ribbon(aes(x, ymin = 0, ymax = p, fill = pop), alpha = 0.5) +
+  geom_line(aes(x, p)) +
+  geom_hline(yintercept = 0) +
+  labs(x = 'Population size', y = 'Probability density') +
+  scale_fill_brewer(type = 'qual', palette = 6, direction = 1) +
+  scale_x_continuous(breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  theme(strip.text = element_blank(), line = element_line(size = .5))
+
+library('mgcv')  # for semi-parametric GAMs
+library('qgam')  # for non-parametric quantile GAMs
+library('dplyr') # for data wrangling
+theme_set(theme_bw() +
+            theme(legend.position = 'none', strip.text = element_blank()))
+
+# simulate population data
+d <- tibble(Year = 1500:2050,
+            N = c(100, rep(NA, length(Year) - 1)),
+            die.off = NA,
+            extreme = NA_real_)
+
+# should change the simulation to something more realistic
+set.seed(1)
+for(i in 2:nrow(d)) { # for each row after the first one
+  if(d$N[i - 1] > 1) { # if more than one animal existed in the previous row
+    
+    d$N[i] <- d$N[i - 1] - rpois(n = 1, 3) + 3
+    
+    # extreme event
+    if(d$Year[i] > 1900 & rbinom(1, size = 1, prob = (d$Year[i] / 20000)^2)) {
+      d$N[i] <- d$N[i - 1] - rpois(n = 1, lambda = 25)
+      d$extreme[i] <- d$Year[i]
+    }
+    
+    # size <- abs(round(rnorm(1, sd = (d$Year[i] / 1900)^5) / 5)) # magnitude of dieoff
+    # d$die.off[i] <- size * ((d$Year[i] - 1800) / 20)^1.5
+    # d$N[i] <- d$N[i] - d$die.off[i]
+    
+  } else {
+    d$N[i - 1] <- 0
+    d$N[i] <- 0
+  }
+}
+
+# reduce population size by ten but keep to a min of 0
+# d$N <- if_else(d$N > 5, round(d$N - 5), 0)
+
+ggplot(d, aes(Year, N)) +
+  geom_line() +
+  scale_x_continuous(expand = c(0, 0)) +
+  labs(y = 'Population Size', x = 'Year C.E.')
+
+# death and birth rates are arbitrary
+m0 <- qgam(N ~ s(Year, k = 25), d, qu = .5)
+mu <- predict(m0, type = 'response')
+xtrm.lwr <- mu - 5 # lower threshold for extremes
+xtrm.upr <- mu + 5 # upper threshold for extremes
+
+# create an arbitrary range for "normal" population levels
+ggplot(d, aes(Year, N)) +
+  geom_ribbon(aes(ymin = xtrm.lwr, ymax = xtrm.upr), fill = 'goldenrod', alpha = 0.4) +
+  geom_line(lwd = .5) +
+  scale_x_continuous(expand = c(0, 0)) +
+  labs(y = 'Population Size', x = NULL)
+
+# frequency of unusually high (triangles) or low (crosses) numbers
+ggplot(d, aes(Year, N)) +
+  geom_ribbon(aes(ymin = xtrm.lwr, ymax = xtrm.upr), fill = 'goldenrod', alpha = 0.4) +
+  geom_point(alpha = .5) +
+  geom_point(aes(Year, max(d$N) * 1.1), filter(d, N > xtrm.upr),
+             col = 'forestgreen', size = 3, shape = 17) +
+  geom_point(aes(Year, 0 - max(d$N) * 0.05), filter(d, N < xtrm.lwr),
+             col = 'red', size = 3, shape = 4) +
+  scale_x_continuous(expand = c(0, 0)) +
+  labs(y = 'Population Size', x = NULL)
+
+# models ----
+# LM fails to detect changes in variance and expects linear, monotonic trends
+ggplot(d, aes(Year, N)) +
+  geom_point(alpha = .5) +
+  geom_point(aes(x = extreme, y = - 1), d, color = 'red', pch = 4) +
+  geom_smooth(method = 'lm', se = FALSE, formula = y ~ x) +
+  labs(y = 'Population Size', x = NULL)
+
+# quantile GAM
+mq <- mqgam(N ~ s(Year, k = 10, bs = 'ad'), data = d,
+            qu = c(0.01, 0.99), multicore = TRUE, ncores = 4)
+
+pred.q <-
+  tibble(Year = d$Year,
+         N.99 = qdo(mq, qu = c(0.99),
+                    \(m) predict(m, newdata = tibble(Year = Year))),
+         N.01 = qdo(mq, qu = c(0.01),
+                    \(m) predict(m, newdata = tibble(Year = Year))))
+
+# quantile GAM (or location-scale GAM) can detect change in 
+ggplot(pred.q) +
+  geom_point(aes(Year, N), d) +
+  geom_point(aes(x = extreme, y = - 1), d, color = 'red', pch = 4) +
+  geom_line(aes(Year, N.99), col = 'blue', lwd = 1) +
+  geom_line(aes(Year, N.01), col = 'blue', lwd = 1) +
+  ylim(c(-1, NA)) +
+  labs(y = 'Population Size', x = NULL)
+```
