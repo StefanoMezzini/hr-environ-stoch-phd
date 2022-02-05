@@ -1,0 +1,11 @@
+\newpage
+
+# List of abbreviations
+
+```{r}
+library('dplyr')
+tibble(Abbreviation = c('HR', 'CTMM', 'GAM', 'HGAM'),
+       Phrase = c('Home range', 'Continuous-time movement model', 'Generalized additive model', 'Hierarchical generalized additive model')) %>%
+  arrange(Abbreviation) %>%
+  knitr::kable(format = 'pipe') # simple
+```
