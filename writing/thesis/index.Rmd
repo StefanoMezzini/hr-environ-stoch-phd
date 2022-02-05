@@ -22,6 +22,11 @@ site: bookdown::bookdown_site # needed to build the book
 config_file: '_bookdown.yml'
 ---
 
+```{r, include=FALSE}
+TITLE <- 'Linking environmental stochasticity with animal space use using continuous-time stochastic processes'
+knitr::opts_chunk$set(echo = FALSE)
+```
+
 <!-- http://www.personal.ceu.hu/tex/breaking.htm for breaking lines and pages-->
 
 <!-- center text, triple spacing, leave blank lines between sections -->
@@ -30,7 +35,7 @@ config_file: '_bookdown.yml'
 
 \setstretch{3}
 
-\textbf{LINKING ENVIRONMENTAL STOCHASTICITY WITH ANIMAL SPACE USE USING CONTINUOUS-TIME STOCHASTIC PROCESSES}
+\textbf{`r toupper(TITLE)`}
 
 by
 
@@ -70,38 +75,44 @@ THE UNIVERSITY OF BRITISH COLUMBIA
 
 \newpage
 
+<!--
 ***NOTES:***
 
-- refer to the style guideline at https://github.com/jepa/ubcdown
+- not using the style guideline at https://github.com/jepa/ubcdown because it requires cloning and forking the repository
 - UBC-V style: https://faculty.washington.edu/mforbes/projects/ubcthesis/
 - TU Delft, Netherlands, template https://www.tudelft.nl/huisstijl/downloads
 - contact Sunil Suresh, Kristy Baxter, and Mathew Vis-Dunbar once I've made a template
 - see https://gradstudies.ok.ubc.ca/theses-supplementary-deposit/ for how to submit and store supplementary materials to support transparency and reproducibility, as well as SI from other theses
 - underline entire lines with committee members and examiners for them to sign
+- write section of progress to date
+- add appendix with papers to which I contributed substantially during my Master's (include the actual papers, not just DOIs)
 
 \newpage
+-->
 
 \pagenumbering{roman} <!-- use roman numerals -->
 
-\setcounter{page}{2} <!-- start numbering from 1 -->
+\setcounter{page}{2} <!-- cover page is page i, so start from ii -->
 
-**The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis/dissertation entitled:**\newline
-***TITLE***\newline
-**submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.**
+\textbf{The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis entitled:\newline
+\textit{`r TITLE`},\newline
+submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.}
 
-Michael J. Noonan\newline
+\bigskip
+
+**Michael J. Noonan** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
 Supervisor
 
-Adam T. Ford\newline
+**Adam T. Ford** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
 Supervisory Committee Member
 
-Jason Pither\newline
+**Jason Pither** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
 Supervisory Committee Member
 
-Click or tap here to enter text.\newline
+**University Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
 University Examiner
 
-Click or tap here to enter text.\newline
+**External Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
 External Examiner
 
 <!--Additional Committee Members include:
@@ -116,19 +127,27 @@ Supervisory Committee Member.-->
 
 # Abstract {-}
 
-
+<!-- The abstract is a concise and accurate summary of the research contained in the thesis. It states the problem, the methods of investigation, and the general conclusions. It should not contain tables, graphs or illustrations. It must not exceed 350 words, and should contain relevant keywords that will facilitate automated information retrieval. There only be one abstract for the entire thesis. -->
 
 \newpage
 
 # Lay Summary {-}
 
-
+<!-- The lay summary explains the key goals and contributions of the research/scholarly work in terms that can be understood by the general public. It does not use technical terms and discipline-specific language. It must not exceed 150 words in length. -->
 
 \newpage
 
 # Preface {-}
 
-
+<!--
+The preface is a statement indicating the relative contributions of all collaborators and co-authors (including supervisors and members of the supervisory committee) of publications or material submitted for publication, emphasizing details of the student's contribution and stating the proportion of research and writing conducted by the student. It should include:
+* Identification and design of the research program.
+* Performance of the various parts of the research.
+* Analysis of the research data.
+* Preparation of manuscripts, if any.
+* A list of any publications or submissions arising from work presented in the thesis including the title of the article and name of the publisher (only if the article has been accepted or published), and the chapter(s) of the dissertation in which the work is located.
+* The name of the particular UBC Research Ethics Board, and the Certificate Number(s) of the Ethics Certificate(s) obtained, if ethics approval was required for the research.
+-->
 
 \newpage
 
@@ -146,18 +165,20 @@ Supervisory Committee Member.-->
 
 # Acknowledgements {-}
 
-
+<!-- In this section you can acknowledge the extent to which assistance has been given by members of staff, fellow students, data technicians, editors, and/or others; recognize the supervision and advice given by your supervisor and committee members; acknowledge colleagues with whom you have written journal articles. -->
 
 \newpage
 
 # Dedication {-}
 
+To the Lands that have nourished me and given me a place to live, learn, and play.
 
+<!-- The dedication is usually quite short, and is a personal rather than academic recognition. You can use any font or language you wish for the dedication page. -->
 
 \newpage
 
-\setcounter{page}{1} <!-- start numbering from 1 -->
+\pagenumbering{arabic} <!-- change numbering format -->
 
-\pagenumbering{arabic}
+\setcounter{page}{1} <!-- start numbering from 1 -->
 
 <!-- to refer to a section, add {#section-name} after the heading, and reference using \@ref(section-name) -->
