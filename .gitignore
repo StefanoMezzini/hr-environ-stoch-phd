@@ -37,3 +37,6 @@ rsconnect/
 
 # thesis revisions
 revisions/*
+
+# all *.rds files (e.g., saved simulations and models)
+*.rds
