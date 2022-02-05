@@ -1,23 +1,63 @@
 \newpage
 
-# Chapter 1: Theorerical and empirical movement models
+# Chapter 1: Literature review with theorerical and empirical movement models
 
 ***NOTES:***
 
-- spend time reading papers initially to do a review, get a review paper out of it
 - make predictions/hypotheses for project
 - what influences stochasticity: what is it and what is affecting it
 - very little testing has been done on effects of stochasticity
 - write paragraph(s) on energetics
 - don't use tau for generation times because it's used for autocorrelation parameters
 
+- linear features can facilitate movement [e.g., pipelines, seismic lines, low-traffic roads, @dickie_resource_2022] but also increase mortality (Mike's anteater study)
+
 ## Resource availability and productivity
+
+@grant_whether_1993:
+- protective/defensive adaptations peaks at intermediate levels of competitor density/spatial resource density/spatioteporal clumping. At low competition, there's no need for defense and the cost (e.g., energetic) and risk (e.g., wounds) outweigh the benefit, while at high values the cost and risk become too high and they outweigh the benefit.
+- 
 
 <!-- from NSERC proposal: -->
 
 Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce[@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity, stochasticity, and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance[@chevin_adaptation_2010], which, in turn, would decrease animals' fitness. Therefore, we expect animals living in unpredictable environments to require more space than those in stable environments (Fig. 1). Although this hypothesis is supported by a few recent studies[@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events[@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species[@wilson_habitat_2016], who struggle to move in fragmented[@fahrig_non-optimal_2007], human-dominated landscapes[@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future[@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
 
 ## Envrironmental stochasticity
+
+*If an individual is centered on prime habitat, there's only so far it can go out before it hits the bounds of its current ecosystem. Of course, the scale over which this occurs is likely to be massive, but even with infinite plasticity, there's an upper limit on how large a species range can be.* But then moving to the edge can be important in patchy environments.
+
+Let $E$ indicate the energy an animal can access through food in a given visit to a patch or encounter with prey. Next, let $V$ indicate the number of patch visits or prey encounters necessary for the animal to reach its energetic needs for a given time period. Let $\mathbb E(\cdot)$ indicate the expected (i.e., mean) of a random variable and $\mathbb V(\cdot)$ its variance (e.g., $\mathbb E(E)$ and $\mathbb V(E)$ for the energic need's mean and variance, respectively).
+
+
+```{r 5-5-panel, fig.cap="Simulated data with constant, linearly increasing, cyclical, drifting, and erratic means and variances. The red lines are the means estimated by a Generalized Additive Model fit by $\\texttt{ggplot2::geom\\_smooth()}$, while the shaded areas are the range of $\\pm$ 2 true (i.e, not estimated) standard deviations around the estimated mean.", out.width='100%'}
+knitr::include_graphics('../../figures/mean-variance-5-by-5.png')
+```
+
+The `geom_smooth()` shows that the amount of detail in our estimates depends directly on our data resolution (which is why some red lines don't look similar to the orange mean ones, especially for the stochastic mean). This also adds a new consideration, because the change in the mean is not the same as the variance in the data, but we cannot distinguish the two (easily).
+
+***FIX FIGURE REFERENCE IN FIGURE CAPTIONS FOR 5-5-sims AND 5-5-cv***
+
+```{r 5-5-sims, fig.cap="Simulated spatial requirements for animals living in habitats detailed in Figure ref(fig:5-5-panel). The black line indicates the mean spatial requirement needed for survival, while the red line indicates the mean requirement + 2 standard deviations. The latter can be interpreted as the minimum requirements needed for an approximate 95\\% chance of survival, which would be proportional to the animals' 95\\% home range.", out.width='100%'}
+knitr::include_graphics('../../figures/mean-variance-5-by-5-sims.png')
+```
+
+```{r 5-5-cv, fig.cap="Standard deviations of the number of patch visits needed for an animal to survive in the habitats detailed in Figure @ref(fig:5-5-panel). Each patch has mean resources as indicated on the left column and variances as indicated in the top row. Note that although the variance in available energy, $V(E)$, is related to the variance in patch visits, the two are not the same. More variable habitats will result in larger spatial requirements, but the relationship is not linear, since habitats with higher mean available energy result in lower spatial requirements. Additionally, the mean available energy and the .", out.width='100%'}
+knitr::include_graphics('../../figures/mean-variance-5-by-5-sd-visits.png')
+```
+
+Changes in variance have greater effects in highly predictable areas because changing variance from near 0 to any number is multiplicatively much larger than increasing an already large variance. 
+
+$HR = a \mathbb E(\text{productivity}) + b \mathbb V(\text{productivity}) - c \mathbb E(\text{metabolic rate}) - d \mathbb E(\text{energetic cost of movement})$ where $a, b, c, d$ are (estimated) coefficients.
+
+Also, a highly stochastic variance will be estimated as a smoothly-changing variance unless we have very high amounts of data.
+
+Apply mean VS variance 5x5 figure to HR size or location:
+
+* there are conditions where remaining in a particular habitat becomes unsustainable and migrations or range shifts are required for survival,
+* **cyclical mean** ==> repeated migration (or diurnal cicles)
+* **cyclical variance** could be because of seasonal/daily cycles in resources, temperature, precipitation
+* **drifting** could be because of a highly complex ecosystem with many unpredictable agents (e.g., tropical areas with high density of insects)
+* **erratic** could be because of sudden events (e.g., fires, human activity)
 
 ### Temporal stochasticity
 
@@ -38,9 +78,17 @@ For an event or process to be recognized as deterministic by an individual, it m
 
 Trees that have drought resilience have higher mortality [@desoto_low_2020] *check the stats & causation from this reference*
 
+```{r hr-and-lifespan, fig.cap="Simulated movement of an individual over their life. Samples from different periods of the animal's life may result in different conclusions, such as slow nomadism (a) or range residency (b), but neither sample is representative of the space the animal used over its entire life (c).", out.width='100%'}
+knitr::include_graphics('../../figures/hr-and-lifespan.png')
+```
+
+The length of an animal's lifespan and the scale of their space use can determine how we classify their movement. However, we should minimize the bias which may arise from considering an animal's spatio-temporal scale relative to our view of time and space. If the animal tracked in figure \@ref(fig:hr-and-lifespan) is an insect with a lifespan of one day that lives in our office, we may consider the insect range-resident relative to a space we are familiar with (the office), but if the animal is a vertebrate living in a forest, we may be more likely to consider the animal a nomad.
+
+Distinguish between temporary spatial needs (e.g., yearly) vs long-term spatial needs (e.g., life-long). If the animal moves because of fires or human activity, we wouldn't consider it nomadic, and we should account for the full range of space, rather than the space used in a fraction of its life (e.g., panels (a) or (b)). Looking at the group it lives in may also help understand if the changes are random or not, since the entire group moving would suggest it's not random.
+
 ### Spatial stochasticity
 
-```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments."}
+```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments.", out.width='100%'}
 knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
 ```
 
@@ -66,13 +114,13 @@ The same idea (*that variance is finite if we consider the entire ecosystem*) wo
 
 Note that highly variable $\ne$ unpredictable. E.g.: temperature change within each year can be highly variable (-40 to +40), but it is still predictable:
 
-```{r}
+```{r, echo = TRUE}
 plot(2 * sinpi(seq(1, 8, length.out = 400)) + rnorm(400))
 ```
 
 For organisms to evolve, some need to survive. If habitats are so unpredictable that most individuals cannot survive a stochastic event (whether it be as short as a fire or as long as a centennial drought), then species will not be able to evolve and adapt.
 
-```{r}
+```{r, echo = TRUE}
 library('tibble')
 library('tidyr')
 library('ggplot2')
@@ -118,6 +166,25 @@ Refs to check:
 * memory constitutes an important
 mechanism for home range emergence (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B6, Börger et al., 2008; Van Moorter et al., 2009)
 
+## Movement types
+
+### Range residency
+
+
+### Seasonal migration
+
+
+### Nomadism
+
+predation is more stochastic than herbibory; predators need to match more cycles, depend on less individuals -> more variable food
+
+@teitelbaum_beyond_2019:
+- **Nomadic movement**: with irregular timing and/or direction, producing both within-year and between-year variability in location and movement patterns
+- **Nomadic movement** is not the same as **migration**, because migration is predictable and cyclical while nomadism is random in time and space
+- "Data from recent developments in animal tracking technology (e.g., longer-lasting and lighter GPS devices) show that species previously considered migrants or range residents can show irregular, often long-distance, movement patterns (flexible foraging movements of leatherback turtles across the north atlantic ocean, To migrate, stay put, or wander Varied movement strategies in bald eagles, Big data analyses reveal patterns and drivers of the movements of southern elephant seals)"
+
+### Edge dynamics
+
 ## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge
 
 The ancestral and traditional Knowledge of Indigenous and colonized Peoples is often dismissed, ignored, and contradicted by Western institutions [@smith_decolonizing_2012]. **...** The development of Western science is often assumed to clash with the sacred Knowledge many colonized People hold. Western science is also often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such it is believed by Western institutions to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved. <!-- *damage to generations to come* -->
@@ -156,7 +223,7 @@ See `R` packages for meta-community simulations
 
 Figures adapted from a presentation from a presentation I gave on extreme events and mammals for an undergrad course (BIOL385):
 
-```{r}
+```{r, echo = TRUE}
 # density plots ---
 d.dens <-
   tibble(x = seq(10, 20, length.out = 400),
