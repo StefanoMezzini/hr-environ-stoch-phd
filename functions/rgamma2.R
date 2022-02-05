@@ -2,9 +2,7 @@
 rgamma2 <- function(mu, sigma2, N = n()) {
   # mean = k * theta
   # sigma^2 = k * theta^2
-  
-  theta <- sigma2 / mu # scale parameter
-  k <- mu / theta # shape parameter
-  
-  rgamma(n = N, shape = k, scale = theta)
+  rgamma(n = N,
+         shape = mu^2 / sigma2, # (k * theta)^2 / (k * theta^2)
+         scale = sigma2 / mu)   # (k * theta^2) / (k * theta)
 }
