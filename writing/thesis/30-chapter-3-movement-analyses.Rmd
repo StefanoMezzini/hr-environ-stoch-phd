@@ -1,6 +1,6 @@
 \newpage
 
-# Chapter 3: Movement analyses
+# Chapter 3: Movement analyses {#movement-analyses}
 
 ## Movement simulations
 
@@ -13,5 +13,12 @@
 
 ## Movement analysis
 
+### Model types {#model-types}
+
 - add HFI to analysis (but it's temporally static)
+- define and describe:
+  - IID model
+  - OU anisotropic, isotropic
+  - OUF anisotropic, isotropic,
+  - OUf anisotropic
 - look at HPAMs?
