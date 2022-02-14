@@ -2,3 +2,6 @@
 
 # Chapter 4: Summary
 
+- why is this work important?
+- so what?
+- now what?
