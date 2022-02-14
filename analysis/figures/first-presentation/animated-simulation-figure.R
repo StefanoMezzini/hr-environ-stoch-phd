@@ -3,8 +3,6 @@ library('dplyr')   # for data wrangling
 library('tidyr')   # for data wrangling
 library('purrr')   # for functional programming
 library('grid')    # for arrow heads on axis
-library('future')  # for parallel computation
-library('furrr')   # for parallel computation
 
 # set colors for raster palette
 LOW <- '#744700'
@@ -106,8 +104,7 @@ p0 +
   geom_point(data = mov0, pch = 16, size = 1.5,
              color = if_else(LIGHT.THEME, 'white', 'black'))
 ggsave(paste0('figures/first-presentation/static-movement-all-',
-              if_else(LIGHT.THEME, 'light', 'dark'), '.png'),
-       height = 1000, width = 1000, units = 'px', dpi = 'print')
+              if_else(LIGHT.THEME, 'light', 'dark'), '.png'), height = 4, width = 4)
   
 # tibble with movement data
 mov <- mutate(mov0, t = 0)
@@ -117,13 +114,7 @@ m <- mutate(m,
             food = if_else(paste(mu, s2) %in% paste(mov0$mu, mov0$s2), 0, food))
 
 # generate movement data ----
-# switch to multi-core cluster computation (need to use a future function)
-# plan('cluster')
-
 eat(1) # start the first turn
-
-# switch to single-core computation (ggplot2 will crash in multisession)
-# plan('sequential')
 
 # total number of steps required for satiety (keep `t` to make labels dynamic)
 total.steps <-
@@ -147,11 +138,11 @@ p1 <-
              pch = 16, size = 1.5,
              color = if_else(LIGHT.THEME, 'white', 'black')) +
   
-  geom_label(aes(label = n_steps), total.steps, size = 5); p1
+  geom_label(aes(label = n_steps), total.steps, size = 3); p1
 
 # save the final figure
-ggsave(filename = IMG_NAME, height = 1000, width = 1000, dpi = 'print',
-       units = 'px', path = 'figures/first-presentation')
+ggsave(filename = IMG_NAME, height = 4, width = 4, scale = 1.5,
+       path = 'figures/first-presentation')
 
 # animate the plot ----
 library('gganimate')
