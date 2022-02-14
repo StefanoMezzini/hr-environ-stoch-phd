@@ -1,15 +1,10 @@
 \newpage
 
-# Chapter 3: Movement analyses {#movement-analyses}
+# Chapter 3: Movement analyses {#chapter-3}
 
 ## Movement simulations
 
 - Inform priors and simulation distributions using Indigenous Traditional Knowledge
-
-## Stochasticity map
-
-- currently there's no raster of stochasticity => paper / product
-- PCA on main drivers/causes of stochasticity
 
 ## Movement analysis
 
@@ -18,7 +13,6 @@
 - add HFI to analysis (but it's temporally static)
 - define and describe:
   - IID model
-  - OU anisotropic, isotropic
-  - OUF anisotropic, isotropic,
-  - OUf anisotropic
-- look at HPAMs?
+  - OU
+  - OUF
+  - GAMs, HGAMs

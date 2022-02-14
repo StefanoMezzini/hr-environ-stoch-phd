@@ -1,5 +1,26 @@
 \newpage
 
-# Chapter 2: A new measure of environmental stochasticity
+# Chapter 2: A new measure of environmental variance
+
+Whether an animal is affected by or can environmental variance depends strongly on the spatiotemporal scale of the process(es) involved. Processes that occur at very small scales (e.g., the location of electrons around atoms) or very large scales (e.g., the movement of the Milky Way) are undetected by most living organisms (if not all).
 
 quantify levels and stability of green light wave (see NDVI) with and without human modification/activity, include citizen science data (e.g., flowering phenology)
+
+For an event or process to be recognized as deterministic by an individual, it must occur multiple times during the individual's lifetime (but the converse is not true). *some animals can develop memory* [@foley_severe_2008]
+
+Trees that have drought resilience have higher mortality -- that's not what the paper says [@desoto_low_2020]
+
+- currently there's no raster of stochasticity
+- PCA on main drivers/causes of stochasticity
+- ml-HFI would be useful, but it's static
+- can use NDVI, but it only starts in ~2000
+
+Fire:
+
+- variety in fires increases variation of birds, particularly years after fires occur and when fires produce heterogeneous burns [@tingley_pyrodiversity_2016]
+- **Small-scale patch structure in North American and South**: *Alone, fire homogenizes while herbivory diversifies, but together they diversify the most (Fuhlendorf and Engle 2004; Archibald et al. 2005; Collins and Smith 2006)*
+
+
+Urban environments homogenize spatially but add strong temporal heterogeneity
+
+as explained in chapter 1, spatiotemporal variance can be divided into heterogeneity and stochasticity
