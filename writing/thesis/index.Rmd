@@ -23,7 +23,7 @@ config_file: '_bookdown.yml'
 ---
 
 ```{r, include=FALSE}
-TITLE <- 'Linking environmental stochasticity with animal space use using continuous-time stochastic processes'
+TITLE <- 'Linking resource abundance and environmental stochasticity with animal space use using continuous-time stochastic processes'
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -167,13 +167,19 @@ The preface is a statement indicating the relative contributions of all collabor
 
 <!-- In this section you can acknowledge the extent to which assistance has been given by members of staff, fellow students, data technicians, editors, and/or others; recognize the supervision and advice given by your supervisor and committee members; acknowledge colleagues with whom you have written journal articles. -->
 
+I would like to thank Dr. Noonan for offering me the opportunity to pursue a Master's degree with such an interesting project with cutting-edge statistical methods for movement ecology. I have already learned a lot and I expect I will learn much more.
+
+I would like to thank Dr. Ford and Dr. Pither for agreeing to be on my committee. Your feedback and mentorship will help me ensure this project is relevant and directly applicable to current issues regarding conservation and biogeography.
+
+I would like to thank Sandra Fox for providing me with resources to ensure my perspective and work are inclusive and supportive of different ways of knowing, including Indigenous Knowledge, and that my attitude remains anti-colonial and anti-imperial.
+
 \newpage
 
 # Dedication {-}
 
-To the Lands that have nourished me and given me a place to live, learn, and play.
-
 <!-- The dedication is usually quite short, and is a personal rather than academic recognition. You can use any font or language you wish for the dedication page. -->
+
+To the Lands that have nourished me and given me a place to live, learn, and play.
 
 \newpage
 
