@@ -6,7 +6,7 @@ Chapter 1,Test simulation models with empirical data,2022-01-01,2022-05-01
 Chapter 1,Write chapter 1,2022-01-01,2022-06-01
 Chapter 1,"Open science: update READMEs, ensure work is reproducible",2022-05-15,2022-06-01
 Chapter 2,Chapter 2: A new global measure of stochasticity,,
-Chapter 2,Collect data for the the global stochasticity raster,2022-02-01,2022-03-15
+Chapter 2,Collect data for the the global stochasticity raster,2022-03-01,2022-04-15
 Chapter 2,"Clean, merge, and analyze the data for the stochasticity raster",2022-03-01,2022-05-01
 Chapter 2,Write chapter 2,2022-03-01,2022-10-01
 Chapter 2,"Open science: update READMEs, ensure work is reproducible",2022-09-15,2022-10-01
@@ -32,7 +32,8 @@ Other,TAship (BIOL 125 Biology for Science majors II),2022-01-01,2022-04-15
 Other,TAship (anticipated),2022-09-01,2022-12-15
 Other,TAship (anticipated),2023-01-01,2023-04-15
 Other,Data analyst: estimated effects of human activity on tapir movement,2021-05-01,2022-01-31
-Other,LDP working group: estimating minimum sample for an accurate cLPI,2021-08-30,2022-03-31
+Other,LDP WG: estimating minimum sample for an accurate cLPI,2021-08-30,2022-03-31
+Other,"LDP WG: estimating bias in the cLPI, calculating the cLPI with non-Gaussian models",2021-08-30,2022-03-31
 Preparatory,Preparatory,,
 Preparatory,Write proposal,2022-01-01,2022-03-01
 Preparatory,Open Science: Create and organize GitHub repository,2021-10-22,2021-12-10
