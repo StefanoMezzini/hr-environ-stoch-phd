@@ -1,3 +1,5 @@
+\newpage
+
 # Project timeline
 
 ```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my Master\'s project.', fig.width=14, fig.height=8, message=FALSE}
@@ -45,14 +47,12 @@ tasks <-
          # task = stri_replace_all(task, regex ='for~', replacement='\'for\'~'),
          # make headers bold (removed because numbers cannot be bold)
          #task = if_else(header, paste0('bold(', task, ')'), task),
-         # split long strings over multiple lines
-         spaces = purrr::map(task, \(x) gregexpr('~', x)))
+         )
 
 # tasks %>%
 #   transmute(Task = task, `Start date` = start, `End date` = end) %>%
 #   knitr::kable(caption = 'Estimated timeline for my Master\'s project.')
-p <-
-  ggplot(tasks, aes(y = id)) +
+ggplot(tasks, aes(y = id)) +
   geom_hline(aes(yintercept = id + 0.5), filter(tasks, header), alpha = 0.15) +
   geom_vline(xintercept = decimal_date(Sys.Date()), lty = 'dashed', alpha = 0.5) +
   geom_errorbar(aes(xmin = dec_start, xmax = dec_end, color = section),
@@ -64,7 +64,18 @@ p <-
                      expand = c(0, 0)) +
   scale_y_continuous(NULL, breaks = NULL) +
   scale_color_manual(NULL, values = c('black', 'grey40', pal),
-                     breaks = c(TRUE, FALSE, levels(tasks$section))); p
+                     breaks = c(TRUE, FALSE, levels(tasks$section)))
 ```
 
-\newpage
+## Progress to date
+
+```{r, eval = FALSE}
+filter(tasks, completed) %>%
+  pull(task) %>%
+  as.character() %>%
+  cat(sep = '\n')
+```
+
+- Created and organized the GitHub repository (https://github.com/StefanoMezzini/hr-environ-stoch-masters);
+- Completed all coursework necessary for a Master's degree;
+- Living Data Project Working group: calculate new Canadian Living Planet Index (cLPI)
