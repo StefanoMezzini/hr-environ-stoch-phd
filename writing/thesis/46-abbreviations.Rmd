@@ -4,8 +4,7 @@
 
 ```{r}
 library('dplyr')
-tibble(Abbreviation = c('HR', 'CTMM', 'GAM', 'HGAM'),
-       Phrase = c('Home range', 'Continuous-time movement model', 'Generalized additive model', 'Hierarchical generalized additive model')) %>%
+readr::read_csv('abbreviations.csv', col_types = 'cc') %>%
   arrange(Abbreviation) %>%
   knitr::kable(format = 'pipe') # simple
 ```
