@@ -99,6 +99,7 @@ d_summarized <-
 p_sim_55 <-
   ggplot(d_summarized) +
   facet_grid(mean ~ variance, scales = 'free_y') +
+  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = 'black', alpha = 0.2) +
   geom_line(aes(t, mean_visits), color = 'black') +
   geom_line(aes(t, upr), color = 'red') +
   scale_x_continuous('Time', breaks = NULL) +
