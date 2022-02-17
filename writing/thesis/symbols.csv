@@ -1,0 +1,7 @@
+Symbol,Meaning
+$\mathbb E(\cdot)$,"Expectation, mean"
+$\mathbb V (\cdot)$,Variance
+$H$,"Home range, spatial needs, required area"
+$P(A)$,"Probability of event $A$, e.g., $A = \text{success}$"
+$\tau_p$,"Positional autocorrelation, mean reversion to HR center, range crossing time"
+$\tau_v$,"Velocity autocorrelation, directional persistance"
