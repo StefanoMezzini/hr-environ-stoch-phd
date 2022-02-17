@@ -49,7 +49,8 @@ p <-
   geom_raster() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_fill_distiller('Mean', type = 'seq', palette = 7, direction = 1)
+  scale_fill_distiller('Mean', type = 'seq', palette = 7, direction = 1,
+                       breaks = range(h_raster$z), labels = c('low', 'high'))
 
 p_s2 <-
   h_raster %>%
@@ -63,7 +64,7 @@ p_s2 <-
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_fill_distiller('Heterogeneity', type = 'seq', palette = 1, direction = 1,
-                       limits = c(0, max(h_raster$var)))
+                       breaks = range(h_raster$var), labels = c('low', 'high'))
 
 p_s2.s <-
   h_raster %>%
@@ -77,8 +78,8 @@ p_s2.s <-
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_fill_distiller(bquote(atop('Perceived', 'heterogeneity')), type = 'seq',
-                       palette = 1, direction = 1,
-                       limits = c(0, max(h_raster$var)))
+                       palette = 1, direction = 1, limits = range(h_raster$var),
+                       breaks = range(h_raster$var), labels = c('low', 'high'))
 
 p_full <- plot_grid(p + theme(legend.position = 'none'),
                     get_legend(p),
