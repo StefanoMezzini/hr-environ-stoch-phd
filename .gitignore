@@ -40,3 +40,6 @@ revisions/*
 
 # all *.rds files (e.g., saved simulations and models)
 *.rds
+
+# all Rmd logs
+*.log
