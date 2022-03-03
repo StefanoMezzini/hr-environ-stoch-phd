@@ -6,6 +6,7 @@ library('purrr')   # for functinal programming
 library('future')  # for parallel computing
 library('furrr')   # for parallel functional programming
 source('functions/rgamma2.R') # rgamma() parameterized by mean and variance
+source('analysis/default-figure-styling.R') # for default figure styling and colors
 theme_set(theme_bw())
 
 # see 'analysis/figures/mean-variance-trends.R' for reference figures
@@ -50,8 +51,9 @@ p_cv <-
   ggplot(d55) +
   facet_grid(mean ~ variance) +
   geom_line(aes(t, sqrt(sigma2)/mu)) +
-  scale_x_continuous(NULL, breaks = NULL) +
-  ylab(expression(Coefficient~of~variation)); p_cv
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous(expression(Coefficient~of~variation~'in'~italic(H)),
+                     breaks = NULL); p_cv
 
 #' model assumes:
 #' - infinite behavioral plasticity, 
@@ -91,28 +93,29 @@ d_summarized <-
   group_by(mean, variance, t, mu, sigma2) %>%
   summarize(mean_visits = mean(n_visits),
             sd_visits = sd(n_visits),
-            lwr = mean_visits - 2 * sd_visits,
-            upr = mean_visits + 2 * sd_visits,
+            lwr = quantile(n_visits, 0.05),
+            upr = quantile(n_visits, 0.95),
             .groups = 'drop')
 
 # simulation figure
+hr_lab <- expression(Home~range~size~(italic(H)))
 p_sim_55 <-
   ggplot(d_summarized) +
   facet_grid(mean ~ variance, scales = 'free_y') +
-  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = 'black', alpha = 0.2) +
-  geom_line(aes(t, mean_visits), color = 'black') +
-  geom_line(aes(t, upr), color = 'red') +
+  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(t, upr), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous('Patch visits required for satiety') +
+  scale_y_continuous(hr_lab, breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
 
 # trends in the mean
 p_mean <-
   ggplot(d55, aes(t, mu)) +
   facet_grid(mean ~ ., switch = 'y') +
-  geom_line(color = 'darkorange', lwd = 1) +
+  geom_line(color = pal[1], lwd = 1) +
   scale_x_continuous(' ', breaks = NULL) +
-  scale_y_continuous('Mean', breaks = NULL) +
+  scale_y_continuous(expression(Mean~italic(R)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'),
         axis.text = element_text(color = 'transparent'), axis.ticks = element_blank(),
         panel.grid = element_blank())
@@ -121,14 +124,14 @@ p_mean <-
 p_variance <-
   ggplot(d55, aes(t, sigma2)) +
   facet_wrap(. ~ variance, nrow = 1) +
-  geom_line(color = 'darkorange', lwd = 1) +
-  scale_x_continuous('Variance', breaks = NULL, position = 'top') +
-  scale_y_continuous(' ', breaks = 90) +
+  geom_line(color = pal[2], lwd = 1) +
+  scale_x_continuous(expression(Variance~'in'~italic(R)), breaks = NULL, position = 'top') +
+  scale_y_continuous('', breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'),
         axis.text = element_text(color = 'transparent'), axis.ticks = element_blank(),
         panel.grid = element_blank())
 
-plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.5), nrow = 1),
+plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.4), nrow = 1),
           plot_grid(p_mean, p_sim_55, rel_widths = c(1, 4.5), nrow = 1),
           rel_heights = c(1, 4), nrow = 2)
 
@@ -141,23 +144,64 @@ p_sd <-
   facet_grid(mean ~ variance, scales = 'free_y') +
   geom_area(aes(t, sd_visits), color = 'black', alpha = 0.3) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(sqrt(V(visits)))) +
+  scale_y_continuous(expression(Standard~deviation~of~italic(H)), breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
 
-plot_grid(plot_grid(NULL, p_variance,
-                    rel_widths = c(1, 4.3), nrow = 1),
+plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.3), nrow = 1),
           plot_grid(p_mean, p_sd, rel_widths = c(1, 4.5), nrow = 1),
           rel_heights = c(1, 4), nrow = 2)
 ggsave('figures/mean-variance-5-by-5-sd-visits.png', width = 8, height = 4.5, scale = 2,
        units = 'in', dpi = 'print', bg = 'white')
 
 # plot coefficient of variation
-plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.7), nrow = 1),
+plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.5), nrow = 1),
           plot_grid(p_mean, p_cv + theme(strip.background = element_blank(),
                                          strip.text = element_blank()),
                     rel_widths = c(1, 4.5), nrow = 1),
           rel_heights = c(1, 4), nrow = 2)
 ggsave('figures/mean-variance-5-by-5-cv.png', width = 8, height = 4.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (constant, constant) panel
+filter(d_summarized, mean == 'constant', variance == 'constant') %>%
+  ggplot() +
+  facet_grid(mean ~ variance, scales = 'free_y') +
+  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(t, upr), color = pal[3]) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Home range size', breaks = NULL, limits=c(20,40))+
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/c-c-hr.png', width = 3, height = 1.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (linear, constant) panel
+filter(d_summarized, mean == 'linear', variance == 'constant') %>%
+  ggplot() +
+  facet_grid(mean ~ variance, scales = 'free_y') +
+  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(t, upr), color = pal[3]) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Home range size', breaks = NULL) +
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/l-c-hr.png', width = 3, height = 1.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (linear, linear) panel
+filter(d_summarized, mean == 'linear', variance == 'linear') %>%
+  ggplot() +
+  facet_grid(mean ~ variance, scales = 'free_y') +
+  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(t, upr), color = pal[3]) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Home range size', breaks = NULL) +
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/l-l-hr.png', width = 3, height = 1.5, scale = 2,
        units = 'in', dpi = 'print', bg = 'white')
 
 # see https://github.com/NoonanM/BallisticMotion -----------------------------------------

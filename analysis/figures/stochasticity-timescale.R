@@ -12,7 +12,7 @@ theme_set(theme_bw() +
                   axis.ticks.y = element_blank(),
                   axis.text.y = element_blank()))
 
-# curstom color-vision deficient palette
+# curstom colorblind palette
 pal <- c('#4477AA', '#ff8c00', '#66CCEE', '#009900',
          '#CCBB44', '#AA3377', '#EE6677', '#BBBBBB')
 

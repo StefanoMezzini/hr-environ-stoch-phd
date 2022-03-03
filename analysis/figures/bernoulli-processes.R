@@ -76,14 +76,14 @@ r_density <-
   tibble(r = seq(0, 10, length.out = 400), dens = dgamma(r, shape = 3, scale = 1)) %>%
   ggplot(aes(r, dens)) +
   geom_area(fill = pal[1], alpha = 0.5, color = pal[1]) +
-  scale_x_continuous(expression(italic(R)), breaks = NULL) +
+  scale_x_continuous(expression(italic(r)), breaks = NULL) +
   scale_y_continuous(expression(P(italic(R==r))), breaks = NULL)
 
 s_density <-
   tibble(s = 0:1, dens = dbinom(s, 1, 1)) %>%
   ggplot(aes(s, dens)) +
   geom_bar(fill = pal[2], alpha = 0.5, color = pal[2], stat = 'identity', width = 0.5) +
-  scale_x_continuous(expression(italic(S)), breaks = 0:1) +
+  scale_x_continuous(expression(italic(s)), breaks = 0:1) +
   scale_y_continuous(expression(P(italic(S==s))))
 
 u_density <-
@@ -96,7 +96,7 @@ u_density <-
   ggplot(aes(u, dens)) +
   geom_area(fill = 'transparent', alpha = 0.5, color = pal[3]) +
   geom_area(aes(y = dens_2), fill = pal[3], alpha = 0.5, color = pal[3]) +
-  scale_x_continuous(expression(italic(U==R%.%S)), breaks = NULL) +
+  scale_x_continuous(expression(italic(u==r%.%s)), breaks = NULL) +
   scale_y_continuous(expression(P(italic(U==u))), breaks = NULL, limits = c(0, 0.3))
 
 p_1b <- plot_grid(plot_expr('italic(R%~%Gamma(k, theta))'),
@@ -113,14 +113,14 @@ if(FALSE) {
     tibble(r = seq(0, 10, length.out = 400), dens = dgamma(r, shape = 3, scale = 1)) %>%
     ggplot(aes(r, dens)) +
     geom_area(fill = 'grey', alpha = 0.5, color = 'black') +
-    scale_x_continuous(expression(italic(R)), breaks = NULL) +
+    scale_x_continuous(expression(italic(r)), breaks = NULL) +
     scale_y_continuous(expression(P(italic(R==r))), breaks = NULL)
   
   s_density <-
     tibble(s = seq(0, 1, length.out = 100), dens = dbeta(s, 5, 5)) %>%
     ggplot(aes(s, dens)) +
     geom_area(fill = 'grey', alpha = 0.5, color = 'black') +
-    scale_x_continuous(expression(italic(S))) +
+    scale_x_continuous(expression(italic(s))) +
     scale_y_continuous(expression(P(S==s)), limits = 0:1)
   
   u_density <-
@@ -131,8 +131,8 @@ if(FALSE) {
            dens = r_dens * s_dens) %>%
     ggplot(aes(r, s, fill = dens)) +
     geom_tile() +
-    scale_x_continuous(expression(italic(R)), breaks = NULL, expand = c(0, 0)) +
-    scale_y_continuous(expression(italic(S)), expand = c(0, 0)) +
+    scale_x_continuous(expression(italic(r)), breaks = NULL, expand = c(0, 0)) +
+    scale_y_continuous(expression(italic(s)), expand = c(0, 0), limits = c(0, 0.3)) +
     scale_fill_viridis_c(expression(P(italic(U==u)))) +
     theme(legend.position = 'right')
   
@@ -213,14 +213,14 @@ r_density <-
   tibble(r = seq(0, 10, length.out = 400), dens = dgamma(r, shape = 3, scale = 1)) %>%
   ggplot(aes(r, dens)) +
   geom_area(fill = pal[1], alpha = 0.5, color = pal[1]) +
-  scale_x_continuous(expression(italic(R)), breaks = NULL) +
+  scale_x_continuous(expression(italic(r)), breaks = NULL) +
   scale_y_continuous(expression(P(italic(R==r))), breaks = NULL)
 
 s_density <-
   tibble(s = 0:1, dens = dbinom(s, 1, prob = 0.6)) %>%
   ggplot(aes(s, dens)) +
   geom_bar(fill = pal[2], alpha = 0.5, color = pal[2], stat = 'identity', width = 0.5) +
-  scale_x_continuous(expression(italic(S)), breaks = 0:1) +
+  scale_x_continuous(expression(italic(s)), breaks = 0:1) +
   scale_y_continuous(expression(P(italic(S==s))), limits = 0:1)
 
 u_density <-
@@ -234,7 +234,7 @@ u_density <-
   coord_cartesian(ylim = c(0, 0.4)) +
   geom_area(fill = 'transparent', color = pal[3]) +
   geom_area(aes(y = dens_2), fill = pal[3], alpha = 0.5, color = pal[3]) +
-  scale_x_continuous(expression(italic(U==R%.%S)), breaks = NULL) +
+  scale_x_continuous(expression(italic(u==r%.%s)), breaks = NULL) +
   scale_y_continuous(expression(P(italic(U==u))), breaks = NULL, limits = c(0, 0.3))
 
 p_2b <- plot_grid(plot_expr('italic(R%~%Gamma(k, theta))'),

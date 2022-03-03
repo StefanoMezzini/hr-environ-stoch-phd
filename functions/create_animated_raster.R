@@ -29,14 +29,9 @@ create_animated_raster <- function(movement_data, raster_data) {
     # add a custom color scale for the raster
     scale_fill_gradient2(low = LOW, mid = MID, high = HIGH) +
     
-    # no legend or outer border, add arrows to axis lines, bold axis labels
-    theme(legend.position = 'none', panel.border = element_blank(),
-          axis.line = element_line(arrow = arrow(length = unit(0.3, 'cm'),
-                                                 ends = 'last',
-                                                 type = 'closed')),
-          text = element_text(face = 'bold')) +
+    # no legend or outer border
+    theme(legend.position = 'none', panel.border = element_blank()) +
     
     # animate the plot
-    transition_reveal(along = t) +
-    ease_aes(default = 'elastic-in')
+    transition_reveal(along = t)
 }

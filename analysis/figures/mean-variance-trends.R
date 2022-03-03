@@ -2,7 +2,7 @@ library('dplyr')   # for data wrangling
 library('tidyr')   # for data wrangling (expand_grid())
 library('ggplot2') # for fancy plots
 library('cowplot') # for multi-panel plots
-theme_set(theme_bw())
+source('analysis/default-figure-styling.R')
 
 N <- 200
 types <- c('constant', 'linear', 'cyclical', 'drifting', 'erratic')
@@ -37,18 +37,18 @@ p_mean <-
   ggplot(d55, aes(t, mu)) +
   facet_grid(mean ~ ., scales = 'free_y', switch = 'y') +
   geom_point(aes(y = y), alpha = 0) +
-  geom_line(color = 'darkorange', lwd = 1) +
-  scale_x_continuous(NULL, breaks = NULL) +
-  scale_y_continuous('Mean', breaks = NULL) +
+  geom_line(color = pal[1], lwd = 1) +
+  scale_x_continuous('', breaks = NULL) +
+  scale_y_continuous(expression(Mean~italic(R)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'))
 
 # variance
 p_variance <-
   ggplot(d55, aes(t, sigma2)) +
   facet_wrap(. ~ variance, nrow = 1) +
-  geom_line(color = 'darkorange', lwd = 1) +
-  scale_x_continuous('Variance', breaks = NULL, position = 'top') +
-  scale_y_continuous(NULL, breaks = NULL) +
+  geom_line(color = pal[2], lwd = 1) +
+  scale_x_continuous(expression(Variance~'in'~italic(R)), breaks = NULL, position='top') +
+  scale_y_continuous('', breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'))
 
 # simulation
@@ -58,8 +58,8 @@ p55 <-
   geom_point(alpha = 0.3) +
   geom_ribbon(aes(ymin = lwr, ymax = upr), fill = 'red3', alpha = 0.3) +
   geom_smooth(color = 'red', se = FALSE, method = 'gam', formula = y ~ s(x, k = 15)) +
-  scale_x_continuous(NULL, breaks = NULL) +
-  scale_y_continuous(NULL, breaks = NULL) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Resource availability', breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
 
 plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.5), nrow = 1),
@@ -67,4 +67,46 @@ plot_grid(plot_grid(NULL, p_variance, rel_widths = c(1, 4.5), nrow = 1),
           rel_heights = c(1, 4), nrow = 2)
 
 ggsave('figures/mean-variance-5-by-5.png', width = 8, height = 4.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (constant, constant) panel
+filter(d55, mean == 'constant', variance == 'constant') %>%
+  ggplot(aes(t, y)) +
+  facet_grid(mean ~ variance, switch = 'both', scales = 'free') +
+  geom_point(alpha = 0.3) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = 'red3', alpha = 0.3) +
+  geom_smooth(color = 'red', se = FALSE, method = 'gam', formula = y ~ s(x, k = 15)) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Resource availability', breaks = NULL) +
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/c-c-resources.png', width = 3, height = 1.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (linear, constant) panel
+filter(d55, mean == 'linear', variance == 'constant') %>%
+  ggplot(aes(t, y)) +
+  facet_grid(mean ~ variance, switch = 'both', scales = 'free') +
+  geom_point(alpha = 0.3) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = 'red3', alpha = 0.3) +
+  geom_smooth(color = 'red', se = FALSE, method = 'gam', formula = y ~ s(x, k = 15)) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Resource availability', breaks = NULL) +
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/l-c-resources.png', width = 3, height = 1.5, scale = 2,
+       units = 'in', dpi = 'print', bg = 'white')
+
+# (linear, linear) panel
+filter(d55, mean == 'linear', variance == 'linear') %>%
+  ggplot(aes(t, y)) +
+  facet_grid(mean ~ variance, switch = 'both', scales = 'free') +
+  geom_point(alpha = 0.3) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = 'red3', alpha = 0.3) +
+  geom_smooth(color = 'red', se = FALSE, method = 'gam', formula = y ~ s(x, k = 15)) +
+  scale_x_continuous('Time', breaks = NULL) +
+  scale_y_continuous('Resource availability', breaks = NULL) +
+  theme(strip.background = element_blank(), strip.text = element_blank())
+
+ggsave('figures/l-l-resources.png', width = 3, height = 1.5, scale = 2,
        units = 'in', dpi = 'print', bg = 'white')

@@ -1,6 +1,12 @@
 library('ggplot2') # for fancy figures
 library('stringi') # for working with strings
 
+theme_set(theme_bw())
+
+# custom color-blind palette
+pal <- c('#ff8c00', '#4477AA', '#009900', '#66CCEE',
+         '#CCBB44', '#EE6677', '#AA3377', '#BBBBBB')
+
 WIDTH <- 5
 HEIGHT <- 3
 
