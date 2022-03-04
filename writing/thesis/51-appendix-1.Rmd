@@ -1,7 +1,11 @@
 \newpage
 
-# Appendix 1 {-}
+# Appendix 1: Manuscripts contributed to during the degree {-}
 
-```{r}
-plot(1:10, pch = 1:10)
+```{r kwb-paper, eval = FALSE, fig.align='center', out.width='0.75\\linewidth', fig.pos='H'}
+knitr::include_graphics('../manuscripts/kwb-paper.pdf')
+```
+
+```{r tapir-paper, eval = FALSE, fig.align='center', out.width='0.75\\linewidth', fig.pos='H'}
+knitr::include_graphics('../manuscripts/tapir-paper.pdf')
 ```

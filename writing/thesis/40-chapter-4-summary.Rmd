@@ -5,3 +5,25 @@
 - why is this work important?
 - so what?
 - now what?
+
+***From the foreword:***
+
+### Two-eyed seeing: Recognizing Traditional Indigenous Knowledge
+
+***split into: preface, chapters 2 and 3, and conclusion; use for preface and conclusion***
+
+The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2012]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized People hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@ref]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved.
+
+The concept of *two-eye seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. One possibility, however, is to use Traditional Knowledge to create properly informed Bayesian priors [@bolstad_introduction_2017]. The validity of the priors can be ensured using prior predictive modeling [@mcelreath_statistical_2016] to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
+
+<!--
+- https://focus.science.ubc.ca/stats-660805dd930a
+- *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
+- *Native knowledge for native ecosystems*
+- *Searching for synergy integrating traditional and scientific ecological knowledge in environmental science education*
+- *The Role of Indigenous Burning in Land Management*
+- calls to action for scientists: @wong_towards_2020
+- weaving TIK and Western knowledge: @tengo_weaving_2017
+- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
+- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
+-->

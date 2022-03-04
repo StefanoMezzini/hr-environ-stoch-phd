@@ -1,10 +1,10 @@
 \newpage
 
-# List of abbreviations
+# List of abbreviations used
 
 ```{r}
 library('dplyr')
 readr::read_csv('abbreviations.csv', col_types = 'cc') %>%
   arrange(Abbreviation) %>%
-  knitr::kable(format = 'pipe') # simple
+  knitr::kable(format = 'pipe')
 ```

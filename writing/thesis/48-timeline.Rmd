@@ -2,13 +2,13 @@
 
 # Project timeline
 
-```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my Master\'s project.', fig.width=14, fig.height=8, message=FALSE}
+```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my Master\'s project.', fig.width=14, fig.height=8, message=FALSE, out.width='100%'}
 library('tibble')    # for fancy data frames
 library('dplyr')     # for piping and data wrangling
 library('lubridate') # for working with dates
 library('stringi')   # for working with character strings
 library('ggplot2')   # for plotting the timeline
-library('ggrepel')   # for non-overlapping ggplot labels
+# library('ggrepel')   # for non-overlapping ggplot labels
 theme_set(theme_classic() +
             theme(axis.line.y = element_blank(),
                   legend.position = 'none'))
@@ -37,7 +37,6 @@ tasks <-
          task = factor(task, levels = unique(task)),
          id = 1:n(),
          completed = end <= Sys.Date(),
-         # add new line after colons -- "\n" doesn't work
          # task = stri_replace_all(task, regex = ':', replacement = ':\n'),
          # re-format all special characters (only needed if parse = TRUE)
          # task = stri_replace_all(task, regex = ' ', replacement = '~'),
@@ -58,7 +57,7 @@ ggplot(tasks, aes(y = id)) +
   geom_errorbar(aes(xmin = dec_start, xmax = dec_end, color = section),
                 width = 0, lwd = 2, alpha = 0.75) +
   #' use `ggrepel::geom_label_repel()` for repelling labels
-  geom_text(aes(2020.5, label = task, color = header), hjust = 'left', size = 3,
+  geom_text(aes(2020.3, label = task, color = header), hjust = 'left', size = 3,
             parse = FALSE) +
   scale_x_continuous(NULL, breaks = t_breaks$dec, labels = t_breaks$strings,
                      expand = c(0, 0)) +
@@ -76,6 +75,9 @@ filter(tasks, completed) %>%
   cat(sep = '\n')
 ```
 
-- Created and organized the GitHub repository (https://github.com/StefanoMezzini/hr-environ-stoch-masters);
+- Created and organized the GitHub repository  ([https://github.com/StefanoMezzini/hr-environ-stoch-masters](https://github.com/StefanoMezzini/hr-environ-stoch-masters));
 - Completed all coursework necessary for a Master's degree;
-- Living Data Project Working group: calculate new Canadian Living Planet Index (cLPI)
+- Reviewed literature and have begun making theoretical predictions;
+- Living Data Project Working group: calculated new Canadian Living Planet Index (cLPI);
+- Data analyst: estimated effects of human activity on tapir movement using `ctmm` and `mgcv`. Code and data are available at [https://github.com/StefanoMezzini/tapirs](https://github.com/StefanoMezzini/tapirs), while the manuscript's preprint is available at [https://www.biorxiv.org/content/10.1101/2021.11.12.468362v1](https://www.biorxiv.org/content/10.1101/2021.11.12.468362v1);
+- Data analyst: estimated changes paleolimnological time series from endorheic lakes due to 8-m lake-level variation using Hierarchical Generalized Additive Models (HGAMs) and location-scale HGAMs fit with `mgcv`. Code and data are available at [https://github.com/simpson-lab/kenosee-white-bear](https://github.com/simpson-lab/kenosee-white-bear).

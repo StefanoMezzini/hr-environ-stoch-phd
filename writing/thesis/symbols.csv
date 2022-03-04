@@ -2,6 +2,9 @@ Symbol,Meaning
 $\mathbb E(\cdot)$,"Expectation, mean"
 $\mathbb V (\cdot)$,Variance
 $H$,"Home range, spatial needs, required area"
-$P(A)$,"Probability of event $A$, e.g., $A = \text{success}$"
+$P(A)$,"Probability of event $A$, e.g., $A = \text{successful foraging}$"
 $\tau_p$,"Positional autocorrelation, mean reversion to HR center, range crossing time"
 $\tau_v$,"Velocity autocorrelation, directional persistance"
+$R$,Resources
+$c \propto k$,$c$ is proportional to $k$
+$F$,Favorableness or value of a region

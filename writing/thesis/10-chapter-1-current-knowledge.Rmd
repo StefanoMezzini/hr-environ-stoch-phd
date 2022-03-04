@@ -2,6 +2,26 @@
 
 # Chapter 1: Literature review and quantitative predictions
 
+<!-- (Read http://www.zo.utexas.edu/courses/bio373/chapters/Chapter5/Chapter5.html) -->
+
+## Home ranges as proxies for animals' needs
+
+The ability to move allows most animals to adapt rapidly and continuously to heterogeneous and changing environments. Animals may move to search for resources (e.g., as food, nutrients, water, heat, a new den or nesting spot), a mate, or a new group. Movement also allows animals to escape predation or dangerous competition, and it allows them to defend resources and territory, too. Thus, we can estimate changes in animals' movement and space use as a proxy for many needs, rather than measuring changes in the various individual needs [@ref].
+
+The concept of a home range (HR) is often used to indicate the space an animal requires to satisfy its essential needs during a period of time [@burt_territoriality_1943]. Such needs include energetic needs and reproductive needs (which are not limited to finding a mate, since offspring require energy a safe location to develop in, too), but exploratory movement outside the core HR are generally not accounted for. However, for an animal to have what we may consider a HR, the animal must remain in a stable "home" area for long periods of time. That is, the animal must be range-resident and the HR must have a stable centroid. Stable centroids may be concrete locations such as an eagle's nest, a bear's den, or a bee's hive, or they may be abstract points such as the center of a coyote’s hunting grounds or the center of a deer’s foraging grounds.
+
+While the HR may change over time (e.g., following a forest fire or a flood), it should remain be stable during the period of observation. Ideally, properties of the HR (e.g., range size and crossing time) are representative of any new HR the animal will move to if the current one becomes inhospitable. Thus, animals with an unstable centroid would not be appropriate for HR analysis. Nomadic or migrating animals [e.g., @nandintsetseg_variability_2019] are thus generally not considered range resident, and tracking periods should be long enough to provide a representative sample of the animal's spatial needs.
+
+In the case of a species or population where spatial needs change over the animals' lifetimes [e.g., @ref], one may define HR as a function of the animal's life stages (with distinct discrete HRs) or as a function of age (so HR changes smoothly). In either case, the accuracy of the estimate will depend strongly on the length of the observation period as well as the measurement frequency. Data from a portion of an animal's life may be sufficient if it is representative the animal's movement or if inference is limited to the period(s) for which data is available (figure \@ref(fig:hr-and-lifespan)).
+
+```{r hr-and-lifespan, fig.cap="Simulated movement of an individual over their life. Samples from different periods of the animal's life may result in different conclusions, such as slow nomadism (a) or range residency (b), but neither sample is representative of the space the animal used over its entire life (c).", out.width='100%'}
+knitr::include_graphics('../../figures/hr-and-lifespan.png')
+```
+
+There are many factors which may affect animal's spatial requirements and how they use their HR. Resource abundance is often assumed to be inversely proportional to HR size (or some function of it), such that regions with higher abundance correspond to smaller spatial needs. However, the effect of many other factors likely depends on how an animal responds to them. For instance, competition may push individuals to explore other areas and expand their HR, but strong and consistent competition may also prevent them from doing so. Similarly, predation may force animals to move more frequently to escape predators, or it may prevent them from venturing too far from the safety of their den (the HR's centroid) too often. Fragmentation and patch heterogeneity may cause animals to explore more patches if some are of low value, but high diversity may also decrease HR size [@lucherini_habitat_1996]. Similarly, patch connectivity and ease of movement may favor exploration and a wider HR [@dickie_resource_nodate in press], or they may decrease the animal's energetic needs and the HR with it.
+
+<!-- Animals can be simplified to systems whose needs (input) and (inter)actions (output) depend on the resources and energy required to move, survive and reproduce. , and used to move: more arduous areas may require more energy to move -->
+
 <!--
 Notes:
 
@@ -12,7 +32,7 @@ notation:
 - $\tau_p$ positional autocorrelation, mean time reversion to the mean (origin), range crossing time
 - $tau_v$ velocity autocorrelation
 
-protective/defensive adaptations peaks at intermediate levels of competitor density/spatial resource density/spatioteporal clumping. At low competition, there's no need for defense and the cost (e.g., energetic) and risk (e.g., wounds) outweigh the benefit, while at high values the cost and risk become too high and they outweigh the benefit [@grant_whether_1993].
+protective/defensive adaptations peaks at intermediate levels of competitor density/spatial resource density/spatiotemporal clumping. At low competition, there's no need for defense and the cost (e.g., energetic) and risk (e.g., wounds) outweigh the benefit, while at high values the cost and risk become too high and they outweigh the benefit [@grant_whether_1993].
 
 See *The effects of phenological mismatches on demography*.
 
@@ -24,229 +44,76 @@ See *The effects of phenological mismatches on demography*.
 - Elk left early when exposed to hunting more
 -->
 
-The effects of resource abundance on animals' spatial needs have been studied by many in the last century. Multiple general hypotheses have been postulated based on (relatively) small-scale empirical studies [e.g., @burt_territoriality_1943; @southwood_habitat_1977; @lindstedt_seasonality_1985; @grant_whether_1993], and supported (or questioned) by recent work with larger, higher-resolution datasets [e.g., @jonzen_rapid_2006; @wolkovich_warming_2012; @falcon-cortes_hierarchical_2021; @dickie_resource_nodate in press] and simulations [@blackwell_heterogeneity_2007]. Recently, the amount of movement data which can be modeled at once due to improvements of animal tracking equipment [@rutz_new_2009] and decreases in the cost such equipment, together with growing propensity (and requirements) to share data openly on various open data platforms such as Movebank [@kranstauber_movebank_2011; but see @roche_public_2015].
+The effects of resource abundance on animals' spatial needs have been studied by many in the last century. Multiple general hypotheses have been postulated based on (relatively) small-scale empirical studies [e.g., @burt_territoriality_1943; @southwood_habitat_1977; @lindstedt_seasonality_1985; @grant_whether_1993; @lucherini_habitat_1996; @nilsen_can_2005; @bengsen_feral_2016], and supported (or questioned) by more recent work with larger, higher-resolution datasets [e.g., @jonzen_rapid_2006; @wolkovich_warming_2012; @falcon-cortes_hierarchical_2021; @dickie_resource_nodate in press] and simulations [@blackwell_heterogeneity_2007]. Recently, the amount of movement data which can be modeled at once has increased due to improvements in the quality and affordability of tracking equipment [@rutz_new_2009], together with growing propensity (and requirements) to share data openly on various open data platforms such as Movebank [@kranstauber_movebank_2011; @kays_movebank_2022; but see @roche_public_2015], as well as the development of high-level modeling software [e.g., @r_core_team_r_2021; @wood_generalized_2017; @burkner_brms_2017; @burkner_advanced_2018].
 
-The increase in movement data availability allows researchers to produce more powerful results, but the high-frequency sampling often results in non-independence between temporally consecutive data. Additionally, high-frequency data is more likely to be sampled at irregular intervals. Thus, many commonly-used home range estimation methods (e.g., minimum convex polygon, kernel density estimation) cannot be used with such datasets because they assume data points to be approximately independent and at regular time intervals. While one could coarsen data to larger, regular intervals at the expense of data frequency, this nullifies great part of the benefits achieved with recent improvements in tracking technologies. Thus, it is increasingly more important to model animal movement data using models that (1) do not assume data is regularly sampled, and (2) account for the spatiotemporal autocorrelation within the data. Continuous-time models such as Ornstein-Uhlenbeck (OU) and OU foraging (OUF) models relax the assumption of spatiotemporal independence by accounting for positional autocorrelation (OU and OUF models) and directional (i.e., velocity) autocorrelation (OUF models only), which allows them to estimate the animal's average home range crossing time (OU and OUF) and the animal's average directional persistence (OUF only). @peron_periodic_2017 provide additional information OU and OUF models and how to interpret them while also demonstrating how to use high-frequency movement data can help detect small-scale cycles, such as patterns that occur daily or weekly. Additional discussions on modeling can be found in Chapter \@ref(chapter-3).
+It is understood that an animal's spatial use strongly depends on the amount of resources and energy the animal can obtain from their habitat, but estimates are often restricted to single populations or at most single species. To my knowledge, there are currently no large-scale estimations of vertebrate (or mammalian) space use as a function of resource availability. Additionally, little attention is often given to the stochasticity of resource availability or, more generally, habitat heterogeneity and stochasticity [but see @lucherini_habitat_1996; @nilsen_can_2005; @rizzuto_forage_2021]. This project aims to quantify the effects of resource abundance and environmental stochasticity on animal space use using statistical models which are based on continuous-time stochastic processes and are insensitive to sampling frequency and spatiotemporal or taxonomic autocorrelation in the data. We hope findings from this project will inform us on how stochasticity has shaped the ecology and evolution of terrestrial mammals and how terrestrial mammals are currently adapting to heterogeneous and changing environments.
 
-It is understood that an animal's spatial use strongly depends on the amount of resources and energy the animal can obtain from their habitat, but estimates are often restricted to single populations or at most single species. To my knowledge, there are currently no large-scale estimations of vertebrate (or mammalian) space use as a function of resource availability. Additionally, little attention is often given to the stochasticity of resource availability or, more generally, habitat stochasticity. This project aims to quantify the effects of resource abundance and environmental stochasticity on animal space use using statistical models which are based on continuous-time stochastic processes and are insensitive to sampling frequency and spatiotemporal or taxonomic autocorrelation in the data.
+## Effects of resource availability and productivity on spatial needs
 
-## Resource availability and productivity
+Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce [@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making [@refs], an environment's heterogeneity (i.e., diversity), stochasticity (i.e., unpredictability), and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance [@chevin_adaptation_2010], which, in turn, decreases animals' fitness. Therefore, I expect animals living in unpredictable environments to require more space than those in stable environments. Although this hypothesis is supported by a few recent studies [@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so the extent to which these preliminary findings can be generalized is still very limited. There thus remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events [@ipcc_global_2018; @noonan_situ_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species [@wilson_habitat_2016], who struggle to move in fragmented [@fahrig_non-optimal_2007], human-dominated landscapes [@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future [@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
 
-<!-- from NSERC proposal: -->
+Animals' needs vary greatly between taxonomic groups, but some needs are essential for most species for survival and reproduction, such as energetic needs [e.g., food, water; see @ref], habitat needs [e.g., dens, trees, tall grass, breeding grounds, protection from predators and competitors; see @refs], and maintaining a thermoregulatory balance. The size of a home range (defined as the area used by an animal to satisfy its essential needs, such as gathering food and resources, mating, and raising offspring), is hypothesized to be proportional to resource abundance [@burt_territoriality_1943], such that spatial needs increase when resources are low, but the relationship is likely not monotonic nor linear, since larger home ranges can result in higher rates of competition and are harder to defend [@grant_whether_1993; @jetz_scaling_2004]. Home range size is also affected by resource (or patch) connectivity, since well-connected habitats can decrease the energetic cost of movement and increase resource exploitation rates [@dickie_resource_nodate in press], although the effect human modifications have on animal movement may depend on environmental harshness [@dawe_influence_2014]. However, not all animals take advantage of linear features or higher predictability in human-altered habitats. @noonan_roads_2021 found that giant anteaters (*Myrmecophaga tridactyla*) in Brazil did not use roads to reduce movement costs or increase movement speed. Instead, roads increased anteater mortality because the animals were attracted to the high-quality foraging found on roadside habitat. Similarly, @medici_movement_nodate (in press) found that the movement of tapirs (*Tapirus terrestris*) was unaffected by anthropogenic activity or habitat type.
 
-Environmental productivity is tightly linked to the amount of space that animals need to cover to obtain the resources they needed to survive and reproduce [@lucherini_habitat_1996; @relyea_home_2000]. While resource availability is often considered in conservation decision-making, an environment's heterogeneity (i.e., diversity), stochasticity (i.e., unpredictability), and how the two change over time are rarely accounted for. In addition, environmental stochasticity, including extreme events, can reduce a landscape's energetic balance [@chevin_adaptation_2010], which, in turn, decreases animals' fitness. Therefore, I expect animals living in unpredictable environments to require more space than those in stable environments (figure \@ref(fig:stoch-example-figure)). Although this hypothesis is supported by a few recent studies [@morellet_seasonality_2013; @nandintsetseg_variability_2019; @riotte-lambert_environmental_2020], many of them are limited in their analytical depth and geographic and taxonomic scales, so there remains a need for developing a more complete understanding of how animals' spatial needs change with environmental stochasticity. These stresses are compounded by climate change, which exposes species to increasingly common stochastic events [@ipcc_global_2018]. Furthermore, anthropogenic structures reduce the habitat available to terrestrial species [@wilson_habitat_2016], who struggle to move in fragmented [@fahrig_non-optimal_2007], human-dominated landscapes [@tucker_moving_2018]. As the impacts of habitat loss and climate change will worsen in the future [@ipcc_global_2018; @hansen_high-resolution_2013], it is imperative that we better understand spatial requirements of taxa to protect wildlife existence and biodiversity. Environmental safeguarding is also essential for Reconciliation with Indigenous People in Canada [@truth_and_reconciliation_commission_of_canada_honouring_2015].
+## Effects of environmental heterogeneity and stochasticity on spatial needs
 
-```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments. Resources were generated using a gamma random variable parameterized by independent mean and variance paramters, which represented the resource abundance and environmental stochasticity, respectively, even though the two are likely correlated in nature.", out.width='100%'}
-knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
+The favorableness of a patch or habitat often depends on a variety of factors, including resource availability, competitive pressure, and predation risk. Let $R$ indicate the amount of *resources* in a particular patch, and let $S$ be the random variable indicating whether or not a patch visit is *successful*. For simplicity, we can let $S$ follow a Bernoulli distribution with probability of success $p$ (which we can write as $S \sim Ber(p)$). Next, let $U = R \cdot S$ indicate the resources an animal can *use* during a visit. Following this simple model, a patch visit can result in two possible outcomes: if the visit is successful ($S = 1$), an animal can use the entirety of the resource ($U = R \cdot 1 = R$), but if it is unsuccessful ($S = 0$) the animal is unable to access any of the resource ($U = R \cdot 0 = 0$).
+
+Let's start by considering the simplistic (and unlikely) scenario where patches are fully predictable and free of disturbance and competition, such that the animal can access the patches' resources during any visit, i.e., $p = P(S = 1) = 1$. In heterogeneous regions with no stochasticity (figure \@ref(fig:bernoulli-constant)a-b), the favorableness of a location will depend strongly on $R$, so regions with higher $R$ should be preferred (figure \@ref(fig:bernoulli-constant)c). Since all patch visits in fully predictable regions are successful, animals can expect $U$ to be equal to $R$, since $U = R \cdot S = R \cdot 1 = R$ (figure \@ref(fig:bernoulli-constant)d), which implies that $\mathbb E(U) = \mathbb E(R \, S) = \mathbb E(R)$. Since $U = R$, animals can choose their home ranges based on $R$ without having to account for any spatiotemporal stochasticity. Therefore, animals in such regions are likely to maximize fitness and minimize movement costs by spending large amounts of time in highly productive regions, with occasional exploratory movements to different patches. This model is quite simplistic, but its simplicity makes it easy to fit and conceptualize. While it is unlikely for a region to be fully predictable, this model may provide acceptable results when environmental variance is low and has little effect on animal fitness, such as is areas where the variation in $U$, $\mathbb V(U)$, is low relative to its expected value, $\mathbb E(U)$, such that the costs of moving to another favorable area are low or the chances of encountering prey are high. Mathematically, we can say that this simple model may be acceptable when the coefficient of variation, $\sqrt{\mathbb V(R)} / \mathbb E(R)$, is low. Additionally, this model may be the only option when data availability is too low to produce appreciable measures of stochasticity or there is no way to estimate it.
+
+```{r bernoulli-constant, out.width='100%', fig.cap="Fictitious example of variation in resource abundance in a heterogenous but fully predictable environment. (a.) Complete predictability results in success (black dots) during each foraging attempt (white dots). (b.) Although the environment is heterogenous, there is no stochsticity because it is fully predictable. (c.) Since an animal living in such an environment can expect each foraging attemp to be successful, it will likely rely more on areas with high density of resources."}
+knitr::include_graphics('../../figures/bernoulli-constant-p.png')
 ```
 
-Animals' needs vary greatly between taxonomic groups, but some needs are essential for most species for survival and reproduction, such as include energetic needs (e.g., food, water), habitat needs (e.g., dens, trees, tall grass, breeding grounds, protection from predators and competitors). The size of a home range (defined as the area used by an animal to satisfy its essential needs, such as gathering food and resources, mating, and raising offspring), is hypothesized to be proportional to resource abundance [@burt_territoriality_1943], such that spatial needs increase when resources are low, but the relationship is likely not monotonic nor linear, since larger home ranges can result in higher rates of competition and are harder to defend [@grant_whether_1993]. Home range size is also affected by resource (or patch) connectivity, since well-connected habitats can decrease the energetic cost of movement and increase resource exploitation rates [@dickie_resource_nodate in press], although the effect human modifications have on animal movement may depend on environmental harshness [@dawe_influence_2014]. However, not all animals take advantage of linear features or higher predictability in human-altered habitats. @noonan_roads_2021 found that giant anteaters (*Myrmecophaga tridactyla*) in Brazil did not use roads to reduce movement costs or increase movement speed. Instead, roads increased anteater mortality because the animals were attracted to the high-quality foraging found on roadside habitat. Similarly, @medici_movement_nodate (in press) found that the movement of tapirs (*Tapirus terrestris*) was unaffected by anthropogenic activity or habitat type.
+In areas where animals are not guaranteed that the resources they find during one visit will be there the next time (figure \@ref(fig:bernoulli-changing)a), stochasticity will have an appreciable effect on the location's favourableness. Patches with low or high $p$ will be most predictable, since successes can be expected to be very rare (if $p \approx 0$) or very common (if $p \approx 1$). In contrast, patches will be most stochastic when the probabilities of success and failure are approximately the same (i.e., $p \approx 1 - p \implies p \approx 0.5$, see figure \@ref(fig:bernoulli-changing)b). In stochastic habitats, $\mathbb E(U)$ will depend on $\mathbb E(S)$ as well as $\mathbb E(R)$, since $S$ is no longer constant (figure \@ref(fig:bernoulli-changing)c). Now, expected usable resources become $\mathbb E(U) = \mathbb E(R \, S)$, or $\mathbb E(U) = \mathbb E(R) \, \mathbb E(S)$ if $R$ and $S$ are independent. This model can be applied to all mobile animals, including herbivores, carnivores, and omnivores. In the case of herbivores, $p$ may indicate the chance of finding good forage, which may be absent if regeneration times are long, if competitors have already exhausted the resource, or following a fire. For carnivores, $p$ may indicate the chance of feeding on prey, which may depend on encountering and killing some first. However, since $R$ is not limited to energetic resources, $p$ may also indicate the chance of finding water or also a suitable location for a den or nest.
 
-## Environmental heterogeneity and stochasticity
-
-<!-- Organisms are most affected by stochastic events and processes which occur on time scales which are in the order of the organisms' life spans or generation times [@southwood_habitat_1977]. Weekly heavy rains which alter a lake's salinity [@ref] are more likely to affect an individual than a multi-centennial drought, and the high salinity that follows the drought may be perceived as the (stressful) standard by individuals which were born during the drought. In contrast, organisms can adapt to unpredictable heavy rains if they occur on a daily frequency. However, stochastic processes and events which occur on time scales that are longer than an organism's lifespan may still cause significant effects on a population's fitness and stability. Droughts which occur on the time scale of centuries or millennia [@haig_assessment_2013] are unlikely to affect organisms directly, but such events could still alter the population's habitat or breeding grounds enough to cause a population collapse or prevent individuals from reproducing in their habitual breeding region (or reproduce altogether). -->
-
-There are many sources of environmental changes. Some are due to repetitive, predictable, or even well-known patterns (such as changes in temperature and precipitation with the seasons or the location of different patches), while others are due to infrequent, unpredictable, or poorly-understood events (such as forest fires, the arrival of new competitors, or human activity). In this thesis, I will refer to predictable or known changes in space and time as environmental *heterogeneity*, while I will use the term *stochasticity* specifically for unpredictable (spatiotemporal) variation. Generally, events are hard to predict when (1) they occur with a probability density that changes stochastically over time and space, (2) they do not occur frequently within an organism's generation time or lifespan, or (3) they occur frequently but unpredictably. (Note that the variance of a Bernoulli random variable $Y$ is maximized when $P(Y) = p = 0.5 \implies \mathbb V(Y) = p\,(1-p) = 0.25$, and minimized when the event occurs almost never ($p \approx 0$) or or almost always ($p \approx 1$), since now $\mathbb V(Y)\approx 0 (1-0) = 1 (1-1) = 0$.) As an event begins to occur more frequently (e.g., when $p > 0.5$, but likely even before), animals may begin to expect the event to occur and consider it normality (figure \@ref(fig:bernoulli)), as long as the change in frequency and magnitude is sufficiently gradual. For instance, @lamont_fire_2020 found that serotiny (the storage of seeds in closed cones or fruits which open following a fire) is common common in plant populations which suffer fires at least once per lifespan, on average. However, the trait becomes less common if the fires become so common that plants survive more often as resprouters than by producing seeds. If a dangerous event such as fires becomes more frequent, unpredictable, or severe, organisms may store resources in favorable times and locations so they can resist more adverse times, and mobile animals may move to avoid avoid such events altogether [@southwood_habitat_1977].
-
-```{r bernoulli, eval = TRUE, message = FALSE, fig.cap= "Realizations of a Bernoulli random variable $Y$ for different probabilities of success, $p = P(Y = 1)$, over time. At low values of $p$, successes occur unexpectedly and unpredictably, while when $p = 0.5$ successes are as expected as failures and both are most unpredictable. As $p$ approaches 1, successes are expected and become less unpredictable.", fig.align='center', fig.width=7, fig.height=4, fig.pos='h'}
-library('ggplot2')
-library('dplyr')
-library('tidyr')
-theme_set(theme_bw())
-expand_grid(t = 1:50,
-            p = seq(0, 1, by = 0.1)) %>%
-  mutate(sigma2 = 1 * p * (1 - p),
-         y = rbinom(n = n(), size = 1, prob = p)) %>%
-  filter(y == 1) %>% # remove failures
-  ggplot() +
-  geom_hline(yintercept = seq(0, 1, by = 0.1), alpha = 0.1) +
-  # geom_point(aes(t, p), shape = 1, size = 2) +
-  geom_point(aes(t, p, color = sigma2)) +
-  scale_x_continuous('Time', breaks = NULL, expand = c(0, 1)) +
-  scale_y_continuous('Probability of occurrence', limits = c(0, 1)) +
-  # can use latex2exp::TeX() to use LaTeX, but it doesn't support \mathbb or \mathcal
-  # scale_color_distiller('Stochasticity', direction = 1, palette = 2,
-  #                       breaks = c(0, 0.125, 0.25), labels = c('0', '0.125', '0.25')) +
-  scale_color_viridis_c('Stochasticity', direction = -1, option = 'D', end = 1, begin = 0.3,
-                        breaks = c(0, 0.125, 0.25), labels = c('0', '0.125', '0.25')) +
-  theme(panel.grid = element_blank(), legend.position = 'top')
+```{r bernoulli-changing, out.width='100%', fig.cap="Fictitious example of variation in resource abundance in a heterogenous and stochastic environment. (a.) The probability of success (black dots) during a foraging attempt (white dot) can vary between patches due to various reasons, including differences in competition, predation, and resource-specific trends. (b.) Patches where the probability of success is very low (e.g., a, b) or very high (e.g., j, k) are highly predictable because animals can expect very poor or very good resource availability, respectively. In contrast, patches where the probability of success is near 0.5 (e.g., e, f, g) are higly stochastic because failure and success are approximately equally as likely. (c.) An animal living in such an environment cannot always expect each foraging attemp to be successful. When possible, animals are likely to rely mostly on predictable, resource-rich areas (top right). Alternatively, they may prefer predictable but resouce-poor areas (top left) or specialize for high-risk, high-reward areas (bottom right)."}
+knitr::include_graphics('../../figures/bernoulli-changing-p.png')
 ```
-
-Events which do not occur frequently during an organism's generation time or lifespan (e.g., 2 times or less, on average) may not be considered as threats worth preparing for. In contrast, stochastic and destructive events which happen frequently become part of an organism's habitat, and such organisms may either adapt to their occurrence and even learn to predict them [@foley_severe_2008], or they may avoid the risk altogether by moving to a new habitat [@southwood_habitat_1977]. If habitats are (or become) unfavorable, animals may move to a new habitat, migrate seasonally, or simply prefer nomadism over range residency [e.g., @nandintsetseg_variability_2019]. It is unclear when animals switch from range residency to nomadism (or vice-versa), but understanding the connection between the two types of movement is important for quantifying the effect of spatiotemporal stochasticity on animal's spatial needs.
-
-While the effects of resource abundance on animal's spatial needs have been studied extensively, the effects of environmental heterogeneity and stochasticity, including those around resource abundance, have not been given as much consideration. Environmental stochasticity has been of interest to biologists for multiple decades [e.g., @bell_spatial_1993], but until recently changes in variance have been hard to quantify because they require large amounts of data to produce reasonably precise and accurate estimates, especially if the variance varies over time or space. However, the recent increase in high-frequency ecological data allows us to estimate trends in environmental stochasticity with reasonable levels of precision. In addition, advances in accessible, high-level modeling software [e.g., @r_core_team_r_2021; @wood_generalized_2017; @burkner_brms_2017; @burkner_advanced_2018] and computing power allow researchers to perform sophisticated analyses using (relatively) accessible and inexpensive equipment.
-
-The recent shift to more quantitative statistical methods in environmental biology has pushed scientists to begin thinking more critically about data analysis. However, many still operate using methods and frameworks which were necessary with small datasets, but likely become problematic with an abundance of data. For instance, the widespread frequentist approach of hypothesis testing with a significance level of $\alpha = 0.05$ may often be misleading, because the significance of an effect depends on its standard error, which is a function of its sample size ($\mathbb V(\bar y) = \mathbb V(y) / n$). Similarly, the question of how much data is needed to detect a significant trend [@gray_how_2018] may seem important to some, but I suggest we pay less attention to whether an event or trend is statistically significant over a period of time based on the dichotomy of significance based on an arbitrary significance level. Since statistical significance does not only depend on effect size but also sample size (including measurement frequency), high-frequency data is likely to produce statistically significant effects, even in the event of a false positive. Instead, we should focus primarily on whether a change has an important impact on the fitness of the animal(s) of interest.
-
-What an animal perceives as a stochastic process depends on the stochasticity of the process relative to the animal's size, current age (or average lifespan), and adaptability. Generally, small, short-lived, or young organisms will tend to be more sensitive to small-scale (spatial) or short-term (temporal) changes [@southwood_habitat_1977], and the effects of size and lifespan on sensitivity are likely nonlinear and correlated, since smaller animals tend to have shorter lifespans [@ref]. Overall, processes will have stronger impacts on smaller animals than on bigger ones: The grazing pattern of a bison (*Bison bison*) drastically alters the habitat of most crawling insects, but other grazing mammals would not pay attention to changes in grass length at the same spatial or temporal resolution. Similarly, the timing and quantity of yearly snowfall would be a somewhat predictable and expected event for most adult moose (*Alces alces*), but it may be a shock for many adult zooplankton or a new-born wolf (*Canis lupus*). Thus, what one animal may perceive as a single stochastic event (or cycle) may be considered as a series of short and highly stochastic events by another animal. Figure \@ref(fig:stochasticity-timescale-figure) illustrates the perceived resource availability mean and variance by animals with four different levels of adaptability and how they may predict the mean and variance to change in the future (after the vertical grey line).
-
-Animals which do not adapt to the environment (dark blue) cannot react to or predict changes in either mean resource abundance, and thus the perceived variance is inflated whenever the resource abundance does not match the expected mean. Environments appear highly unpredictable to such animals. Animals which only perceive simple, linear changes in mean resource abundance (orange) perform better as long as trends remain monotonic, but may be surprised when the trend's direction changes, as indicated by the rapidly increase in variance in the top rows of figure \@ref(fig:stochasticity-timescale-figure)b. Animals which are able to adapt smoothly (light blue) can predict changes in mean without a significant bias in estimated variance, as long as the process is not highly stochastic (unsurprisingly, see the bottom rows of figure \@ref(fig:stochasticity-timescale-figure)). Finally, animals which adapt rapidly to changing environments may be most able to take advantage of frequent environmental changes, but they may be unable to produce reasonable predictions based on memory. Instead, they depend on constant information and only predict on the most recent information (as indicated by the deviations from the data when predicting into the future).
-
-```{r stochasticity-timescale-figure, out.width='100%', fig.cap="Fictitious changes in resource abundance mean (a) and variance (b) over the course of a year. The true trends are indicated by the black line, while the colored lines indicate the estimates perceived based on different levels of adaptability. The dashed vertical line indicates the hypothetical current date, such that any data to the right of the line is unknown to the animals, so estimates on the right of the dashed line are extrapolations. The data were simulated using Gaussian noise to ensure mean-variance independence and modeled using Generalized Additive Models with an identity link function to allow linear responses.", out.width='100%'}
-knitr::include_graphics('../../figures/stochasticity-timescale.png')
-```
-
-### The temporal scale of stochastic events
-
-An animal's ability to alter its behavior (including its movement) in response to environmental conditions is essential in stochastic or changing landscapes. Whether the changes be due to highly variable but (potentially) predictable changes such as the seasons and the weather, or whether they be due to more stochastic events [e.g., natural events such as fires or floods, but also anthropogenic events like oil spills; see @matkin_ongoing_2008], an animal's ability to adapt increases its odds of survival. @rickbeil_plasticity_2019 showed that the yearly migration of elk (*Cervus canadensis*) depends on variable environmental events and cues such as available forage biomass, hunting pressure, snow fall, and snow melt. Birds have also shown to change their their migration as the climate changes, including large-scale, trans-Saharian migrants [@jonzen_rapid_2006]. And while genetic diversity and polymorphisms also increase the odds of survival for a species [@ref], this project will focus strictly on animal behavior.
-
-How an organism responds to a stochastic event broadly depends on a variety of correlated factors, including the organism's size, ability to move, lifespan, and generation time [@ref]. Smaller organisms (e.g., mice) are more likely to be be severely impacted by a stochastic event than larger ones (e.g. elephants), since larger organisms can have bigger energy reserves, can move longer distances over short periods of time, and tend to have longer lifespans, generation times, and developmental periods, which allow them to develop or memory about the frequency and severity of such events [@foley_severe_2008; @polansky_elucidating_2015]. However, the short generation time and high fertility of smaller *r-limited* species [@ref] can allow them to develop traits that increase the chances of survival following an extreme event. For instance, while most large trees are able to survive small-scale fires, many grasses survive fires by keeping most of their biomass below ground, where it is unaffected by most superficial fires.
-
-In a changing environment, organisms which depend on mutable cycles such as changes in temperature, precipitation, and resource availability are more likely to respond to environmental changes than organisms which depend purely on deterministic cycles (e.g., photoperiod). While this thesis focuses on the movement and spatial use of animals, the adaptability (or lack thereof) of non-animal organisms is also crucial. The ability of most animals to rely on visual cues and move accordingly greatly increases their adaptability and plasticity, particularly for those animals that are able to move large distances over short periods of time (e.g., flying birds and large vertebrates). Since plants and fungi cannot rely on visual cues nor move as easily, they must depend more on effective reproduction timing, seed dispersal, and evolution of the species rather than the fitness of the individual [@ref]. Recent changes in flowering and leafing times of plants have been detected, but changes are occurring faster than predicted by experimental estimates by as much as 4.0-8.5 times [@wolkovich_warming_2012]. Laboratory-based estimates may fail to account for changes in plant phenology following loss of species diversity [@wolf_flowering_2017]. Although this project will focus on vertebrate animals, such changes are important to consider because the ability of a specialist or obligate symbiont to shift its home range or adapt will likely depend strongly on its associate's ability to move or adapt, too.
-
-#### Temporal changes in home range
-
-The length of an animal's lifespan and the size of their space use can determine how we classify their movement. However, we should minimize the bias which may arise from considering an animal's temporal and spatial scales relative to our perception of time and space. If the animal tracked in figure \@ref(fig:hr-and-lifespan) is an fruit fly that lives in our office and has a lifespan of a few days, we are more likely to consider it range-resident because the space it lived in is relatively small and familiar to us, but if the animal is a large feline, we may be more likely to consider the animal a nomad. In this project, I will use a definition of home range similar to that of @burt_territoriality_1943 (i.e., the area used by an animal to satisfy its essential needs) while viewing it as a continuous-time stochastic process: Since both an animal's needs and their habitat may change over time, I will consider an animal to be range resident if it inhabits a region with a stable centroid during the period of observation. While I would still consider an animal range-resident if it moved its centroid suddenly (rather than with a slow drift), the models implemented in the `ctmm` [@ref] package for `R`[ @ref] assume the centroid is stable, so I would not be able to estimate two separate home ranges. Instead, I would have to consider each region as temporary sections of the overall range, similar to the example illustrated in figure \@ref(fig:hr-and-lifespan). If the animal lives in a group, tracking other members of the group may help understand whether the animal shifted its home range or is not range-resident.
-
-```{r hr-and-lifespan, fig.cap="Simulated movement of an individual over their life. Samples from different periods of the animal's life may result in different conclusions, such as slow nomadism (a) or range residency (b), but neither sample is representative of the space the animal used over its entire life (c).", out.width='100%'}
-knitr::include_graphics('../../figures/hr-and-lifespan.png')
-```
-
-### The spatial scale of stochastic events
-
-To measure the spatial stochasticity of an ecosystem, it is necessary to first define extent of the ecosystem of interest. A lake may seem like a simple and self-contained space to define, but it is often not as simple as deciding the lake's boundaries using a map or satellite pictures. Should one include the shores of the lake? And if so, which region do we consider the lake's shores? Are they the area of land which are currently covered by water, including the sections hit daily by waves, or should we also include the parts of land which are currently not wet but are covered during seasons with more rain? One could base their definition on the species of interest, since coastal areas are not frequented by large fish, but they would likely include them in the ecosystem if they are studying benthic litoral species. Thus, how one measures stochasticity should also depend on which organisms are of most interest.
-
-Transition regions are often have the highest heterogeneity, but, similarly to temporal stochasticity, measures and perceptions of spatial heterogeneity depend on the scale at which they are being considered. The repetitive and cyclical motion of waves may not concern most vertebrates that live along the coast, but it is much more turbulent and chaotic for smaller organisms, such as crustaceans or diatoms. Therefore, the scale at which we consider spatial stochasticity should depend on the size of the organisms of interest as well as the size of their habitat or home range.
-
-```{r spatial-heterogeneity, fig.cap="Hypothetical representation of environmental heterogeneity between different patches. ", out.width='100%'}
-knitr::include_graphics('../../figures/spatial-heterogeneity.png')
-```
-
-@bell_spatial_1993:
-
-* Believe "environmental variance increases indefinitely with distance or over time, so that ***environments can be regarded neither as ~uniform at small spatial scales nor as random at large spatial scales~"???***.
-* Regions with high spatial (or spatiotemporal) variance can result in offspring experiencing conditions very different from those their parents experienced
-* The scale at which we consider spatiotemporal variance is important. @bell_spatial_1993 were unable to find a maximum value of spatiotemporal stochasticity as the distance between locations increased from the order of meters to that of hundreds of kilometers.
-* Spatially autocorrelated and temporally homogeneous landscapes favor sedentary specialists, spatially independent and temporally homogeneous areas favor nomadic specialists, temporally heterogeneous favor generalist or plastic species.
-* Variation can occur on multiple axes (light, food, temperature, water availability, etc.), so there can be different types of adaptations and plasticity, some of which can be more advantageous.
-* Spatial variation will favor movement and behavioral adaptations faster than temporal variation will. Species in a heterogeneous landscape can move to more favorable locations, but it is harder to adapt to an unpredictable or highly variable environment.
-* temporal variation should promote plasticity over diversity
-* Although @bell_spatial_1993 couldn't find a scale at which variance stopped increasing, it seems reasonable to assume that variance cannot increase infinitely. The variance of a finite system (e.g., a lake or a well-defined habitat), should reach a finite maximum somewhere between our smallest scale of interest and the scale of the entire system, even if the maximum is reached when the entire system is considered. This does not imply that a somewhat larger system that contains the first one (e.g. the lake and its coasts) will have the same variance. Variance between lake and coast is high because they are different types of habitats, and the area where they meet (the coast) is potentially even more variable because the mixture of the two creates a third habitat for litoral benthic animals which is subject to high stochasticity due to waves and changing water levels.
-
-***non sequitur***
-
-The same idea (*that variance is finite if we consider the entire ecosystem*) would likely also apply for larger-scale systems, such as continents or a planet. And while stochasticity of a system may also vary over time, it is not reasonable to expect it to increase monotonically through time because that would imply it has been increasing monotonically until the current moment. Still, stochasticity does vary over time, and its estimation depends on the data available, so it may be useful to view it as a random variable with an estimated, conditional posterior distribution through a Bayesian framework [@bolstad_introduction_2017].
-* @bell_spatial_1993 state that they expect environmental variables to vary more than population sizes or fitness. While this may make sense conceptually, quantitatively it depends on the units used. Movement measured in miles will differ less than movement measured in meters, so comparing the two variances to the variance in resources (e.g., food, precipitation) may be futile.
-
-Note that highly variable $\ne$ unpredictable. E.g.: temperature change within each year can be highly variable (-40 to +40), but it is still predictable:
-
-```{r, echo = TRUE}
-plot(2 * sinpi(seq(1, 8, length.out = 400)) + rnorm(400))
-```
-
-For organisms to evolve, some need to survive. If habitats are so unpredictable that most individuals cannot survive a stochastic event (whether it be as short as a fire or as long as a centennial drought), then species will not be able to evolve and adapt.
-
-```{r, echo = TRUE}
-library('dplyr')
-library('tidyr')
-library('ggplot2')
-theme_set(theme_bw())
-n <- 100
-t <- 1:n
-
-# instantaneous variance increases over time
-plot(t, rnorm(n, sd = t))
-
-# variance between time points t and t-k increases over time
-plot(t, cumsum(rnorm(n, sd = 1)), type = 'l')
-
-x <- expand_grid(t = 1:n,
-                 i = 1:100) %>%
-  group_by(i) %>%
-  mutate(x = cumsum(rnorm(n, sd = 1)),
-         var_tk = purrr::map_dbl(t, \(k) var(x - lag(x, k), na.rm = TRUE)))
-
-ggplot(x) +
-  geom_smooth(aes(t, var_tk, group = i), method = 'gam',
-              formula = y ~ s(x, k = 20), color = '#00000030') +
-  geom_smooth(aes(t, var_tk), method = 'gam',
-              formula = y ~ s(x, k = 20), color = 'red') +
-  xlim(c(NA, n/2)) + # 2nd half of a variogram is not useful
-  ylab(expression({sigma^2}[tk]))
-```
-
-- The $\gamma$-variance between spatiotemporal points at a given (spatiotemporal, multidimensional) lag $\vec h$ is calculated as $$\gamma(\vec h) = \frac 12 \mathbb E\left[Z(\vec x + \vec h) - Z(\vec x) \right]^2 = \frac 12 Var\left[Z(\vec x + \vec h) - Z(\vec x) \right]$$ [@bachmaier_variogram_2011]. The $\frac 12$ is because we don't need to repeat each pair (e.g., $V((a, b), (b, a)) = 2 V((a, b))$). View $\gamma(\vec h)$ as a function of $\vec h$ rather than a fixed value.
-
-### Frontiers  Hierarchical, Memory-Based Movement Models for Translocated Elk (Cervus canadensis)  Ecology and Evolution
-
-Refs to check:
-
-* humans, nonhuman primates and other large-brained vertebrates make movement decisions based on spatial representations of their environments (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B50)
-* 2010). These representations may allow animals to move directly to important sites in their environment that lie outside of their perceptual range (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B40, https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B35)
-* Attribute memory, i.e., non-spatial memory, e.g., food type and abundance (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B13)
-* Bison remember valuable information about the location and quality of meadows (spatial and attribute memory) and use this information to revisit profitable locations (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B29)
-* Roe deer an spatial memory for foraging in absence of territorility (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B41)
-* memory in capuchin monkeys (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B8)
-* memory in bison (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B18)
-* memory in sheep (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B18)
-* memory in woodland caribou (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B1)
-* memory in chimpanzees (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B20)
-* memory constitutes an important
-mechanism for home range emergence (https://www.frontiersin.org/articles/10.3389/fevo.2021.702925/#B6, Börger et al., 2008; Van Moorter et al., 2009)
-
-### Urban landscapes and habitat structure
-
-Human activity often fundamentally alters the structure of environments by spatially homogenizing them and imposing temporally heterogeneous and potentially stochastic cycles (e.g., mining, clear-cutting, road traffic, and weekly work schedules). The perception of spatial heterogeneity and cycles in anthropogenic areas varies between species: scavenger animals such as ravens (*Corvus corax*) and raccoons (*Procyon lotor*) often learn to recognize areas that can provide food, such as restaurants or large disposal bins, but other animals may not be able to distinguish between different urban areas. Certain animals have learned to depend on and take advantage of human activity, such as crows who place nuts strategically so that cars will crack them open for them to eat [@nihei_when_2002].
-
-### Two-eyed seeing: Recognizing Traditional Indigenous Knowledge
-
-***split into: preface, chapters 2 and 3, and conclusion; use for preface and conclusion***
-
-The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2012]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized People hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2012]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@ref]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@ref]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved.
-
-The concept of *two-eye seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. One possibility, however, is to use Traditional Knowledge to create properly informed Bayesian priors [@bolstad_introduction_2017]. The validity of the priors can be ensured using prior predictive modeling [@mcelreath_statistical_2016] to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
-
-<!--
-- https://focus.science.ubc.ca/stats-660805dd930a
-- *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
-- *Native knowledge for native ecosystems*
-- *Searching for synergy integrating traditional and scientific ecological knowledge in environmental science education*
-- *The Role of Indigenous Burning in Land Management*
-- calls to action for scientists: @wong_towards_2020
-- weaving TIK and Western knowledge: @tengo_weaving_2017
-- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
-- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
--->
 
 ## Interaction effects of resource availability and stochasticity
 
-Since maximum resource abundance is constrained by environmental stochasticity [@chevin_adaptation_2010], average resource abundance does not provide a sufficiently complete picture of resource availability in an environment. Spatiotemporally constant and homogeneous regions will allow animals to have a small and dependable home range, while stochastic regions will force animals to have higher spatial needs and possibly store resources for periods of scarcity. Similarly, heterogeneous environments, such as habitats with a high variety of patches, may force animals to move between patches if they cannot depend on a single one. Conversely, if some patches are sufficient and highly valuable, animals may adopt strong defensive behaviors towards the patch [@grant_whether_1993]. Thus, some measure of the variation in resource abundance is needed to understand how stochasticity may alter the effect of resource abundance.
+In the previous section, I mentioned that a model which does not account for environmental variance may be acceptable when $\sqrt{\mathbb V(R)} / \mathbb E(R)$ is low, as in the case of a habitat with high $R$ and $p \approx 1$. However, since maximum resource abundance is constrained by environmental stochasticity [@chevin_adaptation_2010] and resources can be depleted or rendered inaccessible by other individuals, $\mathbb E(R)$ does not provide a sufficiently complete picture of resource availability in an environment. Thus, the effect of $\mathbb V(R)$ should be included when possible, even when $p \approx 1$ or $p \approx 0$. <!--Spatiotemporally constant and homogeneous regions will allow animals to have a small and dependable home range, while stochastic regions will force animals to have higher spatial needs and possibly store resources for periods of scarcity. Similarly, heterogeneous environments, such as habitats with a high variety of patches, may force animals to move between patches if they cannot depend on a single one. Conversely, if some patches are sufficient and highly valuable, animals may adopt strong defensive behaviors towards the patch [@grant_whether_1993]. Thus, some measure of $\mathbb V(R)$ is needed to understand how stochasticity may affect spatial requirements.-->
 
-Let $R$ indicate the resources an animal can access in a given visit to a patch or encounter with prey. Next, let $V$ indicate the number of patch visits or prey encounters necessary for the animal to reach its energetic needs for a given time period. Now, let $\mathbb E(Y)$ indicate the expected (i.e., mean) of any random variable $Y$ and $\mathbb V(Y)$ its variance. As explained above, regions with lower average resource abundance, $\mathbb E(R)$, will require a higher average number of visits, $\mathbb E(V)$, for animals to satisfy their needs. In addition, regions with more heterogeneous or stochastic resource abundance (i.e., higher $\mathbb V(R)$) will result in higher spatial needs. Figure \@ref(fig:5-5-panel) presents different trends in $\mathbb E(R)$ and $\mathbb V(R)$, while figure \@ref(fig:5-5-sims) demonstrates how such trends can affect $\mathbb E(V)$ and the 95% home range estimate (which is a function of $\mathbb E(V)$ and $\mathbb V(V)$).
+Let $H$ indicate the size of an animal's HR. (We can consider specific utilization quantiles of the HR, such as the core HR ($H_{50\%}$) or the 95% HR ($H_{95\%}$), but for simplicity I will refer to the entirety of the HR with $H$). As explained above, $H$ will be higher in regions with lower $\mathbb E(R)$ and higher $\mathbb V(R)$. Figure \@ref(fig:5-5-panel) presents various scenarios with different trends in $\mathbb E(R)$ and $\mathbb V(R)$
 
-```{r 5-5-panel, fig.cap="Simulated data with constant, linearly increasing, cyclical, drifting, and erratic means and variances. The red lines are the means estimated by a Generalized Additive Model fit by $\\texttt{ggplot2::geom\\_smooth()}$, while the shaded areas are the range of $\\pm$ 2 true (i.e, not estimated) standard deviations around the estimated mean.", out.width='100%'}
+Figure \@ref(fig:5-5-sims) demonstrates how such trends can affect $\mathbb E(V)$ and the 95% home range estimate (which is a function of $\mathbb E(V)$ and $\mathbb V(V)$).
+
+```{r 5-5-panel, fig.cap="Simulated resource availability with constant, linearly increasing, cyclical, drifting, and erratic means or variances. The red lines are the means estimated by a Generalized Additive Model fit by the $\\texttt{ggplot2::geom\\_smooth()}$ function, while the shaded areas are the range of $\\pm$ 2 true (i.e, not estimated) standard deviations around the estimated mean.", out.width='100%'}
 knitr::include_graphics('../../figures/mean-variance-5-by-5.png')
 ```
 
 ***expand***
 
-The `geom_smooth()` shows that the amount of detail in our estimates depends directly on our data resolution (which is why some red lines don't look similar to the orange mean ones, especially for the stochastic mean). This also adds a new consideration, because the change in the mean is not the same as the variance in the data, but we cannot distinguish the two (easily).
+The smoothed conditional means show that the amount of detail in our estimates depends directly on our data resolution (which is why some red lines don't look similar to the orange mean ones, especially for the stochastic mean). This also adds a new consideration, because the change in the mean is not the same as the variance in the data, but we cannot distinguish the two (easily).
 
-***FIX FIGURE REFERENCE IN FIGURE CAPTIONS FOR 5-5-sims AND 5-5-cv***
-
-```{r 5-5-sims, fig.cap="Simulated spatial requirements for animals living in habitats detailed in Figure ref(fig:5-5-panel). The black line indicates the mean spatial requirement needed for survival, while the red line indicates the mean requirement + 2 standard deviations. The latter can be interpreted as the minimum requirements needed for an approximate 95\\% chance of survival, which would be proportional to the animals' 95\\% home range.", out.width='100%'}
+```{r 5-5-sims, fig.cap="Simulated spatial requirements for animals living in habitats where resource availability vary with constant, linearly increasing, cyclical, drifting, or erratic means and variances. The thick line indicates the mean spatial requirement needed for survival, while the thin line indicates the 95\\% quantile. The thick line can also be interpreted as the animal's core home range, while thin line can be interpreted as the requirements needed for a 95\\% chance of survival, which would be similar to the animals' 95\\% home range. Changes in $\\mathbb V(R)$ have greater impacts when $\\mathbb E(R)$ or $\\mathbb V(R)$ are low.", out.width='100%'}
 knitr::include_graphics('../../figures/mean-variance-5-by-5-sims.png')
 ```
 
-```{r 5-5-cv, fig.cap="Standard deviations of the number of patch visits needed for an animal to survive in the habitats detailed in Figure @ref(fig:5-5-panel). Each patch has mean resources as indicated on the left column and variances as indicated in the top row. Note that although the variance in available energy, $V(E)$, is related to the variance in patch visits, the two are not the same. More variable habitats will result in larger spatial requirements, but the relationship is not linear, since habitats with higher mean available energy result in lower spatial requirements. Additionally, the mean available energy and the .", out.width='100%'}
+Changes in variance have greater effects in highly predictable areas because changing variance from near 0 to any number is multiplicatively much larger than increasing an already large variance.
+
+<!--
+```{r 5-5-cv, fig.cap="Standard deviations of the number of patch visits needed for an animal to survive in the habitats detailed in Figure @ref(fig:5-5-panel). Each patch has mean resources as indicated on the left column and variances as indicated in the top row. Note that although the variance in available energy, $\\mathbb V(E)$, is related to the variance in patch visits, the two are not the same. More variable habitats will result in larger spatial requirements, but the relationship is not linear, since habitats with higher mean available energy result in lower spatial requirements. Additionally, the mean available energy and the .", out.width='100%'}
 knitr::include_graphics('../../figures/mean-variance-5-by-5-sd-visits.png')
 ```
+-->
 
-Changes in variance have greater effects in highly predictable areas because changing variance from near 0 to any number is multiplicatively much larger than increasing an already large variance. 
+<!-- $HR = a \mathbb E(\text{productivity}) + b \mathbb V(\text{productivity}) - c \mathbb E(\text{metabolic rate}) - d \mathbb E(\text{energetic cost of movement})$ where $a, b, c, d$ are (estimated) coefficients. -->
 
-$HR = a \mathbb E(\text{productivity}) + b \mathbb V(\text{productivity}) - c \mathbb E(\text{metabolic rate}) - d \mathbb E(\text{energetic cost of movement})$ where $a, b, c, d$ are (estimated) coefficients.
+Although some of these scenarios may seem overly simplistic 
 
-Also, a highly stochastic variance will be estimated as a smoothly-changing variance unless we have very high amounts of data.
+Also, a highly stochastic variance will be perceived (and estimated) as a smoothly-changing variance unless we have very high amounts of data.
 
 Apply mean VS variance 5x5 figure to HR size or location:
 
 * there are conditions where remaining in a particular habitat becomes unsustainable and migrations or range shifts are required for survival,
-* **cyclical mean** ==> repeated migration (or diurnal cicles)
-* **cyclical variance** could be because of seasonal/daily cycles in resources, temperature, precipitation
-* **drifting** could be because of a highly complex ecosystem with many unpredictable agents (e.g., tropical areas with high density of insects)
+* cyclical changes in $\mathbb E(R)$ and $\mathbb V(R)$ may occur in urban environments [@peron_periodic_2017] or as temperature and precipitation change between seasons [@geremia_migrating_2019]. 
+* **drifting** could be because of a highly complex ecosystem with many unpredictable agents (e.g., tropical areas with high density of insects like locusts?)
 * **erratic** could be because of sudden events (e.g., fires, human activity)
 
-<!-- ## Movement types
+<!--
+
+## Movement types
 
 ### Range residency
 
@@ -267,7 +134,9 @@ predation is more stochastic than herbibory; predators need to match more cycles
 
 -->
 
-<!--## Simulations
+<!--
+
+## Simulations
 
 Include:
 
@@ -277,132 +146,12 @@ Include:
 
 See `R` packages for meta-community simulations
 
-### Extreme events and population stability
-
-Figures adapted from a presentation from a presentation I gave on extreme events and mammals for an undergrad course (BIOL385):
-
-```{r, echo = TRUE}
-# density plots ---
-d.dens <-
-tibble(x = seq(10, 20, length.out = 400),
-pop.x = dnorm(x, mean = 15, sd = 0.5),
-pop.y = dnorm(x, mean = 15, sd = 1.5),
-pop.z = dweibull(x, 15.53, 15)) %>%
-pivot_longer(cols = c('pop.x', 'pop.y', 'pop.z'), names_to = 'pop', values_to = 'p')
-
-# populations with same means but different shapes and variances
-ggplot(d.dens) +
-facet_grid(pop ~ .) +
-geom_ribbon(aes(x, ymin = 0, ymax = p, fill = pop), alpha = 0.5) +
-geom_line(aes(x, p)) +
-geom_hline(yintercept = 0) +
-labs(x = 'Population size', y = 'Probability density') +
-scale_fill_brewer(type = 'qual', palette = 6, direction = 1) +
-scale_x_continuous(breaks = NULL, expand = c(0, 0)) +
-scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
-theme(strip.text = element_blank(), line = element_line(size = .5))
-
-library('mgcv')  # for semi-parametric GAMs
-library('qgam')  # for non-parametric quantile GAMs
-library('dplyr') # for data wrangling
-theme_set(theme_bw() +
-theme(legend.position = 'none', strip.text = element_blank()))
-
-# simulate population data
-d <- tibble(Year = 1500:2050,
-N = c(100, rep(NA, length(Year) - 1)),
-die.off = NA,
-extreme = NA_real_)
-
-# should change the simulation to something more realistic
-set.seed(1)
-for(i in 2:nrow(d)) { # for each row after the first one
-if(d$N[i - 1] > 1) { # if more than one animal existed in the previous row
-
-d$N[i] <- d$N[i - 1] - rpois(n = 1, 3) + 3
-
-# extreme event
-if(d$Year[i] > 1900 & rbinom(1, size = 1, prob = (d$Year[i] / 20000)^2)) {
-d$N[i] <- d$N[i - 1] - rpois(n = 1, lambda = 25)
-d$extreme[i] <- d$Year[i]
-}
-
-# size <- abs(round(rnorm(1, sd = (d$Year[i] / 1900)^5) / 5)) # magnitude of dieoff
-# d$die.off[i] <- size * ((d$Year[i] - 1800) / 20)^1.5
-# d$N[i] <- d$N[i] - d$die.off[i]
-
-} else {
-d$N[i - 1] <- 0
-d$N[i] <- 0
-}
-}
-
-# reduce population size by ten but keep to a min of 0
-# d$N <- if_else(d$N > 5, round(d$N - 5), 0)
-
-ggplot(d, aes(Year, N)) +
-geom_line() +
-scale_x_continuous(expand = c(0, 0)) +
-labs(y = 'Population Size', x = 'Year C.E.')
-
-# death and birth rates are arbitrary
-m0 <- qgam(N ~ s(Year, k = 25), d, qu = .5)
-mu <- predict(m0, type = 'response')
-xtrm.lwr <- mu - 5 # lower threshold for extremes
-xtrm.upr <- mu + 5 # upper threshold for extremes
-
-# create an arbitrary range for "normal" population levels
-ggplot(d, aes(Year, N)) +
-geom_ribbon(aes(ymin = xtrm.lwr, ymax = xtrm.upr), fill = 'goldenrod', alpha = 0.4) +
-geom_line(lwd = .5) +
-scale_x_continuous(expand = c(0, 0)) +
-labs(y = 'Population Size', x = NULL)
-
-# frequency of unusually high (triangles) or low (crosses) numbers
-ggplot(d, aes(Year, N)) +
-geom_ribbon(aes(ymin = xtrm.lwr, ymax = xtrm.upr), fill = 'goldenrod', alpha = 0.4) +
-geom_point(alpha = .5) +
-geom_point(aes(Year, max(d$N) * 1.1), filter(d, N > xtrm.upr),
-col = 'forestgreen', size = 3, shape = 17) +
-geom_point(aes(Year, 0 - max(d$N) * 0.05), filter(d, N < xtrm.lwr),
-col = 'red', size = 3, shape = 4) +
-scale_x_continuous(expand = c(0, 0)) +
-labs(y = 'Population Size', x = NULL)
-
-# models ----
-# LM fails to detect changes in variance and expects linear, monotonic trends
-ggplot(d, aes(Year, N)) +
-geom_point(alpha = .5) +
-geom_point(aes(x = extreme, y = - 1), d, color = 'red', pch = 4) +
-geom_smooth(method = 'lm', se = FALSE, formula = y ~ x) +
-labs(y = 'Population Size', x = NULL)
-
-# quantile GAM
-mq <- mqgam(N ~ s(Year, k = 10, bs = 'ad'), data = d,
-qu = c(0.01, 0.99), multicore = TRUE, ncores = 4)
-
-pred.q <-
-tibble(Year = d$Year,
-N.99 = qdo(mq, qu = c(0.99),
-\(m) predict(m, newdata = tibble(Year = Year))),
-N.01 = qdo(mq, qu = c(0.01),
-\(m) predict(m, newdata = tibble(Year = Year))))
-
-# quantile GAM (or location-scale GAM) can detect change in 
-ggplot(pred.q) +
-geom_point(aes(Year, N), d) +
-geom_point(aes(x = extreme, y = - 1), d, color = 'red', pch = 4) +
-geom_line(aes(Year, N.99), col = 'blue', lwd = 1) +
-geom_line(aes(Year, N.01), col = 'blue', lwd = 1) +
-ylim(c(-1, NA)) +
-labs(y = 'Population Size', x = NULL)
-```
 -->
 
 ## Objectives
 
-This project aims to quantify how animal's movement and use of space are affected by the abundance of resources (e.g., food, water, breeding grounds) and environmental stochasticity. I will produce a global raster of a new environmental stochasticity index, and new quantitative methods for animal movement. Findings will inform design of protected areas and assist in conserving Canada's wildlife, particularly in light of Canada's pledge to protect 30% of its landmass and oceans by 2030 [@ryan_patrick_jones_pm_2021], although only 13% of Canada’s area is currently protected [@government_of_canada_canadian_2021]. Local Indigenous groups will be included in the research process, in the hope of forming long-lasting co-operative relationships.
+This project aims to quantify how animal's movement and use of space are affected by the abundance of resources (e.g., food, water, breeding grounds) and environmental stochasticity. This work has four key objectives: (i) estimating individuals' spatial requirements in a way which is insensitive to variation in sampling protocols and data quality; (ii) quantifying environmental stochasticity and its effects; (iii) estimating between-species trends using models that are robust to commonly-found issues (e.g., correlations within species); and (iv) understanding how Traditional Indigenous Knowledge can be integrated into large-scale ecological research and conservation planning within a framework that acknowledges both Traditional Indigenous Knowledge and Western science [@kutz_two-eyed_2019]. In Chapter 2, I will produce a global raster of a new environmental stochasticity index, and new quantitative methods for animal movement. Findings will inform design of protected areas and assist in conserving Canada's wildlife, particularly in light of Canada's pledge to protect 30% of its landmass and oceans by 2030 [@ryan_patrick_jones_pm_2021], although only 13% of Canada’s area is currently protected [@government_of_canada_canadian_2021]. Local Indigenous groups will be included in the research process, in the hope of forming long-lasting co-operative relationships.
 
-I will use simulation studies and an unprecedented and conservation-relevant animal tracking dataset (>1500 animals, 77 globally-distributed species) to provide the most detailed investigation into how animal spatial needs change with environmental stochasticity to date. This work has four key objectives: (i) estimating individuals' spatial requirements in a way which is insensitive to variation in sampling protocols and data quality; (ii) quantifying environmental stochasticity and its effects; (iii) estimating between-species trends using models that are robust to commonly-found issues (e.g., correlations within species); and (iv) understanding how Traditional Indigenous Knowledge can be integrated into large-scale ecological research and conservation planning within a framework that acknowledges both Traditional Indigenous Knowledge and Western science [@kutz_two-eyed_2019].
+In Chapter 3, I will use simulation studies and an unprecedented and conservation-relevant animal tracking dataset (>1500 animals, 77 globally-distributed species) to provide the most detailed investigation into how animal spatial needs change with environmental stochasticity to date.
 
-To achieve these aims: (i) I will use continuous-time models [@johnson_continuous-time_2008] that do not depend on sampling frequency. Such models will allow me to use the entirety of the data rather than aggregated data (e.g., daily averages), as aggregated data contain less information on sample variance and can lead to biased estimates. (ii) I will produce a global, time-varying raster of environmental stochasticity which accounts for productivity [@nilsen_can_2005], weather, and climate (e.g., precipitation and temperature), as well as the frequency of extreme events (e.g., heat domes, flooding, forest fires). I will then use the raster to estimate the effect of stochasticity on home range sizes. (iii) I will use a hierarchical approach [@pedersen_hierarchical_2019] to estimate common trends and variances within and between populations, species, and data collection methods. (iv) I will collaborate closely with with various Indigenous groups and include any Traditional Knowledge and practices they wish to include in my project. The research will be published in open-access journals and all code will be publicly available.
+<!-- To achieve these aims: (i) I will use continuous-time models [@johnson_continuous-time_2008] that do not depend on sampling frequency. Such models will allow me to use the entirety of the data rather than aggregated data (e.g., daily averages), as aggregated data contain less information on sample variance and can lead to biased estimates. (ii) I will produce a global, time-varying raster of environmental stochasticity which accounts for productivity [@nilsen_can_2005], weather, and climate (e.g., precipitation and temperature), as well as the frequency of extreme events (e.g., heat domes, flooding, forest fires). I will then use the raster to estimate the effect of stochasticity on home range sizes. (iii) I will use a hierarchical approach [@pedersen_hierarchical_2019] to estimate common trends and variances within and between populations, species, and data collection methods. (iv) I will collaborate closely with with various Indigenous groups and include any Traditional Knowledge and practices they wish to include in my project. The research will be published in open-access journals and all code will be publicly available. -->
