@@ -28,7 +28,7 @@ sims <- simulate(m_ouf, t = seq(1, 500, by = 0.05)) %>%
   as.data.frame() %>%
   as_tibble() %>%
   mutate(#x = scales::rescale(x, to = c(1, 11), from = range(x)),
-         y = scales::rescale(y, to = c(1, 11), from = range(y)))
+    y = scales::rescale(y, to = c(1, 11), from = range(y)))
 
 ggplot(sims) +
   coord_equal(ratio = 0.1) +
@@ -50,13 +50,14 @@ d_1 <- expand_grid(t = seq(0, 1, by = 0.1), r = seq(0, 1, by = 0.1)) %>%
 
 # a. raster of abundance with events
 p_1a <-
-  ggplot(d_1, aes(r, patch)) +
+  ggplot(d_1, aes(r, t)) +
   geom_raster(aes(fill = r)) +
   geom_point(color = 'black', size = 3) +
   geom_point(aes(color = sigma2), size = 2) +
   scale_x_continuous('Resource abundance', expand = c(0, 0), breaks = 0:1,
                      labels = c('Low', 'High')) +
-  scale_y_discrete('Patch', expand = c(0, 0)) +
+  scale_y_continuous(expression(Probability~of~success~(italic(p))), expand = c(0, 0),
+                     breaks = unique(d_1$t), labels = rep(1, n_distinct(d_1$t))) +
   # can use latex2exp::TeX() to use LaTeX, but it doesn't support \mathbb or \mathcal
   scale_color_viridis_c('Stochasticity', direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = c(0, 0.25), breaks = c(0, 0.125, 0.25),
@@ -192,13 +193,13 @@ d_2 <-
 
 # a. raster of abundance with events
 p_2a <-
-  ggplot(d_2, aes(r, patch)) +
+  ggplot(d_2, aes(r, p)) +
   geom_raster(aes(fill = r)) +
   geom_point(aes(alpha = s), color = 'black', size = 3) +
   geom_point(aes(alpha = s, color = sigma2), size = 2) +
   scale_x_continuous('Resource abundance', expand = c(0, 0), breaks = 0:1,
                      labels = c('Low', 'High')) +
-  scale_y_discrete('Patch', expand = c(0, 0)) +
+  scale_y_continuous(expression(Probability~of~success~(italic(p))), expand = c(0, 0)) +
   scale_color_viridis_c('Stochasticity', direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = c(0, 0.25), breaks = c(0, 0.125, 0.25),
                         labels = c('0', '0.125', '0.25')) +
