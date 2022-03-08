@@ -43,3 +43,6 @@ revisions/*
 
 # all Rmd logs
 *.log
+
+# manuscripts added to appendix 1
+writing/thesis/manuscripts/*
