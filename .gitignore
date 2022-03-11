@@ -46,3 +46,6 @@ revisions/*
 
 # manuscripts added to appendix 1
 writing/thesis/manuscripts/*
+
+# thesis revisions
+writing/thesis/revisions/*
