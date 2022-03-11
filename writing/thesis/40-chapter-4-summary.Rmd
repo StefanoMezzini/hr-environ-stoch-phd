@@ -1,10 +1,14 @@
 \newpage
 
-# Chapter 4: Summary
+# Chapter 4: Summary {#summary}
 
 - why is this work important?
 - so what?
 - now what?
+
+ <!-- Aim for ca. 1/2 a page on how you expect to tie everything together. Aim for ca. 1/2 a page on how you expect to tie everything together. -->
+
+<!-- 
 
 ***From the foreword:***
 

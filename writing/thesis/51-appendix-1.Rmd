@@ -2,10 +2,9 @@
 
 # Appendix 1: Manuscripts contributed to during the degree {-}
 
-```{r kwb-paper, eval = FALSE, fig.align='center', out.width='0.75\\linewidth', fig.pos='H'}
-knitr::include_graphics('../manuscripts/kwb-paper.pdf')
-```
+<!-- Kenosee and White Bear paper -->
 
-```{r tapir-paper, eval = FALSE, fig.align='center', out.width='0.75\\linewidth', fig.pos='H'}
-knitr::include_graphics('../manuscripts/tapir-paper.pdf')
-```
+\includepdf[pages={-}]{manuscripts/Limnology Oceanography - 2022 - Bjorndahl - Abrupt changes in the physical and biological structure of endorheic upland.pdf}
+
+<!-- tapir paper -->
+\includepdf[pages={-}]{manuscripts/2021.11.12.468362v1.full.pdf}

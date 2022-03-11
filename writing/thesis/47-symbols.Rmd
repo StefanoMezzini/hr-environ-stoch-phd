@@ -1,6 +1,6 @@
 \newpage
 
-# List of notations and symbols used
+# List of notations and symbols used {#symbols}
 
 ```{r}
 library('dplyr')

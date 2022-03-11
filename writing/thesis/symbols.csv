@@ -8,3 +8,4 @@ $\tau_v$,"Velocity autocorrelation, directional persistance"
 $R$,Resources
 $c \propto k$,$c$ is proportional to $k$
 $F$,Favorableness or value of a region
+"$c \in (a, b]$",$c$ is in the interval from $a$ (not included) to $b$ (included)

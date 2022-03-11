@@ -1,6 +1,6 @@
 \newpage
 
-# Chapter 3: Movement analyses {#chapter-3}
+# Chapter 3: Movement analyses {#movement}
 
 ```{r stoch-example-figure, fig.align='center', echo=FALSE, fig.cap = "Simulations depicting the effects of resource availability and stochasticity on spatial needs. Animals moved from the circles to nearby tiles until satiated. The labels indicate how many steps animals took to reach satiety. Note the higher spatial needs of animals in more unpredictable or resource-scarce environments. Resources were generated using a gamma random variable parameterized by independent mean and variance paramters, which represented the resource abundance and environmental stochasticity, respectively, even though the two are likely correlated in nature.", out.width='100%'}
 knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-light.png')
@@ -13,7 +13,3 @@ knitr::include_graphics('../../figures/first-presentation/stochasticity-figure-l
 ## Movement analysis
 
 The increase in movement data availability allows researchers to produce more powerful results, but the high-frequency sampling often results in non-independence between temporally consecutive data. Additionally, high-frequency data is more likely to be sampled at irregular intervals. Thus, many commonly-used home range estimation methods (e.g., minimum convex polygon, kernel density estimation) cannot be used with such datasets because they assume data points to be approximately independent and at regular time intervals. While one could coarsen data to larger, regular intervals at the expense of data frequency, this nullifies great part of the benefits achieved with recent improvements in tracking technologies. Thus, it is increasingly more important to model animal movement data using models that (1) do not assume data is regularly sampled, and (2) account for the spatiotemporal autocorrelation within the data. Continuous-time models such as Ornstein-Uhlenbeck (OU) and OU foraging (OUF) models relax the assumption of spatiotemporal independence by accounting for positional autocorrelation (OU and OUF models) and directional (i.e., velocity) autocorrelation (OUF models only), which allows them to estimate the animal's average home range crossing time (OU and OUF) and the animal's average directional persistence (OUF only). @peron_periodic_2017 provide additional information OU and OUF models and how to interpret them while also demonstrating how to use high-frequency movement data can help detect small-scale cycles, such as patterns that occur daily or weekly.
-
-can't add HFI to analysis because it's temporally static
-
-moving-window HR
