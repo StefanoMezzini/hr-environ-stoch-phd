@@ -115,7 +115,7 @@ p_mean <-
   facet_grid(mean ~ ., switch = 'y') +
   geom_line(color = pal[1], lwd = 1) +
   scale_x_continuous(' ', breaks = NULL) +
-  scale_y_continuous(expression(Mean~italic(R)), breaks = NULL) +
+  scale_y_continuous(expression(Mean~italic(U)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'),
         axis.text = element_text(color = 'transparent'), axis.ticks = element_blank(),
         panel.grid = element_blank())
@@ -125,7 +125,7 @@ p_variance <-
   ggplot(d55, aes(t, sigma2)) +
   facet_wrap(. ~ variance, nrow = 1) +
   geom_line(color = pal[2], lwd = 1) +
-  scale_x_continuous(expression(Variance~'in'~italic(R)), breaks = NULL, position = 'top') +
+  scale_x_continuous(expression(Variance~'in'~italic(U)), breaks = NULL, position = 'top') +
   scale_y_continuous('', breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'),
         axis.text = element_text(color = 'transparent'), axis.ticks = element_blank(),

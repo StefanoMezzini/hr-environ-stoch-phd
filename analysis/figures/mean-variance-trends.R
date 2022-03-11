@@ -39,7 +39,7 @@ p_mean <-
   geom_point(aes(y = y), alpha = 0) +
   geom_line(color = pal[1], lwd = 1) +
   scale_x_continuous('', breaks = NULL) +
-  scale_y_continuous(expression(Mean~italic(R)), breaks = NULL) +
+  scale_y_continuous(expression(Mean~italic(U)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'))
 
 # variance
@@ -47,7 +47,7 @@ p_variance <-
   ggplot(d55, aes(t, sigma2)) +
   facet_wrap(. ~ variance, nrow = 1) +
   geom_line(color = pal[2], lwd = 1) +
-  scale_x_continuous(expression(Variance~'in'~italic(R)), breaks = NULL, position='top') +
+  scale_x_continuous(expression(Variance~'in'~italic(U)), breaks = NULL, position='top') +
   scale_y_continuous('', breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'))
 
