@@ -183,8 +183,6 @@ abstract <- if_else(stringi::stri_count_words(abstract) < 350,
                           ' WORDS).'))
 ```
 
-`r paste0('**', stringi::stri_count_words(abstract), '/350 words**')`
-
 `r abstract`
 
 \newpage

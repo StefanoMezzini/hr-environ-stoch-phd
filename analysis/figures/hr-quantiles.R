@@ -34,21 +34,22 @@ p_mov <-
   scale_x_continuous(NULL, breaks = NULL) +
   scale_y_continuous(NULL, breaks = NULL)
 
-hr <- tibble(q = seq(0, 0.999, length.out = 400),
-             sig = 0.09, # movement variance in m_ouf()
-             H = map_dbl(q, .f = \(x) summary(hr_akde, level.UD = x, units = FALSE)$CI[2]),
-             H_true = -2 * log(1 - q) * pi * sig)
+hr <-
+  tibble(q = seq(0, 0.999, length.out = 1e4),
+         sig = 0.09, # movement variance in m_ouf()
+         # H = map_dbl(q, .f = \(x) summary(hr_akde, level.UD = x, units = FALSE)$CI[2]),
+         H_true = -2 * log(1 - q) * pi * sig)
 
 # create tibbles of core and 95% HRs
 hrs <- bind_rows(SpatialPolygonsDataFrame.UD(hr_akde, level.UD = 0.95) %>%
                    fortify() %>%
-                   mutate(q = '95%'),
+                   mutate(q = 0.95),
                  SpatialPolygonsDataFrame.UD(hr_akde, level.UD = 0.75) %>%
                    fortify() %>%
-                   mutate(q = '75%'),
+                   mutate(q = 0.75),
                  SpatialPolygonsDataFrame.UD(hr_akde, level.UD = 0.5) %>%
                    fortify() %>%
-                   mutate(q = '50%')) %>%
+                   mutate(q = 0.5)) %>%
   as_tibble() %>%
   # remove 95% CIs
   filter(! grepl('low', id) & ! grepl('high', id))
@@ -58,20 +59,21 @@ p_hrs <-
   p_mov +
   geom_polygon(aes(group = group, color = q, fill = q),
                data = hrs, lwd = 1, alpha = 0.4) +
-  scale_color_brewer('Quantile', type = 'qual', palette = 6,
-                     aesthetics = c('color', 'fill')) +
-  scale_alpha_manual(values = c(0.4, 0)) +
+  scale_color_viridis_c('Quantile', option = 'A', aesthetics = c('color', 'fill'),
+                        limits = c(0, 1)) +
   theme(legend.position = 'right')
 
 # estimated area
 p_area <-
   ggplot(hr, aes(q, H_true)) +
-  geom_area(fill = 'black', color = 'black', alpha = 0.3) +
+  # geom_area(fill = 'black', color = 'black', alpha = 0.3) +
+  geom_segment(aes(xend = q, yend = 0, group = q, color = q)) +
   xlab('Quantile') +
   scale_y_continuous(expression(Home~range~size), breaks = NULL) +
-  theme(panel.grid = element_blank())
+  scale_color_viridis_c('Quantile', option = 'A', limits = c(0, 1)) +
+  theme(panel.grid = element_blank(), legend.position = 'none')
 
 p <-
   ggdraw(p_area) +
-  draw_plot(p_hrs, x = 0.05, y = 0.3, width = 0.75, height = 0.75); p
+  draw_plot(p_hrs, x = 0.05, y = 0.3, width = 0.75, height = 0.75)
 ggsave('figures/hr-quantiles.png', p, width = 3, height = 3, scale = 2, bg = 'white')
