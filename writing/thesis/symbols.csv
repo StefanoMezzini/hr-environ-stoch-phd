@@ -9,3 +9,10 @@ $R$,Resources
 $c \propto k$,$c$ is proportional to $k$
 $F$,Favorableness or value of a region
 "$c \in (a, b]$",$c$ is in the interval from $a$ (not included) to $b$ (included)
+$a < b$,$a$ less than $b$
+$a > b$,$a$ greater than $b$
+$a \le b$,$a$ less or equal to $b$
+$a \ge b$,$a$ greater than or equal to $b$
+$a \approx b$,$a$ approximately equal to $b$
+$a \lesssim b$,$a$ approximately less than $b$
+"$R \sim Gamma(k, \theta)$",$R$ follows a Gamma distribution with parameters $k$ and $\theta$
