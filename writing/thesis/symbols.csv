@@ -16,3 +16,5 @@ $a \ge b$,$a$ greater than or equal to $b$
 $a \approx b$,$a$ approximately equal to $b$
 $a \lesssim b$,$a$ approximately less than $b$
 "$R \sim Gamma(k, \theta)$",$R$ follows a Gamma distribution with parameters $k$ and $\theta$
+$n$, sample size
+$n_{eff}$, effective sample size
