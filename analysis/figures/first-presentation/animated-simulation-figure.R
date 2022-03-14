@@ -75,8 +75,8 @@ c(small.s2, big.s2) %in% unique(m$s2)
 p0 <-
   ggplot(m, aes(mu, s2)) +
   geom_raster(aes(fill = food)) +
-  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0))+
-  scale_y_continuous('Environmental stochasticity', breaks = NULL, expand = c(0, 0)) +
+  scale_x_continuous(expression(Resource~abundance~(italic(R))), breaks = NULL, expand = c(0, 0))+
+  scale_y_continuous('Environmental variance', breaks = NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH); p0
 
 # crate a nested tibble with a raster for each turn ----
