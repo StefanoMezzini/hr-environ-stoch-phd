@@ -1,0 +1,281 @@
+---
+bibliography: 'masters-refs.bib'
+csl: '../freshwater-biology.csl'
+header-includes:
+    - \usepackage{setspace}\doublespacing # change default spacing
+    - \usepackage{indentfirst} # add indent to first line of each paragraph
+    - \pagenumbering{gobble} # remove numbering from title page
+    - \usepackage{pdfpages} # to append pdfs to the thesis
+    - \usepackage{wrapfig} # to wrap text around figures
+    - \usepackage{caption}
+    # smaller caption text, less space above and below caption
+    - \captionsetup[figure]{font=scriptsize, aboveskip=4pt, belowskip=-20pt}
+    # not currently needed, but keeping for reference
+    # - \usepackage{gensymb}
+    # - \usepackage{geometry} \geometry{margin=1in, lmargin=1.5in}
+    # - \usepackage{float}
+    # - \usepackage{afterpage}
+    # - \usepackage{ragged2e}
+output:
+  bookdown::pdf_document2:
+    number_sections: true
+    toc: false # added manually later
+    fig_caption: true
+    extra_dependencies: ['float']
+
+# bookdown-specific arguments
+site: bookdown::bookdown_site # needed to build the book
+config_file: '_bookdown.yml'
+---
+
+```{r, include=FALSE}
+TITLE <- 'Linking resource abundance and environmental stochasticity with animal space use using continuous-time stochastic processes'
+knitr::opts_chunk$set(echo = FALSE, out.extra = '')
+library('dplyr')
+```
+
+```{r wrap-figure-function, include = FALSE}
+# code modified from https://stackoverflow.com/questions/54100806/r-markdown-how-do-i-make-text-float-around-figures
+
+# this chunk is needed to wrap text around or beside figures
+
+defOut <- knitr::knit_hooks$get('plot')  # save the default plot hook
+
+knitr::knit_hooks$set(plot = function(x, options) {  # set the new plot hook ...
+  
+  x <- defOut(x, options)  # first apply the default hook
+  
+  # if wrapfigure options are given, create the new opening string for the wrapfigure
+  # environment using custom figure alignment and text width
+  if(!is.null(options$wrapfigure)) {
+    
+    # options must be numeric, they cannot be characters
+    wf <- sprintf('\\begin{wrapfigure}{%s}{%g\\textwidth}',
+                  options$wrapfigure[[1]], # figure alignment
+                  options$wrapfigure[[2]]) # caption width relative to text width
+    x  <- gsub(pattern = '\\begin{figure}', # and replace the default one with it
+               replacement = wf,
+               x = x,
+               fixed = TRUE) # pattern is a string, so evaluate as is
+    x  <- gsub(pattern = '{figure}', # also replace the environment ending
+               replacement = '{wrapfigure}',
+               x = x,
+               fixed = TRUE)
+  }
+  return(x)
+}
+)
+
+# chuck options used to wrap figures:
+## fig.align = "right":          align figures right
+## out.width = "0.5\\textwidth": output width = 0.5 * the width of the text
+## wrapfigure = list("R", 0.5)   wrap caption to right, caption width = 0.5 text width
+```
+
+<!-- http://www.personal.ceu.hu/tex/breaking.htm for breaking lines and pages-->
+
+<!-- center text, triple spacing, leave blank lines between sections -->
+
+\begin{center}
+
+\setstretch{3}
+
+\textbf{`r toupper(TITLE)`}
+
+by
+
+Stefano Mezzini
+
+\bigskip
+
+B.Sc. Hons. Biology, University of Regina, 2021
+
+B.Sc. Statistics, University of Regina, 2021
+
+\bigskip
+
+A THESIS SUBMITTED IN PARTIAL FULFILLMENT OF
+
+THE REQUIREMENTS FOR THE DEGREE OF
+
+MASTER OF SCIENCE
+
+in
+
+THE COLLEGE OF GRADUATE STUDIES
+
+(Biology)
+
+THE UNIVERSITY OF BRITISH COLUMBIA
+
+(Okanagan)
+
+`r paste(month.name[lubridate::month(Sys.Date())], lubridate::year(Sys.Date()))`
+
+© Stefano Mezzini, `r lubridate::year(Sys.Date())`
+
+\end{center}
+
+\doublespacing
+
+\newpage
+
+<!--
+***NOTES:***
+
+- not using the style guideline at https://github.com/jepa/ubcdown because it requires cloning and forking the repository
+- UBC-V style: https://faculty.washington.edu/mforbes/projects/ubcthesis/
+- TU Delft, Netherlands, template https://www.tudelft.nl/huisstijl/downloads
+- contact Sunil Suresh, Kristy Baxter, and Mathew Vis-Dunbar once I've made a template
+- see https://gradstudies.ok.ubc.ca/theses-supplementary-deposit/ for how to submit and store supplementary materials to support transparency and reproducibility, as well as SI from other theses
+- underline entire lines with committee members and examiners for them to sign?
+
+-->
+
+\pagenumbering{roman} <!-- use roman numerals -->
+
+\setcounter{page}{2} <!-- cover page is page i, so start from ii -->
+
+\textbf{The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis entitled:\newline
+\textit{`r TITLE`},\newline
+submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.}
+
+\bigskip
+
+**Michael J. Noonan** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+Supervisor
+
+**Adam T. Ford** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+Supervisory Committee Member
+
+**Jason Pither** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+Supervisory Committee Member
+
+<!--
+**University Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+University Examiner
+
+**External Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+External Examiner
+-->
+
+<!--Additional Committee Members include:
+
+Click or tap here to enter text.
+Supervisory Committee Member
+
+Click or tap here to enter text.
+Supervisory Committee Member.-->
+
+\newpage
+
+# Abstract {-}
+
+<!-- The abstract is a concise and accurate summary of the research contained in the thesis. It states the problem, the methods of investigation, and the general conclusions. It should not contain tables, graphs or illustrations. It must not exceed 350 words, and should contain relevant keywords that will facilitate automated information retrieval. There may only be one abstract for the entire thesis. -->
+
+```{r}
+abstract <- "The ability to move allows animals to access more resources and decrease the risk of mortality or injury from various threats, including predation and competition. However, most motile animals depend on movement to achieve an energetic balance, survive, and reproduce. Animals' spatial needs depend on a multitute of factors, including resource abundance, competitive pressure, predation, weather, and climate. The effects of many of these factors have been studied extensively, but the effects of environmental heterogeneity and unpredictability remain largely understudied. This thesis aims to quantify how resource abundance and environmental variation affect animals' spatial needs using theoretical arguments, computational simulations, and a large animal movement dataset of over 1500 individuals from more than 75 species. To this end, this thesis will produce a new global measure of environmental variance which will be used to quantify the effect of environmental heterogeneity and stochasticity on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The animals' movement will be modeled using continuous-time stochastic movement models. The effects of environmental variance on animal's spatial needs will be estimated using hierarchical generalized additive models that account for common trends between taxonomic groups and populations. The work will be carried out within a framework that recognizes the value of different forms of knowledge, including Traditional Indigenous Knowledge, and it will incorporate Traditional Indigenous Knowledge when possible. Overall, I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance. However, I also expect the effects of resource abundance and environmental variance to depend on the species and ecosystems of interest. Thus, the average trends between species may not be representative of individual populations and species."
+
+abstract <- if_else(stringi::stri_count_words(abstract) < 350,
+                    abstract,
+                    paste0('# ABSTRACT IS LONGER THAN 350 WORDS (',
+                          stringi::stri_count_words(abstract),
+                          ' WORDS).'))
+```
+
+`r abstract`
+
+\newpage
+
+# Lay Summary {-}
+
+<!-- The lay summary explains the key goals and contributions of the research/scholarly work in terms that can be understood by the general public. It does not use technical terms and discipline-specific language. It must not exceed 150 words in length. -->
+
+```{r}
+lay_summary <- "Many factors affect how much space animals need to survive and reproduce. The effects of many factors have been studied extensively, such as resource abundance, competitive pressure, predation, weather, and climate. However, the effects of environmental heterogeneity and unpredictability remain understudied. This thesis aims to quantify how resource abundance and environmental variation affect animals' spatial needs using a large animal movement dataset. This thesis will produce a global measure of environmental variance which will be used to quantify the effect of such variance on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The work will be carried out while recognizing the value of different forms of knowledge, including Traditional Indigenous Knowledge. I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance, although this will likely depend on the species and ecosystems of interest."
+
+lay_summary <- if_else(stringi::stri_count_words(lay_summary) < 150,
+                       lay_summary,
+                       '# LAY SUMMARY IS LONGER THAN 150 WORDS.')
+```
+
+`r lay_summary`
+
+\newpage
+
+<!--
+# Preface {-}
+
+The preface is a statement indicating the relative contributions of all collaborators and co-authors (including supervisors and members of the supervisory committee) of publications or material submitted for publication, emphasizing details of the student's contribution and stating the proportion of research and writing conducted by the student. It should include:
+* Identification and design of the research program.
+* Performance of the various parts of the research.
+* Analysis of the research data.
+* Preparation of manuscripts, if any.
+* A list of any publications or submissions arising from work presented in the thesis including the title of the article and name of the publisher (only if the article has been accepted or published), and the chapter(s) of the dissertation in which the work is located.
+* The name of the particular UBC Research Ethics Board, and the Certificate Number(s) of the Ethics Certificate(s) obtained, if ethics approval was required for the research.
+
+
+\newpage
+-->
+
+# Foreword {-}
+
+## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge {-}
+
+The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2021; @kimmerer_braiding_2020]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized People hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2021]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@bennett_evidence_2021; @smith_decolonizing_2021; @kimmerer_braiding_2020]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@smith_decolonizing_2021]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved.
+
+The concept of *two-eye seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. One possibility, however, is to use Traditional Knowledge to create properly informed Bayesian priors [@bolstad_introduction_2017]. The validity of the priors can be ensured using prior predictive modeling [@mcelreath_statistical_2016] to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
+
+Although this project does not focus on Indigenous Knowledge or Data, I intend to carryout the work with an anti-imperial and anti-colonial stance, to combat problematic and questionable practices and views (rather than risking perpetuating them). I recognize my ignorance in the field in the hopes of receiving valuable critiques, direction, and suggestions. During the project, I intend connecting with local Indigenous groups and Nations (including Westbank First Nation) to offer help in related fields and exchange knowledge (while recognizing that I do not have the right to all knowledge and that many forms and sources of Knowledge are sacred). Regardless of whether collaborations will be possible, I will actively work on removing any form of colonial bias in my work and perspectives while also combating colonialism, imperialism, and other forms of oppression.
+
+<!--
+- https://focus.science.ubc.ca/stats-660805dd930a
+- *A-spatial-overview-of-the-global-importance-of-Indigenous-lands-for-conservation*
+- *Native knowledge for native ecosystems*
+- *Searching for synergy integrating traditional and scientific ecological knowledge in environmental science education*
+- *The Role of Indigenous Burning in Land Management*
+- calls to action for scientists: @wong_towards_2020
+- weaving TIK and Western knowledge: @tengo_weaving_2017
+- *Weaving Indigenous knowledge systems and Western sciences in terrestrial research, monitoring and management in Canada: A protocol for a systematic map* [@henri_weaving_2021]
+- *Indigenizing the North American Model of Wildlife Conservation* [@hessami_indigenizing_2021]
+-->
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\listoftables
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+# Acknowledgements {-}
+
+<!-- In this section you can acknowledge the extent to which assistance has been given by members of staff, fellow students, data technicians, editors, and/or others; recognize the supervision and advice given by your supervisor and committee members; acknowledge colleagues with whom you have written journal articles. -->
+
+I would like to thank Dr. Noonan for offering me the opportunity to pursue a Master's degree with such an interesting project with cutting-edge statistical methods for movement ecology. I have already learned a lot and I expect I will learn much more.
+
+I would like to thank Dr. Ford and Dr. Pither for agreeing to be on my committee. Your feedback and mentorship will help me ensure this project is relevant and directly applicable to current issues regarding conservation and biogeography.
+
+I would like to thank Sandra Fox for providing me with resources to ensure my perspective and work are inclusive and supportive of different ways of knowing, including Indigenous Knowledge, and that my attitude remains anti-colonial and anti-imperial.
+
+\newpage
+
+# Dedication {-}
+
+<!-- The dedication is usually quite short, and is a personal rather than academic recognition. You can use any font or language you wish for the dedication page. -->
+
+To the Lands that have nourished me and given me a place to live, learn, and play.
+
+\newpage
+
+\pagenumbering{arabic} <!-- change numbering format -->
+
+\setcounter{page}{1} <!-- start numbering from 1 -->
+
+<!-- to refer to a section, add {#section-name} after the heading, and reference using \@ref(section-name) -->

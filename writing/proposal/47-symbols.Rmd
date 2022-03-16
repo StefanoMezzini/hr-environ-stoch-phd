@@ -1,0 +1,17 @@
+\newpage
+
+# List of notations and symbols used {#symbols}
+
+```{r}
+library('dplyr')
+library('stringr') # for basic but convenient string manipulation
+readr::read_csv('symbols.csv', col_types = 'cc') %>%
+  mutate(Symbol_2 = Symbol %>%
+           str_replace(pattern = ' ', replacement = '') %>%
+           str_replace(pattern = '\\\\', replacement = '') %>%
+           str_replace(pattern = '\\$', replacement = '') %>%
+           str_replace(pattern = '\\mathbb', replacement = '')) %>%
+  arrange(Symbol_2) %>%
+  select(-Symbol_2) %>%
+  knitr::kable(format = 'pipe', caption = 'A list of all mathematical notations and symbols used in the thesis.')
+```

@@ -1,0 +1,10 @@
+\newpage
+
+# List of abbreviations used {#abbreviations}
+
+```{r}
+library('dplyr')
+readr::read_csv('abbreviations.csv', col_types = 'cc') %>%
+  arrange(Abbreviation) %>%
+  knitr::kable(format = 'pipe', caption = 'A list of all abbreviations and acronyms used in the thesis.')
+```

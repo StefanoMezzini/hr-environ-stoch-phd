@@ -35,9 +35,6 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 
-# thesis revisions
-revisions/*
-
 # all *.rds files (e.g., saved simulations and models)
 *.rds
 
@@ -46,6 +43,8 @@ revisions/*
 
 # manuscripts added to appendix 1
 writing/thesis/manuscripts/*
+writing/proposal/manuscripts/*
 
-# thesis revisions
+# revisions
 writing/thesis/revisions/*
+writing/proposal/revisions/*

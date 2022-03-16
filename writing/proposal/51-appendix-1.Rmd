@@ -1,0 +1,9 @@
+\newpage
+
+# Appendix 1: Manuscripts contributed to during the degree {-}
+
+<!-- Kenosee and White Bear paper -->
+\includepdf[pages={-}]{manuscripts/Limnology Oceanography - 2022 - Bjorndahl - Abrupt changes in the physical and biological structure of endorheic upland.pdf}
+
+<!-- tapir paper -->
+\includepdf[pages={-}]{manuscripts/Movement ecology of vulnerable lowland tapirs between areas of varying human disturbance.pdf}

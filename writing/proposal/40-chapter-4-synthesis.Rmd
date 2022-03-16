@@ -1,0 +1,19 @@
+\newpage
+
+# Chapter 4: Synthesis {#synthesis}
+
+<!--
+- why is this work important? 
+- so what?
+- now what?
+-->
+
+The effect of resource abundance on animals' spatial needs has been studied in multiple species, but little work has been done to estimate common trends between various taxonomic groups. Additionally, the spatiotemporal variability of the ecosystems animals live in is rarely taken into consideration. This thesis will provide estimates of how the spatial needs and behaviors of animals are affected by resource abundance and environmental variance.
+
+**Chapter 1** will contain numerical simulations of how animals' movement and space use are affected by resource abundance and environmental variance, as well as a literature review that will help define the models used to produce such simulations. The review will also help determine which sources of environmental variance should be included in the global stochasticity raster presented in **Chapter \@ref(var-raster)**. Finally, in **Chapter \@ref(movement)**, I will use simulation studies and an unprecedented and conservation-relevant animal tracking dataset (>1500 animals, 77 globally-distributed species) to investigate how animals' spatial needs and behavior change with environmental variance.
+
+The findings produced by this thesis will offer important considerations regarding the amount and quality of habitat animals require to survive in heterogeneous, changing, or stochastic habitats. Although the focus of this thesis will be on (large) mammals (and thus conclusions may not be applicable to other animals), the methods presented here can easily be applied to non-mammalian data. In addition, the global measure of environmental variance produced in **Chapter \@ref(var-raster)** will be designed so it is applicable to other fields of biology other than animal movement ecology, including animal behavior and phenology (including plant phenology).
+
+<!-- Aim for ca. 1/2 a page on how you expect to tie everything together. -->
+
+<!-- tie the foreword to the summary -->

@@ -1,0 +1,84 @@
+\newpage
+
+# Project timeline {#timeline}
+
+```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my Master\'s project.', fig.width=14, fig.height=8, message=FALSE, out.width='100%'}
+library('tibble')    # for fancy data frames
+library('dplyr')     # for piping and data wrangling
+library('lubridate') # for working with dates
+library('stringi')   # for working with character strings
+library('ggplot2')   # for plotting the timeline
+# library('ggrepel')   # for non-overlapping ggplot labels
+theme_set(theme_classic() +
+            theme(axis.line.y = element_blank(),
+                  legend.position = 'none'))
+
+# curstom color-vision deficient palette
+pal <- c('#4477AA', '#ff8c00', '#66CCEE', '#009900',
+         '#CCBB44', '#AA3377', '#EE6677', '#BBBBBB')
+
+t_breaks <- tibble(dates = date(c('2021-09-01',
+                                  '2022-01-01', '2022-05-01', '2022-09-01',
+                                  '2023-01-01', '2023-05-01', '2023-09-01')),
+                   dec = decimal_date(dates),
+                   strings = paste(month.abb[month(dates)], year(dates)))
+
+tasks <-
+  readr::read_csv('timeline.csv', col_types = 'ccDD') %>%
+  mutate(header = purrr::map2_lgl(section, task, grepl),
+         section = factor(section,
+                          levels = c('Other', 'Chapter 4', 'Chapter 3',
+                                     'Chapter 2', 'Chapter 1', 'Preparatory',
+                                     'Coursework'))) %>%
+  arrange(section, desc(start), desc(end)) %>%
+  mutate(dec_start = lubridate::decimal_date(start),
+         dec_end = lubridate::decimal_date(end),
+         dec_mid = purrr::map2_dbl(dec_start, dec_end, \(x, y) (x + y) / 2),
+         task = factor(task, levels = unique(task)),
+         id = 1:n(),
+         completed = end <= Sys.Date(),
+         # task = stri_replace_all(task, regex = ':', replacement = ':\n'),
+         # re-format all special characters (only needed if parse = TRUE)
+         # task = stri_replace_all(task, regex = ' ', replacement = '~'),
+         # task = stri_replace_all(task, regex = '\'', replacement = "\\'"),
+         # task = stri_replace_all(task, regex = '~in~', replacement='~\'in\'~'),
+         # task = stri_replace_all(task, regex = ',', replacement = ''),
+         # task = stri_replace_all(task, regex ='for~', replacement='\'for\'~'),
+         # make headers bold (removed because numbers cannot be bold)
+         #task = if_else(header, paste0('bold(', task, ')'), task),
+         )
+
+# tasks %>%
+#   transmute(Task = task, `Start date` = start, `End date` = end) %>%
+#   knitr::kable(caption = 'Estimated timeline for my Master\'s project.')
+ggplot(tasks, aes(y = id)) +
+  geom_hline(aes(yintercept = id + 0.5), filter(tasks, header), alpha = 0.15) +
+  geom_vline(xintercept = decimal_date(Sys.Date()), lty = 'dashed', alpha = 0.5) +
+  geom_errorbar(aes(xmin = dec_start, xmax = dec_end, color = section),
+                width = 0, lwd = 2, alpha = 0.75) +
+  #' use `ggrepel::geom_label_repel()` for repelling labels
+  geom_text(aes(2020.3, label = task, color = header), hjust = 'left', size = 3,
+            parse = FALSE) +
+  scale_x_continuous(NULL, breaks = t_breaks$dec, labels = t_breaks$strings,
+                     expand = c(0, 0)) +
+  scale_y_continuous(NULL, breaks = NULL) +
+  scale_color_manual(NULL, values = c('black', 'grey40', pal),
+                     breaks = c(TRUE, FALSE, levels(tasks$section)))
+```
+
+## Progress to date
+
+```{r, eval = FALSE}
+filter(tasks, completed) %>%
+  pull(task) %>%
+  as.character() %>%
+  cat(sep = '\n')
+```
+
+- Created and organized the GitHub repository  ([https://github.com/StefanoMezzini/hr-environ-stoch-masters](https://github.com/StefanoMezzini/hr-environ-stoch-masters));
+- Completed all coursework necessary for a Master's degree;
+- Reviewed literature and have begun making theoretical predictions;
+- Living Data Project Working group: calculated new Canadian Living Planet Index (cLPI);
+- Data analyst: estimated effects of human activity on tapir movement using `ctmm` and `mgcv`. The manuscript has been accepted and is in press (preprint is available at [https://www.biorxiv.org/content/10.1101/2021.11.12.468362v1](https://www.biorxiv.org/content/10.1101/2021.11.12.468362v1), and the code and data are available at [https://github.com/StefanoMezzini/tapirs](https://github.com/StefanoMezzini/tapirs);
+- Data analyst: estimated changes paleolimnological time series from endorheic lakes due to 8-m lake-level variation using Hierarchical Generalized Additive Models (HGAMs) and location-scale HGAMs fit with `mgcv`. The manuscript is available at [https://doi.org/10.1002/lno.12054](https://doi.org/10.1002/lno.12054), while code and data are available at [https://github.com/simpson-lab/kenosee-white-bear](https://github.com/simpson-lab/kenosee-white-bear);
+- Presented the background theory behind the thesis and some simulations as a guest lecturer in Dr. Noonan's BIOL 417 course (Evolutionary Ecology).
