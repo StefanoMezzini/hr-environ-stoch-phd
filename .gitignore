@@ -48,3 +48,9 @@ writing/proposal/manuscripts/*
 # revisions
 writing/thesis/revisions/*
 writing/proposal/revisions/*
+
+# EarthData login info
+earthdata-login-info.R
+
+# NDVI rasters
+data/ndvi-rasters/*
