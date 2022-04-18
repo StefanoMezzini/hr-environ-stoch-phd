@@ -54,3 +54,6 @@ earthdata-login-info.R
 
 # NDVI rasters
 data/ndvi-rasters/*
+
+# scripts to run analyses on UBC's HPC (sockeye)
+sockeye-scripts/*
