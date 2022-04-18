@@ -1,14 +1,13 @@
-library('ctmm')     # for generating movement models
-library('dplyr')    # for data wrangling
-library('purrr')    # for functional programming
-library('parallel') # for parallel and clustered computing
+library('ctmm')  # for generating movement models
+library('dplyr') # for data wrangling
+library('purrr') # for functional programming
+library('furrr') # for parallel and clustered computing
 source('functions/energetics-functions.R') # movement & costs based on animal mass
-source('functions/get_tracks.R') # function to get simulated tracks from ctmm model
 
 MASS <- 75e3 # an arbitrary mass (in grams)
-N_DAYS <- 5 # number of "days" (i.e., simulations with different seeds)
+N_DAYS <- 1e4 # number of "days" (i.e., simulations with different seeds)
 SIMULATE_TRACKS <- TRUE # set to "TRUE" if you want to generate new tracks
-WINDOWS <- TRUE # set to "TRUE" if running on a Windows system
+N_CORES <- 7 # number of cores to use for parallel computation
 HABITAT <- create_raster(mass = MASS, width = 4) # raster of patches
 model <- ctmm(tau = c(Inf, 1), sigma = 0.1) # infinitely diffusive movement model
 SAMPLES <- sampling(mass = MASS, crossings = CROSSINGS) # sampling times
@@ -24,14 +23,13 @@ get_tracks <- function(day, times = SAMPLES) {
 # generate simulated tracks (will be truncated at satiety later)
 if(SIMULATE_TRACKS) {
   tictoc::tic()
-  if(WINDOWS) {
-    cl <- makeCluster(4) # make a cluster
-    clusterExport(cl, c('HABITAT') )
-  }
+  plan(multiprocess, workers = 7)
   tracks <- tibble(day = 1:N_DAYS, # a simulation for each day
-                   tel = mclapply(X = day, # set a seed for consistent results
-                                  FUN = get_tracks)) # function to generate tracks
-  stopCluster(cl)
+                   tel = future_map(.x = day, # set a seed for consistent results
+                                    .f = get_tracks, # function to generate tracks
+                                    # don't check; seeds are set manually in simulate()
+                                    .options = furrr_options(seed = NULL)))
+  plan(sequential)
   tictoc::toc()
   saveRDS(tracks, file = 'simulations/1e4-tracks.rds')
   beepr::beep(sound = 2) # notify when done
@@ -48,12 +46,12 @@ if(FALSE) {
 }
 
 # find patch visits and calories consumed from the 10 000 tracks
-tracks <-
-  mutate(tracks,
-         track = map(.x = tel, # map seeds since they are 
-                     .f = \(x) label_visits(tel = x, habitat = HABITAT))) %>%
-  dplyr::select(-tel) %>% # remove telemetry column
-  tidyr::unnest(track) # make a single, large tibble
-readr::write_csv(tracks, 'simulations/1e4-tracks-and-visits.csv')
-readr::read_csv('simulations/1e4-tracks-and-visits.csv') # check the csv is ok
+tracks <- transmute(tracks, # drop tel column
+                    day, # keep day column
+                    track = map(.x = tel,
+                                .f = \(x) label_visits(tel = x, habitat = HABITAT)))
+
+# make a single, large tibble (will need lots of RAM)
+tracks <- tidyr::unnest(tracks, track)
+saveRDS(tracks, file = 'simulations/1e4-labelled-tracks.rds')
 beepr::beep(2)
