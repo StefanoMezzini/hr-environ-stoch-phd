@@ -3,7 +3,7 @@
 ## Sockeye parameters
 
 * `-l` = resource parameters:
-  * the max runtime is 7 days ($7 \times 24 = 168$ hours), i.e. `168:00:00` (format is `hours:minutes:seconds`)
+  * the max runtime is 7 days (7 * 24 = 168 hours), i.e. `168:00:00` (format is `hours:minutes:seconds`)
   * `select` is the number of compute nodes
   * `ncpus` is the total number of cores (use 32 or 40)
   * `mem` is the max amount of RAM (keep 1-3 GB lower than the max to allow the OS to run in the background)
