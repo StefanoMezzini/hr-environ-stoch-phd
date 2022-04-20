@@ -35,12 +35,12 @@ p <-
 # animate the movement data
 p_anim <- p + transition_reveal(sims.df$t)
 anim <- animate(p_anim, duration = 10, start_pause = 1, end_pause = 15)
-anim_save(filename = '../../../figures/biol-417-lecture/animated-movement.gif', anim)
+anim_save(filename = 'figures/biol-417-lecture/animated-movement.gif', anim)
 
 # static movement with 95% AKDE
 p_hr <-
   p +
   geom_polygon(aes(group = group), filter(hr, id == ' 95% est'),
                size = 1, color = 'red', fill = 'red', alpha = 0.3); p_hr
-ggsave('../../../figures/biol-417-lecture/movement-hr.png',
+ggsave('figures/biol-417-lecture/movement-hr.png',
        p_hr, width = 8, height = 8, bg = 'white')
