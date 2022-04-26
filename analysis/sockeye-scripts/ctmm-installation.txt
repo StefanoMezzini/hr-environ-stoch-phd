@@ -1,0 +1,21 @@
+module load gcc/5.4.0
+module load gcc/9.1.0
+module load miniconda3
+source ~/.bashrc
+conda config --add channels conda-forge
+conda create -n stefano-ctmm
+conda activate stefano-ctmm
+conda install -c conda-forge r-base=4.1.1
+conda install -c conda-forge r-gmp
+conda install -c conda-forge gdal
+
+# some versions of conda read Python.3.10 as 3.1 --> might need to update conda (otherwise skip)
+
+conda install -c conda-forge mpfr
+R
+.libPaths('/path/to/R_libs')
+install.packages('ctmm')
+
+# necessary for tidyverse?
+conda install -c conda-forge udunits2
+conda install -c conda-forge freetype
