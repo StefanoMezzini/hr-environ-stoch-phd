@@ -5,12 +5,13 @@ library('furrr') # for parallel and clustered computing
 source('functions/energetics-functions.R') # movement & costs based on animal mass
 
 MASS <- 75e3 # an arbitrary mass (in grams)
+CROSSINGS <- 0.5 # enough time to go from center to the edge
 N_DAYS <- 1e4 # number of "days" (i.e., simulations with different seeds)
 SIMULATE_TRACKS <- TRUE # set to "TRUE" if you want to generate new tracks
 N_CORES <- 7 # number of cores to use for parallel computation
-HABITAT <- create_raster(mass = MASS, width = 4) # raster of patches
+HABITAT <- create_raster(mass = MASS, width = 1) # raster of patches
 model <- ctmm(tau = c(Inf, 1), sigma = 0.1) # infinitely diffusive movement model
-SAMPLES <- sampling(mass = MASS, crossings = CROSSINGS) # sampling times
+SAMPLES <- sampling(mass = MASS, crossings = 0.5) # sampling times
 
 # extracts simulated tracks from a ctmm movement model for given sample times
 get_tracks <- function(day, times = SAMPLES) {
@@ -48,7 +49,7 @@ if(FALSE) {
 # find patch visits and calories consumed from the 10 000 tracks
 tracks <- transmute(tracks, # drop tel column
                     day, # keep day column
-                    track = map(.x = tel,
+                    track = map(.x = tel, # add a column of full tracks
                                 .f = \(x) label_visits(tel = x, habitat = HABITAT)))
 
 # make a single, large tibble (will need lots of RAM)
