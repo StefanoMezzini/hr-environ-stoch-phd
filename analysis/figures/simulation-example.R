@@ -4,7 +4,6 @@ library('tidyr')   # for data wrangling (e.g., unnest())
 library('ggplot2') # for plotting
 library('cowplot') # for plots in grids
 source('functions/energetics-functions.R') # movement & costs based on animal mass
-source('functions/truncate_telemetry.R') # to cut telemetry once animal is "full"
 source('functions/pull_parameter.R') # to extract parameters from ctmm and akde objects
 source('analysis/default-figure-styling.R') # defaults for figures (theme, size, ...)
 theme_set(theme_map() + theme(legend.position = 'none'))
@@ -114,7 +113,7 @@ p_b <-
   geom_point(aes(0, 0), pch = 18, size = 4) +
   geom_point(aes(0, 0), pch = 18, size = 2, color = 'yellow'); p_b
 
-# c) satiety (colored line) and truncate_telemetry() (truncated grey)
+# c) satiety (colored line) and unused portion (grey)
 p_c <-
   ggplot(filter(loops, day == 1, path == 'exploration'), aes(x, y)) +
   coord_equal() +
