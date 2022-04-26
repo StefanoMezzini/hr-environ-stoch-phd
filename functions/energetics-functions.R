@@ -5,7 +5,7 @@ library('ctmm')   # for movement modeling and simulations
 library('raster') # for raster data
 source('functions/rgamma2.R') # rgamma() parameterized by mean and variance
 
-CROSSINGS <- 20
+CROSSINGS <- 10
 
 # calculates the Straight Line (Euclidean) Distance between two points
 sld <- function(x_1, y_1, x_2, y_2){
@@ -88,10 +88,9 @@ count_visits <- function(track, habitat, metric = 'patches') {
 }
 
 # label each movement as whether a new patch was visited
-label_visits <- function(tel, habitat, mu, sigma2, required = REQUIRED) {
+label_visits <- function(tel, habitat) {
   tel %>%
     data.frame() %>% # convert to a data.frame for easy plotting
-    # tibble() %>% # convert to a tibble for easy data wrangling
     mutate(cell_id = cellFromXY(habitat, SpatialPoints.telemetry(tel)) %>%
              suppressWarnings(),
            new_cell = c(1, diff(cell_id)), # check if the animal moved to a new cell

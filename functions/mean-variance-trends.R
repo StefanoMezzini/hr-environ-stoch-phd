@@ -2,19 +2,19 @@ library('dplyr') # for data wrangling (e.g., %>%) and tibble()
 
 # mean functions
 mean_constant <- function(generations) {
-  tibble(mu = rep(5, length(generations))) %>%
+  tibble(mu = rep(10, length(generations))) %>%
     list() %>%
     return()
 }
 
 mean_linear <- function(generations) {
-  tibble(mu = generations * 0.045 + 1) %>%
+  tibble(mu = generations * 0.045 + 6) %>%
     list() %>%
     return()
 }
 
 mean_cyclical <- function(generations) {
-  tibble(mu = sin(generations / 10) * 4.5 + 5.5) %>%
+  tibble(mu = sin(generations / 10) * 4.5 + 10.5) %>%
     list() %>%
     return()
 }
@@ -22,7 +22,7 @@ mean_cyclical <- function(generations) {
 mean_drifting <- function(generations, seed = 8) {
   set.seed(seed = seed)
   tibble(mu = cumsum(rnorm(generations, sd = 0.5))) %>%
-    mutate(mu = mu - min(mu) + 1) %>%
+    mutate(mu = mu - min(mu) + 6) %>%
     list() %>%
     return()
 }
@@ -30,7 +30,7 @@ mean_drifting <- function(generations, seed = 8) {
 mean_erratic <- function(generations) {
   tibble(mu = case_when(generations < quantile(generations, 0.25) ~ 7,
                         generations < quantile(generations, 2/3) ~ 3,
-                        TRUE ~ 10)) %>%
+                        TRUE ~ 10) + 5) %>%
     list() %>%
     return()
 }
