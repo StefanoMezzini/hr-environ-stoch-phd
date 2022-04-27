@@ -23,7 +23,7 @@ sims.df <- sims.tel %>%
          id = 1)
 m <- ctmm.fit(sims.tel)
 hr <- akde(sims.tel, m) %>%
-  SpatialPolygonsDataFrame.UD(proj4string = '+proj=longlat') %>%
+  SpatialPolygonsDataFrame.UD() %>%
   fortify()
 
 # figure of movement alone
@@ -40,7 +40,7 @@ anim_save(filename = 'figures/biol-417-lecture/animated-movement.gif', anim)
 # static movement with 95% AKDE
 p_hr <-
   p +
-  geom_polygon(aes(group = group), filter(hr, id == ' 95% est'),
+  geom_polygon(aes(group = group), filter(hr, grepl('est', id)),
                size = 1, color = 'red', fill = 'red', alpha = 0.3); p_hr
 ggsave('figures/biol-417-lecture/movement-hr.png',
        p_hr, width = 8, height = 8, bg = 'white')
