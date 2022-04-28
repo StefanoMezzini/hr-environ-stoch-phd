@@ -31,6 +31,8 @@ p <-
   ggplot(mapping = aes(long, lat)) +
   coord_equal() +
   geom_path(data = sims.df); p
+ggsave(filename = 'figures/biol-417-lecture/static-movement.png', height = 8, width = 8,
+       bg = 'white')
 
 # animate the movement data
 p_anim <- p + transition_reveal(sims.df$t)
