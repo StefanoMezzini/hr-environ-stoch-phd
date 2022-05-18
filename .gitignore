@@ -61,3 +61,6 @@ sockeye-scripts/*
 # cache and files from .Rmd files
 analysis/modeling/beta-location-scale-models/distributional-models-in-brms_cache
 analysis/modeling/beta-location-scale-models/distributional-models-in-brms_files
+
+# sockeye files and scripts
+analysis/sockeye-scripts
