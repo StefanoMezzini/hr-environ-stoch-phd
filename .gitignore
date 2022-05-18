@@ -57,3 +57,7 @@ data/ndvi-rasters/*
 
 # scripts to run analyses on UBC's HPC (sockeye)
 sockeye-scripts/*
+
+# cache and files from .Rmd files
+*_cache/*
+*_files/*
