@@ -13,8 +13,10 @@ source('functions/energetics-functions.R') # movement & costs based on animal ma
 animate <- gganimate::animate # don't use terra::animate
 select <- dplyr::select # don't use raster::select
 
-# custom functions ----
-#' change `SpatialPoints.telemetry()` to take coords as long-lat instead of x-y
+# set up default gganimate parameters
+options(gganimate.dev_args = list(width = 6, height = 6, units = 'in', res = 300))
+
+#' change `SpatialPoints.telemetry()` to return coordinates as long-lat instead of x-y
 SpatialPoints.telemetry <- function (object, ...) {
   CLASS <- class(object)[1]
   object <- ctmm:::listify(object)
@@ -27,7 +29,7 @@ SpatialPoints.telemetry <- function (object, ...) {
 }
 
 # two-point equidistant projection of the habitat raster
-PROJ <- "+proj=tpeqd +lat_1=-25 +lon_1=25 +lat_2=25 +lon_2=-25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+PROJ <- '+proj=tpeqd +lat_1=-25 +lon_1=25 +lat_2=25 +lon_2=-25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
 
 # set colors for raster palette
 LOW <- '#744700'
@@ -90,10 +92,8 @@ p0 <-
   ggplot(m_tbl, aes(x, y)) +
   coord_equal() +
   geom_raster(aes(fill = food)) +
-  scale_x_continuous(expression(Resource~abundance~(italic(R))),
-                     breaks = NULL, expand = c(0, 0)) +
-  scale_y_continuous(expression(Environmental~variance), breaks = NULL,
-                     expand = c(0, 0)) +
+  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous('Environmental variance', breaks = NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH)
 
 # generate simulated tracks ----
@@ -125,7 +125,7 @@ get_tracks <- function(seed, long, lat) {
   return(s)
 }
 
-# generate simulated tracks
+# generate simulated tracks ----
 tracks <-
   tibble(location = 1:5, # a simulation for each day
          start_x = c(0.2, 0.8, 0.2, 0.8, 0.5) * 25, # four corners and the center
@@ -211,9 +211,10 @@ a_track <-
   p_track +
   geom_point(aes(longitude, latitude, group = location), tracks) +
   transition_reveal(t)
-animate(a_track, duration = 10, start_pause = 7, end_pause = 15,
-        renderer = magick_renderer()) # to avoid annoying green lines/areas
-anim_save('figures/proposal-defense/animated-movement.gif')
+anim_1 <- animate(a_track, duration = 10, start_pause = 7, end_pause = 15, nframes = 100,
+                  renderer = magick_renderer()) # to avoid annoying green lines/areas
+# gifs are too large to push to GitHub
+anim_save('figures/proposal-defense/animated-movement.gif', animation = anim_1)
 
 # repeat 50 times to estimate HR ----
 if(TRUE) { # import the tracks, or set to FALSE to simulate them
@@ -299,8 +300,9 @@ a_track <-
   p_track +
   geom_point(aes(longitude, latitude, group = location), tracks) +
   transition_reveal(t)
-animate(a_track, duration = 10, start_pause = 7, end_pause = 15)
-anim_save('figures/proposal-defense/animated-movement-50-tracks.gif')
+anim_2 <- animate(a_track, duration = 10, start_pause = 7, end_pause = 15,  nframes = 100,
+                  renderer = magick_renderer()) # to avoid annoying green lines/areas
+anim_save('figures/proposal-defense/animated-movement-50-tracks.gif', animation = anim_2)
 
 # calculate HRs ----
 if(TRUE) { # import tracks with home ranges, or set to FALSE to estimate them
@@ -343,7 +345,11 @@ if(TRUE) { # import tracks with home ranges, or set to FALSE to estimate them
   # estimate separate HRs for each location and replicate
   tracks_hr <-
     tracks_hr %>%
-    mutate(akde = akde(tel, model))
+    mutate(akde = akde(tel, model),
+           hr_ratio = map_dbl(akde,
+                              \(x) pull_parameter(.object = x, .parameter = 'area',
+                                                  .quantile = 0.95, .value = 'est')),
+           hr_ratio = hr_ratio / min(hr_ratio))
   
   saveRDS(tracks_hr, 'analysis/figures/proposal-defense/50-tracks-hrs.rds')
 }
@@ -353,9 +359,11 @@ hrs <-
   tracks_hr %>%
   mutate(`95%` = map(akde,
                      \(x) SpatialPolygonsDataFrame.UD(x, level.UD = 0.95, level=0.95) %>%
+                       spTransform(CRS("+proj=longlat")) %>%
                        fortify()),
          `50%` = map(akde,
                      \(x) SpatialPolygonsDataFrame.UD(x, level.UD = 0.50, level=0.95) %>%
+                       spTransform(CRS("+proj=longlat")) %>%
                        fortify())) %>%
   select(location, `95%`, `50%`) %>%
   pivot_longer(cols = c(`95%`, `50%`), values_to = 'akdes', names_to = 'q') %>%
@@ -376,13 +384,16 @@ p_track_hr <-
   ggplot() +
   coord_equal() +
   geom_raster(aes(x, y, fill = food), m_tbl) +
+  geom_polygon(aes(long, lat, group = paste(location, group), alpha = q), hrs,
+               fill = 'dodgerblue', color = 'dodgerblue') +
   geom_path(aes(longitude, latitude, group = paste(location, rep)), tracks, alpha = 0.4) +
+  geom_polygon(aes(long, lat, group = paste(location, group)), hrs, fill = NA,
+               color = 'dodgerblue') +
   geom_point(aes(start_x, start_y, group = location),
              filter(tracks, ! duplicated(location)), shape = 4, color = 'white') +
-  geom_polygon(aes(long, lat, group = paste(location, group)), hrs, fill = NA,
-               color = 'black')+
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH) +
-  scale_x_continuous(expression(Resource~abundance~(italic(R))),
-                     breaks = NULL, expand = c(0, 0))+
-  scale_y_continuous(expression(Environmental~variance), breaks = NULL,
-                     expand = c(0, 0))
+  scale_alpha_manual(values = c(0.7, 0.3)) +
+  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0))+
+  scale_y_continuous('Environmental variance', breaks = NULL, expand = c(0, 0))
+ggsave('figures/proposal-defense/static-movement-hrs.png', plot = p_track_hr, height = 6,
+       width = 6)
