@@ -6,12 +6,12 @@ source('functions/energetics-functions.R') # movement & costs based on animal ma
 
 MASS <- 75e3 # an arbitrary mass (in grams)
 CROSSINGS <- 0.5 # enough time to go from center to the edge
-N_DAYS <- 1e4 # number of "days" (i.e., simulations with different seeds)
+N_DAYS <- 1e3 # number of "days" (i.e., simulations with different seeds)
 SIMULATE_TRACKS <- TRUE # set to "TRUE" if you want to generate new tracks
-N_CORES <- 7 # number of cores to use for parallel computation
-HABITAT <- create_raster(mass = MASS, width = 1) # raster of patches
+N_CORES <- parallel::detectCores() # use all available cores for parallel computation
+HABITAT <- create_raster(mass = MASS, width = 0.5) # raster of patches
 model <- ctmm(tau = c(Inf, 1), sigma = 0.1) # infinitely diffusive movement model
-SAMPLES <- sampling(mass = MASS, crossings = 0.5) # sampling times
+SAMPLES <- sampling(mass = MASS, crossings = CROSSINGS) # sampling times
 
 # extracts simulated tracks from a ctmm movement model for given sample times
 get_tracks <- function(day, times = SAMPLES) {
@@ -24,7 +24,7 @@ get_tracks <- function(day, times = SAMPLES) {
 # generate simulated tracks (will be truncated at satiety later)
 if(SIMULATE_TRACKS) {
   tictoc::tic()
-  plan(multiprocess, workers = 7)
+  plan(multisession, workers = N_CORES)
   tracks <- tibble(day = 1:N_DAYS, # a simulation for each day
                    tel = future_map(.x = day, # set a seed for consistent results
                                     .f = get_tracks, # function to generate tracks
@@ -32,9 +32,9 @@ if(SIMULATE_TRACKS) {
                                     .options = furrr_options(seed = NULL)))
   plan(sequential)
   tictoc::toc()
-  saveRDS(tracks, file = 'simulations/1e4-tracks.rds')
+  saveRDS(tracks, file = 'simulations/tracks.rds')
   beepr::beep(sound = 2) # notify when done
-} else tracks <- readRDS('simulations/1e4-tracks.rds')
+} else tracks <- readRDS('simulations/tracks.rds')
 
 if(FALSE) {
   # plot a subset of the first track and its akde (takes ~ 1 minute)
@@ -54,5 +54,5 @@ tracks <- transmute(tracks, # drop tel column
 
 # make a single, large tibble (will need lots of RAM)
 tracks <- tidyr::unnest(tracks, track)
-saveRDS(tracks, file = 'simulations/1e4-labelled-tracks.rds')
+saveRDS(tracks, file = 'simulations/labelled-tracks.rds')
 beepr::beep(2)

@@ -1,26 +1,22 @@
 library('ctmm')    # for continuous-time movement modeling
 library('dplyr')   # for data wrangling (e.g., %>%)
-library('purrr')   # for functional programming (e.g., map(), map_dbl())
 library('tidyr')   # for data wrangling (e.g., nested tibbles)
 library('ggplot2') # for fancy plots
-source('functions/mean-variance-trends.R') # functions for trends in E(U) and V(U)
 source('functions/rgamma2.R') # rgamma() parameterized by mean and variance
 source('analysis/figures/mean-variance-trends-panel-data.R') # create tibble of parameters
 
-N_CORES <- 7 # 32 # number of cores to use in parallel computations
 REQUIRED <- 1e3 # calories required for satiety
+MAX_T <- 1e5
 m <- ctmm(tau = c(Inf, 1), sigma = 0.1, mu = c(0, 0)) # infinitely diffusive model
 
-tracks <- readRDS('simulations/1e4-labelled-tracks.rds') %>%
-  filter(t <= 1e5) %>% # ~[4.5e4, 7e4] is enough to reach satiety in worst conditions
-  filter(day <= 500) # too long of a track will cause unnest() to fail
+tracks <- readRDS('simulations/labelled-tracks.rds')
 
 WORST <- filter(d55, mu == min(mu)) %>% # lowest mean resources
   filter(sigma2 == max(sigma2)) # with highest variance
 
 days <-
   # modify WORST to follow the syntax used in 'offspring-simulations.R'
-  transmute(WORST, animal = t, mu, sigma2, d = list(tracks)) %>%
+  transmute(WORST, animal, mu, sigma2, d = list(tracks)) %>%
   unnest(d) %>% # unnest the datasets so we have a single, large tibble
   # generate the food for each row from a gamma distribution
   mutate(food = rgamma2(mu = mu, sigma2 = sigma2, N = n()),
@@ -37,12 +33,20 @@ days_end <- days %>%
   # remove unneded columns (also avoids duplicated colnames with tracks)
   dplyr::select(-c(x, y, vx, vy, timestamp, longitude, latitude, food))
 
-max(days_end$t_expl) / max(tracks$t) # check max proportion of time used
+max(days_end$t_expl) / MAX_T # check max fraction of time used
 sum(! days_end$full) # check how many did not reach satiety
 
+# check distribution of animals
 ggplot(days_end, aes('', t_expl)) +
-  geom_boxplot()
+  geom_hline(yintercept = MAX_T, color = 'red') +
+  geom_boxplot() +
+  labs(x = '', y = 'Exploration time') +
+  ylim(c(0, MAX_T))
 
-ggplot(days, aes(t, satiety, group = day)) +
+# diagnostic for animals that did not reach satiety
+days %>%
+  group_by(animal) %>%
+  filter(!any(full)) %>%
+  ggplot(aes(t, satiety, group = day)) +
   geom_line(alpha = 0.1) +
   geom_hline(yintercept = REQUIRED, color = 'red')
