@@ -1,4 +1,4 @@
-# hr-environ-stoch-masters
+# hr-environ-stoch-phd
 This repo contains the work for my Master's in Biology at UBC Okanagan.
 
 * `analysis` contains all scripts used for analyses, including figure creation and model fitting. Scripts contain comments that explain the code, but they assume users have basic knowledge of `R` and that they will refer to help pages for packages and functions (which can be accessed with `?`, e.g.: `?data.frame`).
