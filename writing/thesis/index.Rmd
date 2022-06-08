@@ -1,11 +1,13 @@
 ---
-bibliography: 'masters-refs.bib'
+bibliography: 'phd-refs.bib'
 csl: '../freshwater-biology.csl'
+subparagraph: yes # needed for \usepackage[small]{titlesec}
 header-includes:
     - \usepackage{setspace}\doublespacing # change default spacing
     - \usepackage{indentfirst} # add indent to first line of each paragraph
     - \pagenumbering{gobble} # remove numbering from title page
     - \usepackage{pdfpages} # to append pdfs to the thesis
+    - \usepackage[small]{titlesec} # for smaller headings
     - \usepackage{wrapfig} # to wrap text around figures
     - \usepackage{caption}
     # smaller caption text, less space above and below caption
@@ -98,7 +100,7 @@ A THESIS SUBMITTED IN PARTIAL FULFILLMENT OF
 
 THE REQUIREMENTS FOR THE DEGREE OF
 
-MASTER OF SCIENCE
+DOCTOR OF PHILOSOPHY
 
 in
 
@@ -138,7 +140,7 @@ THE UNIVERSITY OF BRITISH COLUMBIA
 
 \textbf{The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis entitled:\newline
 \textit{`r TITLE`},\newline
-submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.}
+submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Doctor of Philosophy.}
 
 \bigskip
 
@@ -222,7 +224,7 @@ The preface is a statement indicating the relative contributions of all collabor
 
 ## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge {-}
 
-The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2021; @kimmerer_braiding_2020]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized People hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2021]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@bennett_evidence_2021; @smith_decolonizing_2021; @kimmerer_braiding_2020]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@smith_decolonizing_2021]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved.
+The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2021; @kimmerer_braiding_2020]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized Peoples hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2021]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@bennett_evidence_2021; @smith_decolonizing_2021; @kimmerer_braiding_2020]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@smith_decolonizing_2021]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved, and reinforces "research" as the dirtiest word for many Indigenous Peoples [@smith_decolonizing_2021, p. 1]. The sharing, development, recognition, and ownership (or lack thereof) of knowledge (and Sacred Knowledge) are core aspects of imperialism [@smith_decolonizing_2021, p. xii].
 
 The concept of *two-eye seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. One possibility, however, is to use Traditional Knowledge to create properly informed Bayesian priors [@bolstad_introduction_2017]. The validity of the priors can be ensured using prior predictive modeling [@mcelreath_statistical_2016] to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
 
@@ -258,7 +260,7 @@ Although this project does not focus on Indigenous Knowledge or Data, I intend t
 
 <!-- In this section you can acknowledge the extent to which assistance has been given by members of staff, fellow students, data technicians, editors, and/or others; recognize the supervision and advice given by your supervisor and committee members; acknowledge colleagues with whom you have written journal articles. -->
 
-I would like to thank Dr. Noonan for offering me the opportunity to pursue a Master's degree with such an interesting project with cutting-edge statistical methods for movement ecology. I have already learned a lot and I expect I will learn much more.
+I would like to thank Dr. Noonan for offering me the opportunity to pursue a PhD with such an interesting project with cutting-edge statistical methods for movement ecology. I have already learned a lot and I expect I will learn much more.
 
 I would like to thank Dr. Ford and Dr. Pither for agreeing to be on my committee. Your feedback and mentorship will help me ensure this project is relevant and directly applicable to current issues regarding conservation and biogeography.
 
