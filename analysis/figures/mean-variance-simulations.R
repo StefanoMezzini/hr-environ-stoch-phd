@@ -6,40 +6,37 @@ library('purrr')   # for functional programming
 library('future')  # for parallel computing
 library('furrr')   # for parallel functional programming
 source('analysis/default-figure-styling.R') # for a consistent figure theme
-source('functions/mean-variance-trends.R')  # functions to generate means and variances
 source('functions/rgamma2.R')               # rgamma() parameterized by mean and variance
 source('functions/qgamma2.R')               # qgamma() parameterized by mean and variance
 source('analysis/figures/mean-variance-trends-panel-data.R') # create tibble of parameters
 
 # see 'analysis/figures/mean-variance-trends.R' for reference figures
 N <- 200 # number of animals
-REPS <- 5e3 # number of replicate runs ("days")
-required <- 50 # amount required for satiety
+REPS <- 500 # number of replicate runs ("days")
+required <- 500 # amount required for satiety
 MAX_VISITS <- 200 # max number of visits calculated
 types <- c('constant', 'linear', 'cyclical', 'drifting', 'erratic')
-
 
 # plot means and variances
 plot_grid(ggplot(d55) +
             facet_grid(mean ~ ., switch = 'y') +
-            geom_line(aes(t, mu), color = pal[1], lwd = 1),
+            geom_line(aes(animal, mu), color = pal[1], lwd = 1),
           ggplot(d55) +
             facet_grid(variance ~ ., switch = 'y') +
-            geom_line(aes(t, sqrt(sigma2)), color = pal[2], lwd = 1))
+            geom_line(aes(animal, sqrt(sigma2)), color = pal[2], lwd = 1))
 
 # plot coefficient of variation = SD / mean
 p_cv <-
   ggplot(d55) +
   facet_grid(variance ~ mean, switch = 'y') +
-  geom_line(aes(t, sqrt(sigma2)/mu)) +
+  geom_line(aes(animal, sqrt(sigma2)/mu)) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(Coefficient~of~variation~'in'~italic(H)),
+  scale_y_continuous(expression(Coefficient~of~variation~'in'~italic(R)),
                      breaks = NULL); p_cv
 
 #' model assumes:
 #' - infinite behavioral plasticity, 
 #' - instantaneous response times,
-#' - 
 eat <- function(mu, sigma2, reps = REPS) {
   x <-
     expand_grid(replicate = 1:reps, n_visits = 1:MAX_VISITS) %>% # initial tibble
@@ -54,15 +51,15 @@ eat <- function(mu, sigma2, reps = REPS) {
   return(x)
 }
 
-if(FALSE) {
+if(TRUE) {
   print(Sys.time()) # print time at the beginning of the computation
-  plan(multisession, workers = 4) # ~ 21 minutes
+  plan(multisession, workers = parallel::detectCores() - 1) # ~ 2-3 minutes on 7 cores
   
   #' use `furrr_options(seed = NULL)` to ensure statistically sound simulations
   tictoc::tic() # to measure computation time
   d <- d55 %>%
     mutate(visits = future_map2(.x = mu, .y = sigma2, .f = eat,
-                                .options = furrr_options(seed = NULL))) %>%
+                                .options = furrr_options(seed = TRUE))) %>%
     unnest(visits)
   print(tictoc::toc()); beepr::beep(sound = 2) # notify when calculations are complete
   plan(sequential) # back to sequential computing to avoid crashes
@@ -80,7 +77,7 @@ if(any(d$intake == required)) {
 # summarize simulations as mean (0.5) and 95% HR
 d_summarized <-
   d %>%
-  group_by(mean, variance, t, mu, sigma2) %>%
+  group_by(mean, variance, animal, mu, sigma2) %>%
   summarize(mean_visits = mean(n_visits),
             median_visits = median(n_visits),
             sd_visits = sd(n_visits),
@@ -91,31 +88,32 @@ d_summarized <-
 hr_lab <- expression(Home~range~size~(italic(H)))
 p_sim_55 <-
   ggplot(d_summarized) +
-  facet_grid(variance ~ mean, scales = 'free_y') +
-  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
-  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
-  geom_line(aes(t, upr), color = pal[3]) +
+  facet_grid(variance ~ mean) +
+  geom_area(aes(animal, upr), fill = pal[3], alpha = 0.2) +
+  geom_area(aes(animal, median_visits), fill = pal[3], color = pal[3], lwd = 1,
+            alpha = 0.5) +
+  geom_line(aes(animal, upr), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
   scale_y_continuous(hr_lab, breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
 
 # trends in the mean
 p_mean <-
-  ggplot(d55, aes(t, mu)) +
+  ggplot(d55, aes(animal, mu)) +
   facet_grid(. ~ mean) +
   geom_line(color = pal[1], lwd = 1) +
-  scale_x_continuous(expression(Mean~italic(U)), breaks = NULL, position = 'top') +
-  scale_y_continuous(expression(italic(U)), breaks = NULL) +
+  scale_x_continuous(expression(Mean~italic(R)), breaks = NULL, position = 'top') +
+  scale_y_continuous(expression(italic(R)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title.x = element_text(face = 'bold'),
         axis.title.y = element_text(colour = 'transparent'))
 
 # trends in the variance
 p_variance <-
-  ggplot(d55, aes(t, sigma2)) +
+  ggplot(d55, aes(animal, sigma2)) +
   facet_grid(variance ~ ., switch = 'y') +
   geom_line(color = pal[2], lwd = 1) +
   scale_x_continuous('', breaks = NULL) +
-  scale_y_continuous(expression(Variance~'in'~italic(U)), breaks = NULL) +
+  scale_y_continuous(expression(Variance~'in'~italic(R)), breaks = NULL) +
   theme(strip.background = element_blank(), axis.title = element_text(face = 'bold'))
 
 plot_grid(plot_grid(NULL, p_mean, rel_widths = c(1, 4.4), nrow = 1),
@@ -129,7 +127,7 @@ ggsave('figures/mean-variance-5-by-5-sims.png', width = 8, height = 4.5, scale =
 p_sd <-
   ggplot(d_summarized) +
   facet_grid(variance ~ mean) +
-  geom_area(aes(t, sd_visits), color = 'black', alpha = 0.3) +
+  geom_area(aes(animal, sd_visits), color = 'black', alpha = 0.3) +
   scale_x_continuous('Time', breaks = NULL) +
   scale_y_continuous(expression(Standard~deviation~of~italic(H)), breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
@@ -152,41 +150,44 @@ ggsave('figures/mean-variance-5-by-5-cv.png', width = 8, height = 4.5, scale = 2
 # (constant, constant) panel
 filter(d_summarized, mean == 'constant', variance == 'constant') %>%
   ggplot() +
-  facet_grid(mean ~ variance, scales = 'free_y') +
-  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
-  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
-  geom_line(aes(t, upr), color = pal[3]) +
+  facet_grid(mean ~ variance) +
+  geom_ribbon(aes(animal, ymin = median_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(animal, median_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(animal, upr), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous('Home range size', breaks = NULL, limits=c(0,100))+
+  scale_y_continuous(hr_lab, breaks = NULL, limits = c(min(d_summarized$median_visits),
+                                                       max(d_summarized$upr)))+
   theme(strip.background = element_blank(), strip.text = element_blank())
 
-ggsave('figures/c-c-hr.png', width = 3, height = 1.5, scale = 2,
-       units = 'in', dpi = 'print', bg = 'white')
+ggsave('figures/c-c-hr.png', width = 3, height = 1.5, scale = 2, units = 'in',
+       dpi = 'print', bg = 'white')
 
 # (linear, constant) panel
 filter(d_summarized, mean == 'linear', variance == 'constant') %>%
   ggplot() +
-  facet_grid(mean ~ variance, scales = 'free_y') +
-  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
-  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
-  geom_line(aes(t, upr), color = pal[3]) +
+  facet_grid(mean ~ variance) +
+  geom_ribbon(aes(animal, ymin = median_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(animal, median_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(animal, upr), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous('Home range size', breaks = NULL) +
+  scale_y_continuous(hr_lab, breaks = NULL, limits = c(min(d_summarized$median_visits),
+                                                       max(d_summarized$upr)))+
   theme(strip.background = element_blank(), strip.text = element_blank())
 
-ggsave('figures/l-c-hr.png', width = 3, height = 1.5, scale = 2,
-       units = 'in', dpi = 'print', bg = 'white')
+ggsave('figures/l-c-hr.png', width = 3, height = 1.5, scale = 2, units = 'in',
+       dpi = 'print', bg = 'white')
 
 # (linear, linear) panel
 filter(d_summarized, mean == 'linear', variance == 'linear') %>%
   ggplot() +
-  facet_grid(mean ~ variance, scales = 'free_y') +
-  geom_ribbon(aes(t, ymin = mean_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
-  geom_line(aes(t, mean_visits), color = pal[3], lwd = 1) +
-  geom_line(aes(t, upr), color = pal[3]) +
+  facet_grid(mean ~ variance) +
+  geom_ribbon(aes(animal, ymin = median_visits, ymax = upr), fill = pal[3], alpha = 0.2) +
+  geom_line(aes(animal, median_visits), color = pal[3], lwd = 1) +
+  geom_line(aes(animal, upr), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous('Home range size', breaks = NULL) +
+  scale_y_continuous(hr_lab, breaks = NULL, limits = c(min(d_summarized$median_visits),
+                                                       max(d_summarized$upr)))+
   theme(strip.background = element_blank(), strip.text = element_blank())
 
-ggsave('figures/l-l-hr.png', width = 3, height = 1.5, scale = 2,
-       units = 'in', dpi = 'print', bg = 'white')
+ggsave('figures/l-l-hr.png', width = 3, height = 1.5, scale = 2, units = 'in',
+       dpi = 'print', bg = 'white')
