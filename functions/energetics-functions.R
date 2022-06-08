@@ -13,7 +13,7 @@ sld <- function(x_1, y_1, x_2, y_2){
 }
 
 # generates animal's var[position] based on mass (in g) ----
-# model comes from Noonan et al. 2020  https://doi.org/10.1111/cobi.13495
+# model comes from Noonan et al. 2020 https://doi.org/10.1111/cobi.13495
 est_var_pos <- function(mass, variance = FALSE) {
   
   HR <- 0.5078955 + 1.372162 * log10(mass) # calculate HR based on mass
@@ -85,16 +85,6 @@ count_visits <- function(track, habitat, metric = 'patches') {
   
   if(metric == 'patches'){return(PATCHES)}
   if(metric == 'time'){return(TIME)}
-}
-
-# label each movement as whether a new patch was visited
-label_visits <- function(tel, habitat) {
-  tel %>%
-    data.frame() %>% # convert to a data.frame for easy plotting
-    mutate(cell_id = cellFromXY(habitat, SpatialPoints.telemetry(tel)) %>%
-             suppressWarnings(),
-           new_cell = c(1, diff(cell_id)), # check if the animal moved to a new cell
-           new_cell = new_cell != 0) # convert to TRUE/FALSE
 }
 
 # determines lifespan and sampling times based on mass (g) and number of crossings ----
