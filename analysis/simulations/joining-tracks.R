@@ -1,7 +1,7 @@
-library('ctmm')
-library('dplyr')
-library('ggplot2')
-theme_set(theme_bw())
+library('ctmm')    # for movement modeling
+library('dplyr')   # for data wrangling (%>%, mutate(), slice(), etc.)
+library('ggplot2') # for fancy plots
+theme_set(theme_bw()) # change default ggplot theme
 
 # OUF model ----
 m <- ctmm(tau = c(10, 2), # tau_p can be Inf
@@ -11,7 +11,7 @@ m <- ctmm(tau = c(10, 2), # tau_p can be Inf
 set.seed(1) # for consistent results
 sim1 <- simulate(m,t= seq(1, 10, by = 0.005))
 d <- sim1[c(1, nrow(sim1)), ]
-sim2 <- simulate(m, data = d, t=seq(1, 10, by = 0.005))
+sim2 <- simulate(m, data = d, t = seq(1, 10, by = 0.005))
 
 # does not start and end at (0, 0)
 ggplot() +
