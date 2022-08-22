@@ -71,3 +71,7 @@ figures/proposal-defense/animated-movement-50-tracks.gif
 talks/proposal-defense.pptx
 talks/msc-proposal-defense.pptx
 talks/lab-presentation-2022-06-02.pptx
+
+# NDVI rasters and associated json files for MODIStsp
+*.tif
+*.json
