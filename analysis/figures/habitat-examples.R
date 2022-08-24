@@ -6,15 +6,13 @@ library('lubridate') # for working with data more smoothly
 library('ggplot2')   # for fancy plots
 library('latex2exp') # for LaTeX in plots
 library('cowplot')   # for fancy plots in grids
-library('ragg')    # needed for custom alpha with coord_cartesian
+library('ragg')      # needed for custom alpha with coord_cartesian
 # see https://github.com/tidyverse/ggplot2/issues/4029
+
 source('functions/rgamma2.R') # function to generate rgamma() from mean and variance
 source('functions/qgamma2.R') # function to generate qgamma() from mean and variance
-theme_set(theme_bw() + theme(legend.position = 'top', panel.grid = element_blank()))
-
-# color-blind-friendly color palette
-pal <- c('#ff8c00', '#4477AA', '#009900', '#66CCEE',
-         '#CCBB44', '#EE6677', '#AA3377', '#BBBBBB')
+source('analysis/figures/default-figure-styling.R')
+theme_set(theme_get() + theme(legend.position = 'top', panel.grid = element_blank()))
 
 # resource abundance palette
 LOW <- '#744700'
@@ -83,10 +81,10 @@ p_1a <-
   scale_x_continuous('Time', expand = c(0, 0), breaks = NULL) +
   scale_y_discrete('Patch', expand = c(0, 0)) +
   # can use latex2exp::TeX() to use LaTeX, but it doesn't support \mathbb or \mathcal
-  scale_color_viridis_c(expression(sigma^2), direction = -1, option = 'D', end = 1,
+  scale_color_viridis_c('\U1D70E\U00B2', direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = lim_sigma2, breaks = lim_sigma2,
                         labels = c('Low', 'High')) +
-  scale_fill_gradient2(expression(italic(R)), low = LOW, mid = MID, high = HIGH,
+  scale_fill_gradient2('\U1D445', low = LOW, mid = MID, high = HIGH,
                        limits = lim_food, breaks = lim_food, labels = c('Low', 'High'),
                        midpoint = quantile(lim_food, 0.5))
 
@@ -94,16 +92,17 @@ p_1a <-
 # b-1: Gamma distribution
 plot_expr <- function(string) {
   ggplot() +
-    annotate('text', 0, 0, label = string, parse = TRUE, size = 10) +
-    theme_void()
+    annotate('text', 0, 0, label = string, size = 10) +
+    theme_void() +
+    theme(text = element_text(family = 'Symbola'))
 }
 
 # probability density of R
 r_pdf <-
   ggplot(r_density, aes(r, dens)) +
   geom_area(fill = pal[3], alpha = 0.5, color = pal[3]) +
-  scale_x_continuous(expression(italic(r)), breaks = NULL) +
-  scale_y_continuous(expression(P(italic(R==r))), breaks = NULL)
+  scale_x_continuous('\U1D445', breaks = NULL) +
+  scale_y_continuous('P(\U1D445 = \U1D45F)', breaks = NULL)
 
 ## b-2, b-3: mean and variance trends
 p_mean <-
@@ -111,7 +110,7 @@ p_mean <-
   geom_point(aes(t, food), d_1, alpha = 0.25, show.legend = FALSE) +
   geom_line(aes(t, mu, color = mu), params, lwd = 1, show.legend = FALSE) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(italic(R)), limits = lim_food, breaks = lim_food,
+  scale_y_continuous('\U1D445', limits = lim_food, breaks = lim_food,
                      labels = c('Low', 'High')) +
   scale_color_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                         midpoint = quantile(lim_food, 0.5))
@@ -121,27 +120,27 @@ p_var <-
   geom_line(aes(t, sigma2_constant, color = sigma2_constant), params, lwd = 1,
             show.legend = FALSE) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(sigma^2), limits = lim_sigma2,
+  scale_y_continuous('\U1D70E\U00B2', limits = lim_sigma2,
                      breaks = lim_sigma2, labels = c('Low', 'High')) +
   scale_color_viridis_c(direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = lim_sigma2)
 
 p_1b <-
   plot_grid(
-    plot_expr('italic(R%~%Gamma(mu, sigma^2))'), r_pdf,
-    plot_expr('E(italic(R))==mu(t)'), p_mean,
-    plot_expr('V(italic(R))==sigma^2'), p_var,
-    ncol = 2)
+    plot_expr('\U1D445 \U007E \U0393(\U1D707, \U1D70E\U00B2)'), r_pdf,
+    plot_expr('\U1D53C(\U1D445) = \U1D707(t)'), p_mean,
+    plot_expr('\U1D54D(\U1D445) = \U1D70E\U00B2(t)'), p_var,
+    ncol = 2); p_1b
 
 # c. raster of U with animal movement in low productivity season
 rast_1 <- expand_grid(x = seq(0, 1, length.out = 10),
                       y = seq(0, 1, length.out = 10)) %>%
   mutate(food_low = rgamma2(min(params$mu), params$sigma2_constant, n()),
          food_high = rgamma2(max(params$mu), params$sigma2_constant, n()))
-title_low <- paste0('italic(R)%~%Gamma(mu==', round(min(params$mu)), ',~sigma^2==',
-                     round(unique(params$sigma2_constant)), ')')
-title_high <- paste0('italic(R)%~%Gamma(mu==', round(max(params$mu)), ',~sigma^2==',
-                     round(unique(params$sigma2_constant)), ')')
+title_low <- paste0('\U1D445 \U007E \U0393(\U1D707 = ', round(min(params$mu)),
+                    ', \U1D70E\U00B2 = ', round(unique(params$sigma2_constant)), ')')
+title_high <- paste0('\U1D445 \U007E \U0393(\U1D707 = ', round(max(params$mu)),
+                     ', \U1D70E\U00B2 = ', round(unique(params$sigma2_constant)), ')')
 p_1c <-
   ggplot() +
   coord_equal() +
@@ -152,7 +151,8 @@ p_1c <-
   scale_y_discrete(NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                        midpoint = quantile(lim_food, 0.5)) +
-  labs(title = parse(text = eval(parse(text = 'title_low'))))
+  ggtitle(title_low)
+# labs(title = parse(text = eval(parse(text = 'title_low')))) # if in expression syntax
 
 # c. raster of U with animal movement in high productivity season
 p_1d <-
@@ -165,7 +165,7 @@ p_1d <-
   scale_y_discrete(NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                        midpoint = quantile(lim_food, 0.5)) +
-  labs(title = parse(text = eval(parse(text = 'title_high'))))
+  ggtitle(title_high)
 
 p_1 <- plot_grid(p_1a,
                  plot_grid(p_1b,
@@ -195,10 +195,10 @@ p_2a <-
   scale_x_continuous('Time', expand = c(0, 0), breaks = NULL) +
   scale_y_discrete('Patch', expand = c(0, 0)) +
   # can use latex2exp::TeX() to use LaTeX, but it doesn't support \mathbb or \mathcal
-  scale_color_viridis_c(expression(sigma^2), direction = -1, option = 'D', end = 1,
+  scale_color_viridis_c('\U1D70E\U00B2', direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = lim_sigma2, breaks = lim_sigma2,
                         labels = c('Low', 'High')) +
-  scale_fill_gradient2(expression(italic(R)), low = LOW, mid = MID, high = HIGH,
+  scale_fill_gradient2('\U1D445', low = LOW, mid = MID, high = HIGH,
                        limits = lim_food, breaks = lim_food, labels = c('Low', 'High'),
                        midpoint = quantile(lim_food, 0.5))
 
@@ -209,7 +209,7 @@ p_mean <-
   geom_point(aes(t, food), d_2, alpha = 0.25, show.legend = FALSE) +
   geom_line(aes(t, mu, color = mu), params, lwd = 1, show.legend = FALSE) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(italic(R)), limits = lim_food, breaks = lim_food,
+  scale_y_continuous('\U1D445', limits = lim_food, breaks = lim_food,
                      labels = c('Low', 'High')) +
   scale_color_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                        midpoint = quantile(lim_food, 0.5))
@@ -219,16 +219,16 @@ p_var <-
   geom_line(aes(t, sigma2, color = sigma2), params, lwd = 1,
             show.legend = FALSE) +
   scale_x_continuous('Time', breaks = NULL) +
-  scale_y_continuous(expression(sigma^2), limits = lim_sigma2,
+  scale_y_continuous('\U1D70E\U00B2', limits = lim_sigma2,
                      breaks = lim_sigma2, labels = c('Low', 'High')) +
   scale_color_viridis_c(direction = -1, option = 'D', end = 1,
                         begin = 0.3, limits = lim_sigma2)
 
 p_2b <-
   plot_grid(
-    plot_expr('italic(R%~%Gamma(mu, sigma^2))'), r_pdf,
-    plot_expr('E(italic(R))==mu(t)'), p_mean,
-    plot_expr('V(italic(R))==sigma^{2}*(t)'), p_var,
+    plot_expr('\U1D445 \U007E \U0393(\U1D707, \U1D70E\U000B2)'), r_pdf,
+    plot_expr('\U1D53C(\U1D445) = \U1D707(t)'), p_mean,
+    plot_expr('\U1D54D(\U1D445) = \U1D70E\U000B2(t)'), p_var,
     ncol = 2)
 
 # c. raster of U with animal movement in low productivity season
@@ -236,10 +236,13 @@ rast_2 <- expand_grid(x = seq(0, 1, length.out = 10),
                       y = seq(0, 1, length.out = 10)) %>%
   mutate(food_low = rgamma2(min(params$mu), min(params$sigma2), n()),
          food_high = rgamma2(max(params$mu), max(params$sigma2), n()))
-title_low <- paste0('italic(R)%~%Gamma(mu==', round(min(params$mu)), ',~sigma^2==',
-                    round(min(params$sigma2)), ')')
-title_high <- paste0('italic(R)%~%Gamma(mu==', round(max(params$mu)), ',~sigma^2==',
+title_low <- paste0('\U1D445 \U007E \U0393(\U1D707 = ', round(min(params$mu)),
+                    ', \U1D70E\U000B2 = ', round(min(params$sigma2)), ')')
+title_high <- paste0('\U1D445 \U007E \U0393(\U1D707 = ', round(max(params$mu)),
+                     ', \U1D70E\U000B2 = ',
                      round(max(params$sigma2)), ')')
+
+# c. raster of R with animal movement in low productivity and variance season
 p_2c <-
   ggplot() +
   coord_equal() +
@@ -250,9 +253,9 @@ p_2c <-
   scale_y_discrete(NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                        midpoint = quantile(lim_food, 0.5)) +
-  labs(title = parse(text = eval(parse(text = 'title_low'))))
+  ggtitle(title_low)
 
-# c. raster of U with animal movement in high productivity season
+# d. raster of R with animal movement in high productivity and variance season
 p_2d <-
   ggplot() +
   coord_equal() +
@@ -263,7 +266,7 @@ p_2d <-
   scale_y_discrete(NULL, expand = c(0, 0)) +
   scale_fill_gradient2(low = LOW, mid = MID, high = HIGH, limits = lim_food,
                        midpoint = quantile(lim_food, 0.5)) +
-  labs(title = parse(text = eval(parse(text = 'title_high'))))
+  ggtitle(title_high)
 
 p_2 <- plot_grid(p_2a,
                  plot_grid(p_2b,
