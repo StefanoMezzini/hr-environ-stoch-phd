@@ -1,12 +1,14 @@
 library('ggplot2') # for fancy figures
 library('stringi') # for working with strings
 
+windowsFonts('Symbola' = windowsFont('Symbola')) # import font for blackboard bold
 theme_set(theme_bw())
 
 # custom color-blind palette
 pal <- c('#ff8c00', '#4477AA', '#009900', '#66CCEE',
          '#CCBB44', '#EE6677', '#AA3377', '#BBBBBB')
-create_ndvi_pal <- colorRampPalette(c('darkblue', 'dodgerblue', '#744700', '#d9bb94', 'darkgreen'))
+create_ndvi_pal <- colorRampPalette(c('darkblue', 'dodgerblue', '#744700', '#d9bb94',
+                                      'darkgreen'))
 ndvi_pal <- create_ndvi_pal(100)
 if(FALSE) plot(1:100, col = ndvi_pal, pch = 19)
 
