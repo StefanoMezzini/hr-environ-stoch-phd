@@ -6,7 +6,7 @@ library('ggplot2') # for plotting
 library('cowplot') # for plots in grids
 source('functions/label_visits.R') # label food encounters based on a raster
 source('functions/pull_parameter.R') # to extract parameters from ctmm and akde objects
-source('analysis/default-figure-styling.R') # defaults for figures (theme, size, ...)
+source('analysis/figures/default-figure-styling.R') # defaults for figures (theme, size)
 theme_set(theme_map() + theme(legend.position = 'none'))
 select <- dplyr::select # don't use raster::select as a default
 

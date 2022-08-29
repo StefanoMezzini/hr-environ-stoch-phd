@@ -2,9 +2,9 @@ library('dplyr')   # for data wrangling
 library('tidyr')   # for data wrangling (expand_grid())
 library('ggplot2') # for fancy plots
 library('cowplot') # for multi-panel plots
-source('analysis/default-figure-styling.R') # for a consistent figure theme
-source('functions/rgamma2.R')               # rgamma() parameterized by mean and variance
-source('functions/qgamma2.R')               # qgamma() parameterized by mean and variance
+source('analysis/figures/default-figure-styling.R') # for a consistent figure theme
+source('functions/rgamma2.R') # rgamma() parameterized by mean and variance
+source('functions/qgamma2.R') # qgamma() parameterized by mean and variance
 source('analysis/figures/mean-variance-trends-panel-data.R') # create tibble of parameters
 set.seed(3) # for consistent results
 

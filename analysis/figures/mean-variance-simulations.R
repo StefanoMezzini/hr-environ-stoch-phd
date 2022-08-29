@@ -5,19 +5,19 @@ library('cowplot') # for multi-panel plots
 library('purrr')   # for functional programming
 library('future')  # for parallel computing
 library('furrr')   # for parallel functional programming
-source('analysis/default-figure-styling.R') # for a consistent figure theme
-source('functions/rgamma2.R')               # rgamma() parameterized by mean and variance
-source('functions/qgamma2.R')               # qgamma() parameterized by mean and variance
+source('analysis/figures/default-figure-styling.R') # for a consistent figure theme
+source('functions/rgamma2.R') # rgamma() parameterized by mean and variance
+source('functions/qgamma2.R') # qgamma() parameterized by mean and variance
 source('analysis/figures/mean-variance-trends-panel-data.R') # create tibble of parameters
 
 # see 'analysis/figures/mean-variance-trends.R' for reference figures
 N <- 200 # number of animals
-REPS <- 500 # number of replicate runs ("days")
+REPS <- 50 # number of replicate runs ("days")
 required <- 500 # amount required for satiety
-MAX_VISITS <- 200 # max number of visits calculated
+MAX_VISITS <- 150 # max number of visits calculated
 types <- c('constant', 'linear', 'cyclical', 'drifting', 'erratic')
 
-# plot means and variances
+# plot means and standard deviations
 plot_grid(ggplot(d55) +
             facet_grid(mean ~ ., switch = 'y') +
             geom_line(aes(animal, mu), color = pal[1], lwd = 1),
@@ -42,8 +42,9 @@ eat <- function(mu, sigma2, reps = REPS) {
     expand_grid(replicate = 1:reps, n_visits = 1:MAX_VISITS) %>% # initial tibble
     group_by(replicate) %>% # do the following for each replicate independently
     # generate rgamma2() resources for each row, then sum cumulatively
-    mutate(intake = rgamma2(N = n(), mu = mu, sigma2 = sigma2) %>% cumsum()) %>%
-    filter(intake > required) %>% # remove all visits before animal reached satiety
+    mutate(intake = rgamma2(mu, sigma2),
+           intake = cumsum(intake)) %>%
+    filter(intake >= required) %>% # remove all visits before animal reached satiety
     assertr::verify(nrow(.) > 0) %>% # ensure there's at least one row
     filter(intake == min(intake)) %>% # take the first (i.e., smallest) visit count
     ungroup() # remove grouping by replicate
@@ -52,8 +53,7 @@ eat <- function(mu, sigma2, reps = REPS) {
 }
 
 if(TRUE) {
-  print(Sys.time()) # print time at the beginning of the computation
-  plan(multisession, workers = parallel::detectCores() - 1) # ~ 2-3 minutes on 7 cores
+  plan(multisession, workers = parallel::detectCores() / 2) # < 1 minute on 4 cores
   
   #' use `furrr_options(seed = NULL)` to ensure statistically sound simulations
   tictoc::tic() # to measure computation time
@@ -61,11 +61,12 @@ if(TRUE) {
     mutate(visits = future_map2(.x = mu, .y = sigma2, .f = eat,
                                 .options = furrr_options(seed = TRUE))) %>%
     unnest(visits)
-  print(tictoc::toc()); beepr::beep(sound = 2) # notify when calculations are complete
+  print(tictoc::toc())
+  beepr::beep(sound = 2) # notify when calculations are complete
   plan(sequential) # back to sequential computing to avoid crashes
-  saveRDS(d, 'data/mean-variance-simulations-2e4-reps.rds') # save simulations
+  saveRDS(d, 'simulations/mean-variance-simulations-visits.rds') # save simulations
 } else {
-  d <- readRDS('data/mean-variance-simulations-2e4-reps.rds')
+  d <- readRDS('simulations/mean-variance-simulations-visits.rds')
 }
 
 # check if any simulation was unable to finish
@@ -78,21 +79,19 @@ if(any(d$intake == required)) {
 d_summarized <-
   d %>%
   group_by(mean, variance, animal, mu, sigma2) %>%
-  summarize(mean_visits = mean(n_visits),
-            median_visits = median(n_visits),
-            sd_visits = sd(n_visits),
-            upr = quantile(n_visits, 0.95),
-            .groups = 'drop')
+  summarize(visits_50 = mean(n_visits) * 0.50,
+            visits_95 = mean(n_visits) * 0.95,
+            .groups = 'drop_last')
 
 # simulation figure
 hr_lab <- expression(Home~range~size~(italic(H)))
 p_sim_55 <-
   ggplot(d_summarized) +
   facet_grid(variance ~ mean) +
-  geom_area(aes(animal, upr), fill = pal[3], alpha = 0.2) +
-  geom_area(aes(animal, median_visits), fill = pal[3], color = pal[3], lwd = 1,
-            alpha = 0.5) +
-  geom_line(aes(animal, upr), color = pal[3]) +
+  geom_ribbon(aes(animal, ymin = visits_50, ymax = visits_95), fill = pal[3],
+              alpha = 0.2) +
+  geom_line(aes(animal, visits_50), color = pal[3], lwd = 1) +
+  geom_line(aes(animal, visits_95), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
   scale_y_continuous(hr_lab, breaks = NULL) +
   theme(strip.background = element_blank(), strip.text = element_blank())
@@ -141,7 +140,7 @@ ggsave('figures/mean-variance-5-by-5-sd-visits.png', width = 8, height = 4.5, sc
 # plot coefficient of variation
 plot_grid(plot_grid(NULL, p_mean, rel_widths = c(1, 4.5), nrow = 1),
           plot_grid(p_variance, p_cv + theme(strip.background = element_blank(),
-                                         strip.text = element_blank()),
+                                             strip.text = element_blank()),
                     rel_widths = c(1, 4.5), nrow = 1),
           rel_heights = c(1, 4), nrow = 2)
 ggsave('figures/mean-variance-5-by-5-cv.png', width = 8, height = 4.5, scale = 2,
