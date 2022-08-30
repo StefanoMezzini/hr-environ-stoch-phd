@@ -1,5 +1,4 @@
 # does not require large amounts of RAM, takes < 1 minute
-setwd('/scratch/st-mnoonan-1/stefano/hr-environ-stoch-phd') # if in sockeye
 library('ctmm')   # for generating movement models
 library('raster') # for working with raster data
 library('dplyr')  # for data wrangling

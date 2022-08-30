@@ -1,4 +1,3 @@
-setwd('/scratch/st-mnoonan-1/stefano/hr-environ-stoch-phd') # if in sockeye
 library('dplyr')   # for data wrangling
 library('purrr')   # for functional programming
 library('tidyr')   # for data wrangling
