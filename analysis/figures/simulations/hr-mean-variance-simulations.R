@@ -1,19 +1,20 @@
 library('ggplot2') # for fancy plots
 library('cowplot') # for multi-panel fancy plots
+library('mgcv')    # for empirical bayesian modeling
 source('analysis/figures/default-figure-styling.R') # defaults for figures (theme, size)
 source('analysis/figures/mean-variance-trends-panel-data.R') # create tibble of parameters
 
 days <- readRDS('simulations/days-hrs.rds')
 
-# main simulation figure of change in home range ----
+# main simulation figure of change in home range (5x5 plot) ----
 hr_lab <- expression(Home~range~size~(italic(H))) # label for y axis
 p_sim <-
   ggplot(days) +
   facet_grid(variance ~ mean, drop = FALSE) + # facet by trends in mean and variance
   # area between 50% and 95% HRs
-  geom_ribbon(aes(animal, ymin = hr_50, ymax = hr_95), fill = 'grey', alpha = 0.2) +
+  geom_ribbon(aes(animal, ymin = hr_50, ymax = hr_95), fill = pal[3], alpha = 0.2) +
   # add lines for 50% and 95% HRs
-  geom_line(aes(animal, hr_50), color = pal[3]) +
+  geom_line(aes(animal, hr_50), color = pal[3], lwd = 1) +
   geom_line(aes(animal, hr_95), color = pal[3]) +
   scale_x_continuous('Time', breaks = NULL) +
   scale_y_continuous(hr_lab, breaks = NULL, limits = c(0, NA)) +
@@ -112,3 +113,33 @@ p_full_suff
 # save the plot as a png
 ggsave('figures/mean-variance-5-by-5-hr-sims-sufficient.png', p_full_suff, width = 8,
        height = 4.68, scale = 2, units = 'in', dpi = 'print', bg = 'white')
+
+# regression plots ----
+days_long <- pivot_longer(days, c(hr_50, hr_95), names_to = 'quantile', values_to = 'hr')
+
+reg_mu <-
+  ggplot(days_long) +
+  geom_point(aes(mu, hr, color = quantile), alpha = 0.3) +
+  geom_smooth(aes(mu, hr, group = quantile), method = 'gam', formula = y ~ s(x),
+              color = 'black') +
+  scale_x_continuous('\U1D53C(\U1D445)', breaks = NULL) +
+  scale_y_continuous(hr_lab, breaks = NULL) +
+  scale_color_manual('Utilization quantile', values = pal[4:5], labels = c('50%', '95%')) +
+  theme(legend.position = 'none')
+
+reg_s2 <-
+  ggplot(days_long) +
+  geom_point(aes(sigma2, hr, color = quantile), alpha = 0.3) +
+  geom_smooth(aes(sigma2, hr, group = quantile), method = 'gam', formula = y ~ s(x),
+              color = 'black') +
+  scale_x_continuous('\U1D54D(\U1D445)', breaks = NULL) +
+  scale_y_continuous(hr_lab, breaks = NULL) +
+  scale_color_manual('Utilization quantile', values = pal[4:5], labels = c('50%', '95%')) +
+  theme(legend.position = 'none')
+
+regs <- plot_grid(get_legend(reg_mu + theme(legend.position = 'top')),
+                  plot_grid(reg_mu, reg_s2, nrow = 1, labels = c('a.', 'b.')),
+                  ncol = 1, rel_heights = c(0.15, 1))
+
+ggsave('figures/simulations/simulation-regression-plots.png', plot = regs, width = 6,
+       height = 2, dpi = 600, bg = 'white', scale = 1.5)
