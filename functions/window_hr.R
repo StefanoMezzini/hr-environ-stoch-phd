@@ -7,14 +7,14 @@ library('ctmm')  # for continuous movement modeling
 library('dplyr') # for data wrangling
 library('purrr') # for functional programming
 
-window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = NULL) {
+window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = NULL,
+                      cores = 1) {
   
   # moving window created at the beginning of t; slides forward as far as possible:
   # |---|..... --> .|---|.... --> ..|---|... --> ...|---|.. --> ....|---|. --> .....|---|
   
   times <- seq(min(tel$t), max(tel$t) - window, by = dt)
   N <- length(times)
-  date_range <- range(times)
   
   # to extract home ranges later
   extract_hr <- function(a, par, l.ud) {
@@ -38,7 +38,8 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
                    # find initial guesses for models
                    guess = ctmm.guess(data = d, interactive = FALSE) %>% list(),
                    # select best model based on subset of tel
-                   model = ctmm.select(data = d, CTMM = guess[[1]]) %>% list(),
+                   model = ctmm.select(data = d, CTMM = guess[[1]], cores = cores) %>%
+                     list(),
                    # estimate autocorrelated kernel density estimate
                    akde = akde(data = d, CTMM = model[[1]]) %>% list(),
                    # find home range estimate
@@ -103,15 +104,16 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
     
     scale_x_date(NULL, date_labels = '%b %Y') +
     scale_color_viridis_c() +
-    labs(y = expression(Home~range~(m^2)))
+    labs(y = expression(Home~range~(km^2)))
   
   plt <- cowplot::plot_grid(plt_a, plt_b, labels = c('a.', 'b.'), nrow = 1, align = 'hv')
   
   if (! is.null(fig_path)) {
     # Save figure as a png using the animal's name
     ggsave(filename = file.path(fig_path, paste0(tel@info['identity'],
-                                                 '-window-', window/(1%#%'day'), '-days',
-                                                 '-dt-', dt / (1%#% 'day'), '-days.png')),
+                                                 '-window-', window / (1 %#% 'day'),
+                                                 '-days-dt-', dt / (1 %#% 'day'),
+                                                 '-days.png')),
            plot = plt, units = 'in', width = 7, height = 3,
            dpi = 600, bg = 'white')
   } else {
