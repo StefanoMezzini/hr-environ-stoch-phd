@@ -1,5 +1,5 @@
-module load gcc/5.4.0
-module load gcc/9.1.0
+module load gcc/5.5.0
+module load gcc/9.4.0
 module load miniconda3
 source ~/.bashrc
 conda config --add channels conda-forge
@@ -19,3 +19,6 @@ install.packages('ctmm')
 # necessary for tidyverse?
 conda install -c conda-forge udunits2
 conda install -c conda-forge freetype
+
+# necessary to install some packages (many spatial ones) or running anything in C
+module unload gcc
