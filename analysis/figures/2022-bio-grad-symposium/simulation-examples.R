@@ -35,8 +35,8 @@ PROJ <- '+proj=tpeqd +lat_1=-25 +lon_1=25 +lat_2=25 +lon_2=-25 +x_0=0 +y_0=0 +da
 theme_set(theme_bw() +
             theme(panel.border = element_blank(),
                   legend.key.height = unit(0.3, units = 'in'),
-                  axis.title.x = element_text(color = '#F58700', size = 20, vjust = -0.5),
-                  axis.title.y = element_text(color = '#3A6692', size = 20, vjust = 1.5),
+                  axis.title.x = element_text(color = '#F58700', size = 20, vjust = -1),
+                  axis.title.y = element_text(color = '#3A6692', size = 20, vjust = 2),
                   legend.text = element_text(size = 20),
                   legend.title = element_text(size = 20)))
 
