@@ -19,7 +19,6 @@ options(gganimate.dev_args = list(width = 6, height = 6, units = 'in',
 
 # change function to return coordinates as long-lat instead of x-y
 SpatialPoints.telemetry <- function (object, ...) {
-  CLASS <- class(object)[1]
   object <- ctmm:::listify(object)
   SP <- lapply(object, function(d) {
     sp::SpatialPoints(`[.data.frame`(d, c('longitude', 'latitude')),
@@ -32,14 +31,14 @@ SpatialPoints.telemetry <- function (object, ...) {
 # two-point equidistant projection of the habitat raster
 PROJ <- '+proj=tpeqd +lat_1=-25 +lon_1=25 +lat_2=25 +lon_2=-25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
 
-# set colors for raster palette
-LOW <- '#744700'
-MID <- '#d9bb94'
-HIGH <- 'darkgreen'
-
 # choose default theme
 theme_set(theme_bw() +
-            theme(legend.position = 'none', panel.border = element_blank()))
+            theme(panel.border = element_blank(),
+                  legend.key.height = unit(0.3, units = 'in'),
+                  axis.title.x = element_text(color = '#F58700', size = 20, vjust = -0.5),
+                  axis.title.y = element_text(color = '#3A6692', size = 20, vjust = 1.5),
+                  legend.text = element_text(size = 20),
+                  legend.title = element_text(size = 20)))
 
 # set up parameters ----
 # E(food) and V(food) cannot be independent bc E(food) == 0 => V(food) == 0
@@ -53,15 +52,16 @@ min.s2 <- 1                                 # minimum variance
 max.s2 <- 25^2                              # maximum variance
 mu_fcn <- function(.x) min.mu + .x * (max.mu - min.mu) / 25 # .x in [1, 25]
 s2_fcn <- function(.y) min.s2 + .y * (max.s2 - min.s2) / 25 # .y in [1, 25]
+K <- 200
 
 # set up matrix of means, variances, food (animals can re-visit a location) ----
 # tibble of raster cell values
 m_tbl <-
   # create all combinations of mu and s2
-  expand_grid(x = seq(1, 25, length.out = 1e3), y = seq(1, 25, length.out = 1e3)) %>%
+  expand_grid(x = seq(1, 25, length.out = K), y = seq(1, 25, length.out = K)) %>%
   mutate(mu = mu_fcn(x),
          s2 = s2_fcn(y),
-         food = rgamma2(mu = mu, sigma2 = s2), # sample food from a Gamma distr
+         food = rgamma2(mu = mu, sigma2 = s2)^3, # cube for stronger contrast 
          max_food = qgamma2(0.9, mu, s2, lower.tail = TRUE), # add upper limit
          food = if_else(food < max_food, food, max_food))
 
@@ -139,6 +139,7 @@ tracks <-
   filter(satiety <= required | (full & ! duplicated(full)))
 
 # repeat 50 times to estimate HR ----
+#' see `analysis/figures/proposal-defense/animated-simulation-figure.R` for more info
 tracks <- readRDS('analysis/figures/proposal-defense/50-tracks.rds')
 
 # static plot
@@ -146,19 +147,19 @@ p_track <-
   ggplot() +
   coord_equal() +
   geom_raster(aes(x, y, fill = food), m_tbl) +
-  geom_path(aes(longitude, latitude, group = paste(location, rep)), tracks, alpha = 0.4) +
+  geom_path(aes(longitude, latitude, group = paste(location, rep)), tracks) +
   geom_point(aes(start_x, start_y, group = location),
              filter(tracks, ! duplicated(location)), shape = 4, color = 'white') +
-  scale_fill_gradient2(low = LOW, mid = MID, high = HIGH) +
-  scale_color_brewer(type = 'qual', palette = 6, direction = -1) +
+  scale_fill_gradient(expression(atop('Resources', '')), low = 'white', high = pal[7],
+                      breaks = range(m_tbl$food), labels = c('Low', 'High')) +
   scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
-  scale_y_continuous('Environmental variance', breaks = NULL, expand = c(0, 0))
+  scale_y_continuous('Resource unpredictability', breaks = NULL, expand = c(0, 0))
 
 ggsave('figures/2022-bio-grad-symposium/static-movement.png', plot = p_track,
-       height = 6, width = 6)
-
+       height = 6, width = 8)
 
 # calculate the average HR by location
+#' see `analysis/figures/proposal-defense/animated-simulation-figure.R` for more info
 hrs <-
   readRDS('analysis/figures/proposal-defense/50-tracks-hrs.rds') %>%
   mutate(hr_95 = map(akde, \(x) SpatialPolygonsDataFrame.UD(x,
@@ -175,15 +176,15 @@ p_track_hr_95 <-
   ggplot() +
   coord_equal() +
   geom_raster(aes(x, y, fill = food), m_tbl) +
-  geom_path(aes(longitude, latitude, group = paste(location, rep)), tracks,
-            alpha = 0.4) +
+  geom_path(aes(longitude, latitude, group = paste(location, rep)), tracks) +
   geom_polygon(aes(long, lat, group = paste(location, group)), hrs,
                fill = '#009900', color = NA, alpha = 0.8) +
   geom_point(aes(start_x, start_y, group = location), shape = 4,
              filter(tracks, ! duplicated(location)), color = 'white') +
-  scale_fill_gradient2(low = LOW, mid = MID, high = HIGH) +
-  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0))+
-  scale_y_continuous('Environmental variance', breaks = NULL, expand = c(0, 0))
+  scale_fill_gradient(expression(atop('Resources', '')), low = 'white', high = pal[7],
+                      breaks = range(m_tbl$food), labels = c('Low', 'High')) +
+  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous('Resource unpredictability', breaks = NULL, expand = c(0, 0))
 
 ggsave('figures/2022-bio-grad-symposium/static-movement-hrs.png',
-       plot = p_track_hr_95, height = 6, width = 6)
+       plot = p_track_hr_95, height = 6, width = 8)
