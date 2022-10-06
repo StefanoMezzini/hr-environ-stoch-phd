@@ -18,7 +18,7 @@ d <- tibble(mu = seq(0, 1, length.out = 400),
             h_2 = if_else(split, 2 * mu^2 - 7 * mu + 3.916873, h_1),
             h_3 = if_else(split, h_2 + 30 * (0.35 - mu)^2, h_2))
 
-notes <- tibble(x = c(0.13, 0.36, 0.175, 0.68),
+notes <- tibble(x = c(0.13, 0.4, 0.175, 0.68),
                 y = c(2.05, 3.2, 1.35, 2.05),
                 text = c('range-resident', 'nomadic or dispersing',
                          'evolutionary timescale', 'ecological timescale'))
@@ -40,9 +40,9 @@ p_s2 <-
 
 # save the plots ----
 ggsave('figures/mean-abundance-hr-hypotheses.png', plot = p_mu, width = 4, height = 4,
-       scale = 1.5, dpi = 400, bg = 'white')
+       scale = 1.25, dpi = 400, bg = 'white')
 ggsave('figures/variance-abundance-hr-hypotheses.png', plot = p_s2, width = 4, height = 4,
-       scale = 1.5, dpi = 400, bg = 'white')
+       scale = 1.25, dpi = 400, bg = 'white')
 
 # add simulated animal movement ----
 p_track <-
