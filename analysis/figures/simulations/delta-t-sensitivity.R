@@ -36,11 +36,12 @@ intervals <-
             })) %>%
   unnest(ints)
 
+# histogram of number of events as by the time interval between events
 p_hist <-
   ggplot(intervals, aes(interval)) +
   facet_wrap(~ seed, ncol = 1) +
-  geom_histogram(aes(fill = seed), binwidth = 200, center = 100, color = 'black',
-                 na.rm = TRUE) +
+  geom_histogram(aes(fill = seed), binwidth = 200, center = 100,
+                 color = 'black', na.rm = TRUE) +
   geom_rug(alpha = 0.2) +
   scale_fill_viridis_d('Seed', alpha = 0.5) +
   labs(x = 'Interval between encounters', y = 'Count')
@@ -75,9 +76,9 @@ p_events <-
 consecutive_encounters <- intervals %>%
   filter(seed == 1) %>%
   filter(interval <= 30) %>% # only keep pairs of events within 30 s
-  filter(c(0, diff(t)) < 25 | c(diff(t), 0) < 25) %>% # only keep groups within 25 s
+  filter(c(0, diff(t)) < 25 | c(diff(t), 0) < 25) %>% # keep groups within 25 s
   mutate(gross_t = round(t, -2)) %>% # round t to the hundreds
-  group_by(gross_t) %>% # count how many encounters occurred in 100-second intervals
+  group_by(gross_t) %>% # count how many encounters occurred in 100-s intervals
   mutate(count = n()) %>%
   ungroup() %>%
   filter(count == max(count)) # only keep interval with the most events
@@ -144,18 +145,21 @@ p_tracks <-
             fill = 'transparent', color = '#00000020') + # black with some alpha
   geom_path(aes(group = seed), color = 'grey', lwd = 1) +
   geom_path(aes(group = seed, color = seed)) +
-  # geom_point(aes(color = new_cell, shape = new_cell, alpha = new_cell), size = 0.2) +
-  # scale_alpha_manual(values = c(0, 1)) +
-  # scale_color_brewer(type = 'qual', palette = 6) +
-  # scale_shape_manual(values = c(19, 15)) +
   scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'none')
 
+# check that feeding events occur when moving to a new cell
+p_tracks +
+  geom_point(aes(alpha = new_cell), size = 1) +
+  scale_alpha_manual(values = c(0, 1))
+
+# create the final figure
 panels <-
   plot_grid(get_legend(p_hist + theme(legend.position = 'top')),
             plot_grid(p_hist, p_events, p_thinning, p_tracks,
                       labels = c('a.', 'b.', 'c.', 'd.'), ncol = 2),
             ncol = 1, rel_heights = c(1, 10))
+
 ggsave('figures/simulations/thinning-examples.png', plot = panels, width = 7,
        height = 5, scale = 2, bg = 'white')
