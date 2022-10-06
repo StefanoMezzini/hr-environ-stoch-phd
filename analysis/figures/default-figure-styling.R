@@ -1,7 +1,6 @@
 library('ggplot2') # for fancy figures
 library('stringi') # for working with strings
 
-windowsFonts('Symbola' = windowsFont('Symbola')) # import font for blackboard bold
 theme_set(theme_bw())
 
 # custom color-blind palette
