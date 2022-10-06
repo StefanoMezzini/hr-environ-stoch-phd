@@ -1,3 +1,4 @@
+plot(1, xlab = '\U1D53C') # run this before attaching ragg to plot unicode
 library('dplyr')     # for data wrangling
 library('tidyr')     # for data wrangling
 library('purrr')     # for functional programming
