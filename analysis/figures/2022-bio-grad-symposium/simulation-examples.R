@@ -10,6 +10,7 @@ source('functions/qgamma2.R') # qgamma() as a function of mean and variance
 source('functions/eat.R') # to eat food in each tile
 source('functions/create_animated_raster.R') # to create standard animation
 source('functions/energetics-functions.R') # movement & costs based on mass
+source('analysis/figures/default-figure-styling.R') # for color palettes
 animate <- gganimate::animate # don't use terra::animate
 select <- dplyr::select # don't use raster::select
 
@@ -27,9 +28,6 @@ SpatialPoints.telemetry <- function (object, ...) {
   SP <- do.call(sp::rbind.SpatialPoints, SP)
   return(SP)
 }
-
-# two-point equidistant projection of the habitat raster
-PROJ <- '+proj=tpeqd +lat_1=-25 +lon_1=25 +lat_2=25 +lon_2=-25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
 
 # choose default theme
 theme_set(theme_bw() +
@@ -58,7 +56,7 @@ K <- 200
 # tibble of raster cell values
 m_tbl <-
   # create all combinations of mu and s2
-  expand_grid(x = seq(1, 25, length.out = K), y = seq(1, 25, length.out = K)) %>%
+  expand_grid(x = seq(1, 25, length.out = K), y = seq(1, 25, length.out = K))%>%
   mutate(mu = mu_fcn(x),
          s2 = s2_fcn(y),
          food = rgamma2(mu = mu, sigma2 = s2)^3, # cube for stronger contrast 
@@ -70,7 +68,7 @@ m_rast <-
   m_tbl %>%
   select(-c(mu, s2, max_food)) %>%
   arrange(x, desc(y)) %>% # sort by increasing mu and decreasing s2
-  pivot_wider(values_from = food, names_from = x) %>% # pivot into a matrix format
+  pivot_wider(values_from = food, names_from = x) %>% # pivot to matrix format
   dplyr::select(-y) %>% # remove the s2 column
   as.matrix() %>% # convert to a matrix
   raster(xmn = 1, xmx = 25, ymn = 1, ymx = 25) # convert to raster
@@ -81,6 +79,20 @@ m_tbl <-
   arrange(desc(s2), mu) %>% # sort by columns (up -> down), then rows (L -> R)
   mutate(cell_id = 1:n())
 
+# plot the raster of resources
+p_rast <-
+  ggplot() +
+  coord_equal() +
+  geom_raster(aes(x, y, fill = food), m_tbl) +
+  scale_fill_gradient(expression(atop('Resources', '')), low = 'white',
+                      high = pal[7],
+                      breaks = range(m_tbl$food), labels = c('Low', 'High')) +
+  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous('Resource unpredictability', breaks = NULL, expand=c(0, 0))
+
+ggsave('figures/2022-bio-grad-symposium/resource-raster.png', plot = p_rast,
+       height = 6, width = 8)
+
 # generate simulated tracks ----
 get_tracks <- function(seed, long, lat) {
   mass <- 40e3 # mass in g
@@ -89,7 +101,7 @@ get_tracks <- function(seed, long, lat) {
   .tel <- tibble(longitude = 0, latitude = 0,
                  t = '1970-01-01 00:00:00',
                  individual.local.identifier = 1) %>%
-    as.telemetry(projection = PROJ) %>%
+    as.telemetry() %>%
     suppressMessages()
   
   # IOU movement model for an animal of ~ 40 kg
