@@ -7,17 +7,18 @@ library('ctmm')  # for continuous movement modeling
 library('dplyr') # for data wrangling
 library('purrr') # for functional programming
 
-window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = NULL,
-                      cores = 1) {
+window_hr <- function(tel, window, dt, projection, fig_path = NULL,
+                      rds_path = NULL, cores = 1) {
   
-  # moving window created at the beginning of t; slides forward as far as possible:
-  # |---|..... --> .|---|.... --> ..|---|... --> ...|---|.. --> ....|---|. --> .....|---|
+  # moving window created at beginning of t; slides forward as far as possible:
+  # |---|.... --> .|---|... --> ..|---|.. --> ...|---|. --> ....|---|
   
   times <- seq(min(tel$t), max(tel$t) - window, by = dt)
   N <- length(times)
   
   # to extract home ranges later
   extract_hr <- function(a, par, l.ud) {
+    # convert HR to km^2
     summary(a, units = FALSE, level.UD = l.ud)$CI['area (square meters)', ][par] / 1e6
   }
   
@@ -26,8 +27,9 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
       # add start and end times
       t_start = times, # left bound
       t_end = t_start + window, # left bound
-      # subset times within window (t to t + window; can't use filter() bc telemetry)
-      dataset = map2(t_start, t_end, \(t_1, t_2) tel[tel$t >= t_1 & tel$t <= t_2, ]),
+      # subset times within window (t to t + win; can't use filter() bc telmtry)
+      dataset = map2(t_start, t_end,
+                     \(t_1, t_2) tel[tel$t >= t_1 & tel$t <= t_2, ]),
       models =
         imap(dataset,
              \(d, i) {
@@ -38,17 +40,18 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
                    # find initial guesses for models
                    guess = ctmm.guess(data = d, interactive = FALSE) %>% list(),
                    # select best model based on subset of tel
-                   model = ctmm.select(data = d, CTMM = guess[[1]], cores = cores) %>%
+                   model = ctmm.select(data = d, CTMM = guess[[1]],
+                                       cores = cores) %>%
                      list(),
                    # estimate autocorrelated kernel density estimate
                    akde = akde(data = d, CTMM = model[[1]]) %>% list(),
                    # find home range estimate
-                   hr_est_50 = extract_hr(a = akde[[1]], par = 'est', l.ud = 0.50),
-                   hr_lwr_50 = extract_hr(a = akde[[1]], par = 'low', l.ud = 0.50),
-                   hr_upr_50 = extract_hr(a = akde[[1]], par = 'high', l.ud = 0.50),
-                   hr_est_95 = extract_hr(a = akde[[1]], par = 'est', l.ud = 0.95),
-                   hr_lwr_95 = extract_hr(a = akde[[1]], par = 'low', l.ud = 0.95),
-                   hr_upr_95 = extract_hr(a = akde[[1]], par = 'high', l.ud = 0.95))
+                   hr_est_50 = extract_hr(a = akde[[1]], par='est', l.ud=0.50),
+                   hr_lwr_50 = extract_hr(a = akde[[1]], par='low', l.ud=0.50),
+                   hr_upr_50 = extract_hr(a = akde[[1]], par='high', l.ud=0.50),
+                   hr_est_95 = extract_hr(a = akde[[1]], par='est', l.ud=0.95),
+                   hr_lwr_95 = extract_hr(a = akde[[1]], par='low', l.ud=0.95),
+                   hr_upr_95 = extract_hr(a = akde[[1]], par='high', l.ud=0.95))
                } else {
                  tibble(
                    # find initial guesses for models
@@ -68,13 +71,15 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
              })) %>% # close function for imap()
     unnest(models) %>%
     mutate(t_center = (t_start + t_end) / 2,
-           posixct = as.POSIXct(t_center, origin = '1970-01-01', tz = tel@info$timezone),
+           posixct = as.POSIXct(t_center, origin = '1970-01-01',
+                                tz = tel@info$timezone),
            date = as.Date(posixct))
   
   if(! is.null(rds_path)) {
-    saveRDS(out, file.path(rds_path, paste0(tel@info['identity'],
-                                            '-window-', window / (1 %#% 'day'), '-days',
-                                            '-dt-', dt / (1 %#% 'day'), '-days.rds')))
+    saveRDS(out, file.path(rds_path,
+                           paste0(tel@info['identity'],
+                                  '-window-', window / (1 %#% 'day'), '-days',
+                                  '-dt-', dt / (1 %#% 'day'), '-days.rds')))
   }
   
   # plot results
@@ -92,13 +97,16 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
   
   plt_b <-
     ggplot(out) +
+    
+    # 95% CIs for home ranges
+    geom_ribbon(aes(date, ymin = hr_lwr_50, ymax = hr_upr_50), alpha = 0.3) +
+    geom_ribbon(aes(date, ymin = hr_lwr_95, ymax = hr_upr_95), alpha = 0.3) +
+    
     # core home range
-    geom_ribbon(aes(date, ymin = hr_lwr_50, ymax = hr_upr_50), fill = 'grey') +
     geom_line(aes(date, hr_est_50), size = 1.25) +
     geom_line(aes(date, hr_est_50, color = posixct)) +
     
     # 95% home range
-    geom_ribbon(aes(date, ymin = hr_lwr_95, ymax = hr_upr_95), fill = 'grey') +
     geom_line(aes(date, hr_est_95), size = 1.25) +
     geom_line(aes(date, hr_est_95, color = posixct)) +
     
@@ -106,20 +114,20 @@ window_hr <- function(tel, window, dt, projection, fig_path = NULL, rds_path = N
     scale_color_viridis_c() +
     labs(y = expression(Home~range~(km^2)))
   
-  plt <- cowplot::plot_grid(plt_a, plt_b, labels = c('a.', 'b.'), nrow = 1, align = 'hv')
+  plt <- cowplot::plot_grid(plt_a, plt_b, labels = c('a.', 'b.'), nrow = 1,
+                            align = 'hv')
   
   if (! is.null(fig_path)) {
     # Save figure as a png using the animal's name
-    ggsave(filename = file.path(fig_path, paste0(tel@info['identity'],
-                                                 '-window-', window / (1 %#% 'day'),
-                                                 '-days-dt-', dt / (1 %#% 'day'),
-                                                 '-days.png')),
-           plot = plt, units = 'in', width = 7, height = 3,
-           dpi = 600, bg = 'white')
+    file.path(fig_path, paste0(tel@info['identity'],
+                               '-window-', window / (1 %#% 'day'),
+                               '-days-dt-', dt / (1 %#% 'day'),
+                               '-days.png')) %>%
+      ggsave(plot = plt, units = 'in', width = 7, height = 3,
+             dpi = 600, bg = 'white')
   } else {
     print(plt)
   }
-  # return(out)
 }
 
 if(FALSE) {
