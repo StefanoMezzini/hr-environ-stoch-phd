@@ -73,7 +73,7 @@ tapir <-
 
 # create the figure
 date_labs <- range(tel$timestamp) %>% as.Date() # date labels
-hr_lab <- expression(Home~range~size(km^2))
+hr_lab <- expression(Home~range~size~(km^2))
 
 p_mu <- ggplot(tapir, aes(t_center, mu)) +
   geom_line(color = pal[1], lwd = 1.5) +
