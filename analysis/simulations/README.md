@@ -11,4 +11,3 @@
 1. `analysis/figures/simulations/return-sensitivity.R`
 2. `analysis/figures/simulations/delta-t-sensitivity.R`
 3. `analysis/simulations/hr-simulation-extreme-scenarios.R`
-4. `analysis/figures/simulations/replicate-sensitivity.R`
