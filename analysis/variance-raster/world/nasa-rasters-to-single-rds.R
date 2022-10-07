@@ -1,4 +1,3 @@
-setwd('/scratch/st-mnoonan-1/stefano/hr-environ-stoch-phd') # if in sockeye
 library('sf')        # for simple feature objects
 library('sp')        # for spatial objects
 library('raster')    # for working with rasters
