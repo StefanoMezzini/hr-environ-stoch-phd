@@ -73,6 +73,7 @@ tapir <-
 
 # create the figure
 date_labs <- range(tel$timestamp) %>% as.Date() # date labels
+hr_lab <- expression(Home~range~size(km^2))
 
 p_mu <- ggplot(tapir, aes(t_center, mu)) +
   geom_line(color = pal[1], lwd = 1.5) +
@@ -82,7 +83,7 @@ p_s2 <- ggplot(tapir, aes(t_center, sigma2)) +
   labs(x = NULL, y = 'Resource unpredictability')
 p_hr <- ggplot(tapir) +
   geom_line(aes(t_center, hr_est_95), color = pal[3], lwd = 1.5) +
-  labs(x = NULL, y = 'Spatial needs (km)') +
+  labs(x = NULL, y = hr_lab) +
   ylim(c(0, NA))
 
 grobs <- lapply(list(p_mu, p_s2, p_hr), as_grob)
@@ -123,7 +124,7 @@ reg_mu <-
               method = 'gam', formula = y ~ x,
               method.args = list(family = "Gamma")) +
   scale_x_continuous('Resource abundance') +
-  scale_y_continuous('Home range size (km)', expand = c(0, 0))
+  scale_y_continuous(hr_lab, expand = c(0, 0))
 
 # variance
 reg_s2 <-
@@ -134,7 +135,7 @@ reg_s2 <-
               se = FALSE, method = 'gam', formula = y ~ x,
               method.args = list(family = "Gamma")) +
   scale_x_continuous('Resource unpredictability') +
-  scale_y_continuous('Home range size (km)', expand = c(0, 0))
+  scale_y_continuous(hr_lab, expand = c(0, 0))
 
 regs <- plot_grid(reg_mu, reg_s2, nrow = 1); regs
 
