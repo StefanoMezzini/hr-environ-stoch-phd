@@ -175,8 +175,8 @@ ggsave('figures/2022-bio-grad-symposium/static-movement.png', plot = p_track,
 hrs <-
   readRDS('analysis/figures/proposal-defense/50-tracks-hrs.rds') %>%
   mutate(hr_95 = map(akde, \(x) SpatialPolygonsDataFrame.UD(x,
-                                                            level.UD = 0.95,
-                                                            level = 0.95) %>%
+                                                            level.UD = 0.999,
+                                                            level = 0) %>%
                        spTransform(CRS("+proj=longlat")) %>%
                        fortify())) %>%
   select(location, hr_95) %>%
