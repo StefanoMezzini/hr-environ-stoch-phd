@@ -154,8 +154,25 @@ tracks <-
 #' see `analysis/figures/proposal-defense/animated-simulation-figure.R` for more info
 tracks <- readRDS('analysis/figures/proposal-defense/50-tracks.rds')
 
-# static plot
+# static plot with a single track
 p_track <-
+  ggplot() +
+  coord_equal() +
+  geom_raster(aes(x, y, fill = food), m_tbl) +
+  geom_path(aes(longitude, latitude, group = paste(location, rep)),
+            filter(tracks, rep == 1)) +
+  geom_point(aes(start_x, start_y, group = location),
+             filter(tracks, ! duplicated(location)), shape = 4, color = 'white') +
+  scale_fill_gradient(expression(atop('Resources', '')), low = 'white', high = pal[7],
+                      breaks = range(m_tbl$food), labels = c('Low', 'High')) +
+  scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous('Resource unpredictability', breaks = NULL, expand = c(0, 0))
+
+ggsave('figures/2022-bio-grad-symposium/single-track.png', plot = p_track,
+       height = 6, width = 8)
+
+# static plot with 50 track
+p_tracks <-
   ggplot() +
   coord_equal() +
   geom_raster(aes(x, y, fill = food), m_tbl) +
@@ -167,7 +184,7 @@ p_track <-
   scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
   scale_y_continuous('Resource unpredictability', breaks = NULL, expand = c(0, 0))
 
-ggsave('figures/2022-bio-grad-symposium/static-movement.png', plot = p_track,
+ggsave('figures/2022-bio-grad-symposium/fifty-tracks.png', plot = p_tracks,
        height = 6, width = 8)
 
 # calculate the average HR by location
@@ -175,7 +192,7 @@ ggsave('figures/2022-bio-grad-symposium/static-movement.png', plot = p_track,
 hrs <-
   readRDS('analysis/figures/proposal-defense/50-tracks-hrs.rds') %>%
   mutate(hr_95 = map(akde, \(x) SpatialPolygonsDataFrame.UD(x,
-                                                            level.UD = 0.999,
+                                                            level.UD = 0.995,
                                                             level = 0) %>%
                        spTransform(CRS("+proj=longlat")) %>%
                        fortify())) %>%
@@ -183,8 +200,8 @@ hrs <-
   unnest(hr_95) %>%
   filter(grepl('est', group))
 
-# plot the tracks with only the 95% HRs
-p_track_hr_95 <-
+# plot the tracks with the HRs
+p_track_hr <-
   ggplot() +
   coord_equal() +
   geom_raster(aes(x, y, fill = food), m_tbl) +
@@ -198,5 +215,5 @@ p_track_hr_95 <-
   scale_x_continuous('Resource abundance', breaks = NULL, expand = c(0, 0)) +
   scale_y_continuous('Resource unpredictability', breaks = NULL, expand = c(0, 0))
 
-ggsave('figures/2022-bio-grad-symposium/static-movement-hrs.png',
-       plot = p_track_hr_95, height = 6, width = 8)
+ggsave('figures/2022-bio-grad-symposium/fifty-tracks-hrs.png',
+       plot = p_track_hr, height = 6, width = 8)
