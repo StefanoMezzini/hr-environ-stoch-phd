@@ -40,11 +40,11 @@ intervals <-
 p_hist <-
   ggplot(intervals, aes(interval)) +
   facet_wrap(~ seed, ncol = 1) +
-  geom_histogram(aes(fill = seed), binwidth = 200, center = 100,
+  geom_histogram(aes(fill = seed), binwidth = 30, center = 15, lwd = 0.1,
                  color = 'black', na.rm = TRUE) +
-  geom_rug(alpha = 0.2) +
-  scale_fill_viridis_d('Seed', alpha = 0.5) +
-  labs(x = 'Interval between encounters', y = 'Count')
+  scale_fill_viridis_d('Seed', ) +
+  labs(x = 'Interval between encounters (s)', y = 'Count') +
+  theme(panel.grid = element_blank())
 
 # find number of encounters at each sampling time
 d <- expand_grid(delta_t = seq(1, 300),
@@ -70,7 +70,8 @@ p_events <-
   scale_color_viridis_d('Seed') +
   labs(x = expression(paste('Sampling interval (', Delta, 't, s)')),
        y = 'Number of encounters') +
-  scale_x_continuous(breaks = c(0, 60, 120, 180, 240, 300))
+  scale_x_continuous(breaks = c(2^seq(0, 8, by = 2), 30), trans = 'log2') +
+  theme(panel.grid = element_blank())
 
 # plot a part of the track with multiple encounters in a short time interval
 consecutive_encounters <- intervals %>%
@@ -118,15 +119,17 @@ p_thinning <-
   geom_tile(data = rasterToPoints(HABITAT) %>%
               data.frame() %>%
               filter(abs(x) < 5, abs(y) < 5), fill = 'transparent', color = 'black') +
-  geom_path(lwd = 1) +
+  geom_path(color = '#440154', lwd = 1) +
   geom_point(aes(color = new_cell, size = new_cell, shape = new_cell)) +
   geom_point(aes(color = new_cell, size = new_cell, shape = new_cell),
              filter(tracks, new_cell)) +
+  scale_x_continuous(name = NULL, breaks = NULL) +
+  scale_y_continuous(name = NULL, breaks = NULL) +
   scale_color_brewer('New cell', labels = c('No', 'Yes'), type = 'qual', palette = 6) +
   scale_size_manual('New cell', labels = c('No', 'Yes'), values = c(1, 2)) +
   scale_shape_manual('New cell', labels = c('No', 'Yes'), values = c(19, 15)) +
   theme_bw() +
-  theme(legend.position = 'right')
+  theme(legend.position = 'none')
 
 full_tracks <- tels %>%
   mutate(tel = map(tel, data.frame)) %>%
@@ -146,8 +149,10 @@ p_tracks <-
   geom_path(aes(group = seed), color = 'grey', lwd = 1) +
   geom_path(aes(group = seed, color = seed)) +
   scale_color_viridis_d() +
+  scale_x_continuous(NULL, breaks = NULL) +
+  scale_y_continuous('', breaks = NULL) +
   theme_bw() +
-  theme(legend.position = 'none')
+  theme(legend.position = 'none', panel.grid = element_blank())
 
 # check that feeding events occur when moving to a new cell
 p_tracks +
@@ -156,10 +161,11 @@ p_tracks +
 
 # create the final figure
 panels <-
-  plot_grid(get_legend(p_hist + theme(legend.position = 'top')),
+  plot_grid(plot_grid(get_legend(p_hist + theme(legend.position = 'top')),
+                      get_legend(p_thinning + theme(legend.position = 'top'))),
             plot_grid(p_hist, p_events, p_thinning, p_tracks,
                       labels = c('a.', 'b.', 'c.', 'd.'), ncol = 2),
             ncol = 1, rel_heights = c(1, 10))
 
-ggsave('figures/simulations/thinning-examples.png', plot = panels, width = 7,
-       height = 5, scale = 2, bg = 'white')
+ggsave('figures/simulations/thinning-examples.png', plot = panels,
+       width = 7, height = 5, scale = 1.2, bg = 'white')
