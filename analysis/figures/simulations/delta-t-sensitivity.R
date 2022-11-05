@@ -36,6 +36,9 @@ intervals <-
             })) %>%
   unnest(ints)
 
+# check the main quantiles
+quantile(intervals$interval, na.rm = TRUE)
+
 # histogram of number of events as by the time interval between events
 p_hist <-
   ggplot(intervals, aes(interval)) +
@@ -73,9 +76,30 @@ p_events <-
   scale_x_continuous(breaks = c(2^seq(0, 8, by = 2), 30), trans = 'log2') +
   theme(panel.grid = element_blank())
 
+# check how many events are detected for each delta_t
+p_prop <-
+  d %>%
+  select(delta_t, encounters, seed) %>% # only keep necessary columns
+  # calculate the fraction of events lost by coarsening the sampling
+  pivot_wider(names_from = delta_t, values_from = encounters) %>%
+  mutate(max = `1`) %>%
+  pivot_longer(-c(seed, max), names_to = 'delta_t', values_to ='encounters') %>%
+  mutate(delta_t = as.numeric(delta_t), # from character back to numeric
+         frac = encounters / max) %>% # calculate proportion of events detected
+  ggplot(aes(delta_t, frac)) +
+  facet_grid(seed ~ .) +
+  geom_vline(xintercept = 30) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(aes(color = seed), method = 'gam', formula = y ~ s(x)) +
+  scale_color_viridis_d('Seed') +
+  scale_x_continuous(trans = 'log2') + # to show the effect of doubling delta t
+  labs(x = expression(paste('Sampling interval (', Delta, 't, s)')),
+       y = 'Prop. of encounters detected    ') +
+  theme(panel.grid = element_blank())
+
 # plot a part of the track with multiple encounters in a short time interval
 consecutive_encounters <- intervals %>%
-  filter(seed == 1) %>%
+  filter(seed == 1) %>% # only use track 1
   filter(interval <= 30) %>% # only keep pairs of events within 30 s
   filter(c(0, diff(t)) < 25 | c(diff(t), 0) < 25) %>% # keep groups within 25 s
   mutate(gross_t = round(t, -2)) %>% # round t to the hundreds
@@ -163,7 +187,7 @@ p_tracks +
 panels <-
   plot_grid(plot_grid(get_legend(p_hist + theme(legend.position = 'top')),
                       get_legend(p_thinning + theme(legend.position = 'top'))),
-            plot_grid(p_hist, p_events, p_thinning, p_tracks,
+            plot_grid(p_hist, p_prop, p_thinning, p_tracks,
                       labels = c('a.', 'b.', 'c.', 'd.'), ncol = 2),
             ncol = 1, rel_heights = c(1, 10))
 
