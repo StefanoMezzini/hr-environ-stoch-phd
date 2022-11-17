@@ -75,3 +75,6 @@ talks/lab-presentation-2022-06-02.pptx
 # NDVI rasters and associated json files for MODIStsp
 *.tif
 *.json
+
+# all thumbnail files
+*Thumbs.db
