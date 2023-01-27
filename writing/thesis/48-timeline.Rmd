@@ -15,11 +15,14 @@ theme_set(theme_classic() +
 
 # curstom color-vision deficient palette
 pal <- c('#4477AA', '#ff8c00', '#66CCEE', '#009900',
-         '#CCBB44', '#AA3377', '#EE6677', '#BBBBBB')
-
-t_breaks <- tibble(dates = date(c('2021-09-01',
-                                  '2022-01-01', '2022-05-01', '2022-09-01',
-                                  '2023-01-01', '2023-05-01', '2023-09-01')),
+                  '#CCBB44', '#AA3377', '#EE6677', '#BBBBBB')
+                  
+t_breaks <- tibble(dates = c('2021-09-01',
+                             '2022-01-01', '2022-05-01', '2022-09-01',
+                             '2023-01-01', '2023-05-01', '2023-09-01',
+                             '2024-01-01', '2024-05-01', '2024-09-01',
+                             '2025-01-01', '2025-05-01', '2023-09-01') %>%
+                     date(),
                    dec = decimal_date(dates),
                    strings = paste(month.abb[month(dates)], year(dates)))
 
@@ -27,9 +30,9 @@ tasks <-
   readr::read_csv('timeline.csv', col_types = 'ccDD') %>%
   mutate(header = purrr::map2_lgl(section, task, grepl),
          section = factor(section,
-                          levels = c('Other', 'Chapter 4', 'Chapter 3',
-                                     'Chapter 2', 'Chapter 1', 'Preparatory',
-                                     'Coursework'))) %>%
+                          levels = c('Other', 'Chapter 5', 'Chapter 4',
+                                     'Chapter 3', 'Chapter 2', 'Chapter 1',
+                                     'Preparatory', 'Coursework'))) %>%
   arrange(section, desc(start), desc(end)) %>%
   mutate(dec_start = lubridate::decimal_date(start),
          dec_end = lubridate::decimal_date(end),
@@ -46,7 +49,7 @@ tasks <-
          # task = stri_replace_all(task, regex ='for~', replacement='\'for\'~'),
          # make headers bold (removed because numbers cannot be bold)
          #task = if_else(header, paste0('bold(', task, ')'), task),
-         )
+  )
 
 # tasks %>%
 #   transmute(Task = task, `Start date` = start, `End date` = end) %>%
@@ -55,10 +58,10 @@ ggplot(tasks, aes(y = id)) +
   geom_hline(aes(yintercept = id + 0.5), filter(tasks, header), alpha = 0.15) +
   geom_vline(xintercept = decimal_date(Sys.Date()), lty = 'dashed', alpha = 0.5) +
   geom_errorbar(aes(xmin = dec_start, xmax = dec_end, color = section),
-                width = 0, lwd = 2, alpha = 0.75) +
+                width = 0, linewidth = 2, alpha = 0.75) +
   #' use `ggrepel::geom_label_repel()` for repelling labels
-  geom_text(aes(2020.3, label = task, color = header), hjust = 'left', size = 3,
-            parse = FALSE) +
+  geom_text(aes(2020.2, label = task, color = header), hjust = 'left',
+            size = 3, parse = FALSE) +
   scale_x_continuous(NULL, breaks = t_breaks$dec, labels = t_breaks$strings,
                      expand = c(0, 0)) +
   scale_y_continuous(NULL, breaks = NULL) +

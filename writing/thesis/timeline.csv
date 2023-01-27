@@ -1,24 +1,30 @@
-﻿section,task,start,end
+section,task,start,end
 Chapter 1,Chapter 1: Literature review and simulations,,
-Chapter 1,Literature review: survey the current knowledge,2021-12-01,2022-06-01
-Chapter 1,Develop simulation models with theoretical framework,2022-01-01,2022-06-01
-Chapter 1,Test simulation models with empirical data,2022-05-15,2022-07-01
-Chapter 1,Write chapter 1,2022-01-01,2022-07-01
-Chapter 1,"Open science: update READMEs, ensure work is reproducible",2022-06-01,2022-07-01
-Chapter 2,Chapter 2: A new global measure of stochasticity,,
-Chapter 2,Collect NDVI data,2022-03-01,2022-07-01
-Chapter 2,Model NDVI data,2022-03-01,2022-07-01
-Chapter 2,Write chapter 2,2022-03-01,2022-10-01
-Chapter 2,"Open science: update READMEs, ensure work is reproducible",2022-09-15,2022-10-01
-Chapter 3,Chapter 3: Modeling animal movement,,
-Chapter 3,"Clean, organize, and merge movement data",2022-06-01,2022-08-01
-Chapter 3,Model animal tracking data,2022-07-01,2022-12-01
-Chapter 3,Estimate stochasticity effects,2022-10-01,2023-03-01
-Chapter 3,Write chapter 3,2022-09-01,2023-05-15
-Chapter 3,"Open science: update READMEs, ensure work is reproducible",2023-04-15,2023-05-15
-Chapter 4,Chapter 4: Summary,,
-Chapter 4,Write chapter 4,2023-02-15,2023-08-01
-Chapter 4,"Open science: update READMEs, ensure work is reproducible",2023-07-15,2023-08-01
+Chapter 1,Literature review: surveyed the current knowledge,2021-12-01,2022-11-15
+Chapter 1,Developed simulation models with theoretical framework,2022-01-01,2022-09-15
+Chapter 1,Test simulation models with empirical data,2022-05-15,2022-09-15
+Chapter 1,Write chapter 1,2022-01-01,2023-05-31
+Chapter 1,"Open science: update READMEs, ensure work is reproducible",2023-06-01,2023-07-01
+Chapter 2,Chapter 2: Animal movement in a changing climate,,
+Chapter 2,Collect telemtry data,2022-11-15,2023-02-28
+Chapter 2,Collect historical climate data,2022-11-15,2023-02-28
+Chapter 2,Model animal movement,2022-11-15,2023-03-15
+Chapter 2,Write Living Labs report,2023-02-01,2023-03-25
+Chapter 2,Write chapter 2,2023-04-01,2023-08-31
+Chapter 2,"Open science: update READMEs, ensure work is reproducible",2023-03-01,2023-03-25
+Chapter 3,Chapter 3: A new global measure of stochasticity,,
+Chapter 3,Collect NDVI data,2022-06-01,2023-10-31
+Chapter 3,Model NDVI data,2022-06-01,2024-03-31
+Chapter 3,Write chapter 3,2023-09-01,2024-05-31
+Chapter 3,"Open science: update READMEs, ensure work is reproducible",2023-11-01,2023-12-31
+Chapter 4,Chapter 4: Modeling animal movement,,
+Chapter 4,"Clean, organize, and merge movement data",2024-01-01,2024-02-28
+Chapter 4,Model animal tracking data,2024-03-01,2024-05-31
+Chapter 4,Estimate stochasticity effects,2024-04-01,2024-12-31
+Chapter 4,Write chapter 4,2024-06-01,2025-04-30
+Chapter 4,"Open science: update READMEs, ensure work is reproducible",2025-04-01,2025-04-30
+Chapter 5,Chapter 5: Summary,,
+Chapter 5,Write chapter 5,2025-05-01,2025-08-31
 Coursework,Coursework,,
 Coursework,Living Data Project Working group: calculate new Canadian Living Planet Index (cLPI),2021-08-30,2021-09-03
 Coursework,"BIOL 501 Seminar Course: guest spekers, presenting research, creating presentations",2021-09-01,2021-12-07
@@ -31,14 +37,13 @@ Other,TAship (BIOL 202: Intro to Biostatistics),2021-09-01,2021-12-15
 Other,TAship (BIOL 125: Biology for Science majors II),2022-01-01,2022-04-15
 Other,TAship (BIOL 116: Biology for Science majors I),2022-05-16,2022-06-17
 Other,TAship (BIOL 125: Biology for Science majors II),2022-07-07,2022-08-11
-Other,TAship (BIOL 116: Biology for Science majors I),2023-05-16,2023-06-17
-Other,TAship (BIOL 125: Biology for Science majors II),2023-07-07,2023-08-11
-Other,TAship (anticipated),2022-09-01,2022-12-15
-Other,TAship (anticipated),2023-01-01,2023-04-15
+Other,TAship (BIOL 202: Intro to Biostatistics),2022-09-01,2022-12-15
+Other,Research Data Consultant,2023-01-01,2024-03-31
 Other,Data analyst: estimated effects of human activity on tapir movement,2021-05-01,2022-01-31
 Other,LDP WG: estimating minimum sample for an accurate cLPI,2021-08-30,2022-03-31
 Other,"LDP WG: estimating bias in the cLPI, calculating the cLPI with non-Gaussian models",2021-08-30,2022-03-31
 Other,Biol 417 - Guest lecturer,2022-03-01,2022-03-03
 Preparatory,Preparatory,,
-Preparatory,Wrote proposal,2022-01-01,2022-03-15
+Preparatory,Worte MSc Proposal,2022-01-01,2022-03-15
 Preparatory,Open Science: Created and organized GitHub repository,2021-10-22,2021-12-10
+Preparatory,Wrote PhD Proposal,2023-02-01,2023-02-28
