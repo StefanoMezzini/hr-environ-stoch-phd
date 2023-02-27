@@ -14,8 +14,8 @@ options(gganimate.dev_args = list(width = 8, height = 8, units = 'in', res = 300
 # create simulated movement ----
 set.seed(1) # for consistent results
 m_ouf <- ctmm(tau = c(100, 10), sigma = 0.09, mu = c(0.5, 0.5), isotropic = TRUE)
-sims.tel <- simulate(m_ouf, t = seq(1, 500, by = 0.05))
-sims.df <- sims.tel %>%
+sims.tel <- simulate(m_ouf, t = seq(1, 1e4, by = 1))
+sims_df <- sims.tel %>%
   SpatialPoints.telemetry() %>%
   as.data.frame() %>%
   rename(long = x, lat = y) %>%
@@ -28,21 +28,27 @@ hr <- akde(sims.tel, m) %>%
 
 # figure of movement alone
 p <-
-  ggplot(mapping = aes(long, lat)) +
+  ggplot(sims_df, aes(long, lat)) +
   coord_equal() +
-  geom_path(data = sims.df); p
-ggsave(filename = 'figures/biol-417-lecture/static-movement.png', height = 8, width = 8,
-       bg = 'white')
+  geom_path(); p
+ggsave(filename = 'figures/biol-417-lecture/static-movement.png', height = 8,
+       width = 8, bg = 'white')
 
 # animate the movement data
-p_anim <- p + transition_reveal(sims.df$t)
-anim <- animate(p_anim, duration = 10, start_pause = 1, end_pause = 15)
+sims_df_short <- slice(sims_df, 1:1e3)
+p_anim <-
+  ggplot(sims_df_short, aes(long, lat, group = 1)) +
+  coord_equal() +
+  geom_path() +
+  transition_reveal(sims_df_short$t)
+anim <- animate(p_anim, duration = 25, start_pause = 5, end_pause = 25,
+                nframes = nrow(sims_df_short) + 30)
 anim_save(filename = 'figures/biol-417-lecture/animated-movement.gif', anim)
 
 # static movement with 95% AKDE
 p_hr <-
   p +
   geom_polygon(aes(group = group), filter(hr, grepl('est', id)),
-               size = 1, color = 'red', fill = 'red', alpha = 0.3); p_hr
+               linewidth = 1, color = '#70AD47', fill = '#70AD47', alpha = 0.3); p_hr
 ggsave('figures/biol-417-lecture/movement-hr.png',
        p_hr, width = 8, height = 8, bg = 'white')
