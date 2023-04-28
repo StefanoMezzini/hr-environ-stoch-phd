@@ -272,6 +272,10 @@ I would like to thank Sandra Fox for providing me with resources to ensure my pe
 
 <!-- The dedication is usually quite short, and is a personal rather than academic recognition. You can use any font or language you wish for the dedication page. -->
 
+*A is Terras chi m'ant imbuconau e m'ant donau su logu aundi bivi, imparai, e giogai.*
+
+*Alle Terre che mi hanno nutrito e dato un luogo dove vivere, imparare e giocare.*
+
 To the Lands that have nourished me and given me a place to live, learn, and play.
 
 \newpage

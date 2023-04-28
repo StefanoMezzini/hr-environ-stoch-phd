@@ -24,12 +24,12 @@ t_breaks <- tibble(dates = date(c('2021-09-01',
                    strings = paste(month.abb[month(dates)], year(dates)))
 
 tasks <-
-  readr::read_csv('timeline.csv', col_types = 'ccDD') %>%
+  readr::read_csv('../thesis/timeline.csv', col_types = 'ccDD') %>%
   mutate(header = purrr::map2_lgl(section, task, grepl),
          section = factor(section,
-                          levels = c('Other', 'Chapter 4', 'Chapter 3',
-                                     'Chapter 2', 'Chapter 1', 'Preparatory',
-                                     'Coursework'))) %>%
+                          levels = c('Other', 'Chapter 5', 'Chapter 4',
+                                     'Chapter 3', 'Chapter 2', 'Chapter 1',
+                                     'Preparatory', 'Coursework'))) %>%
   arrange(section, desc(start), desc(end)) %>%
   mutate(dec_start = lubridate::decimal_date(start),
          dec_end = lubridate::decimal_date(end),

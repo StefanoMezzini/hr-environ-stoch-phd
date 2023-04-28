@@ -7,3 +7,6 @@
 
 <!-- tapir paper -->
 \includepdf[pages={-}]{manuscripts/Movement ecology of vulnerable lowland tapirs between areas of varying human disturbance.pdf}
+
+<!-- LDP traits paper -->
+\includepdf[pages={-}]{manuscripts/facets-2022-0063_Proof_hi.pdf}
