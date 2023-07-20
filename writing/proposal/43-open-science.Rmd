@@ -2,6 +2,6 @@
 
 # Open and transparent science: Code and data availability {#os}
 
-All code and figures used in this project are available at the GitHub repository located at [https://github.com/StefanoMezzini/hr-environ-stoch-masters](https://github.com/StefanoMezzini/hr-environ-stoch-masters). The repository currently does not include the animal movement data that will be used, which is available on Movebank and will be linked in future R scripts in the repository. The tapir movement data used for figure \@ref(fig:tapir-hr) is available in the `data` folder at [https://github.com/StefanoMezzini/tapirs](https://github.com/StefanoMezzini/tapirs).
+All code and figures used in this project are available at the GitHub repository located at [https://github.com/StefanoMezzini/hr-environ-stoch-phd](https://github.com/StefanoMezzini/hr-environ-stoch-phd) and related repositories (linked in the former's main README file). The repositories will not include any publicly available data, unless the data was substantially wrangled or cleaned.
 
-All scripts include comments to help people replicate the analysis, but they do assume some basic knowledge of `R` (including referring to help files and vignettes). Comments and requests regarding the project can be placed in the repository as issues.
+All scripts will include comments to help people replicate the analysis, but they will assume some basic knowledge of `R` (including referring to help files and vignettes). Comments and requests regarding the project can be placed in the repositories as issues, or sent directly to my email address.

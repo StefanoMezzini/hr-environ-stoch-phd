@@ -3,7 +3,6 @@ CTMM,Continuous-time movement model
 GAM,Generalized additive model
 HGAM,Hierarchical generalized additive model
 NDVI,Normalized difference vegetation index
-ml-HFI,Machine learning human footprint index
 GAMLS,Generalized additive model for location and scale
-PAM,Piecewise exponential additive model
+HPPP,Heterogeneous poisson point process
 PCA,Principal components analysis

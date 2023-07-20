@@ -1,11 +1,14 @@
 ---
-bibliography: 'masters-refs.bib'
+bibliography: 'phd-refs.bib'
 csl: '../freshwater-biology.csl'
+subparagraph: yes # needed for \usepackage[small]{titlesec}
+indent: yes
 header-includes:
     - \usepackage{setspace}\doublespacing # change default spacing
-    - \usepackage{indentfirst} # add indent to first line of each paragraph
+    - \usepackage{indentfirst} # for indenting first line of each paragraph
     - \pagenumbering{gobble} # remove numbering from title page
     - \usepackage{pdfpages} # to append pdfs to the thesis
+    - \usepackage[small]{titlesec} # for smaller headings
     - \usepackage{wrapfig} # to wrap text around figures
     - \usepackage{caption}
     # smaller caption text, less space above and below caption
@@ -29,7 +32,7 @@ config_file: '_bookdown.yml'
 ---
 
 ```{r, include=FALSE}
-TITLE <- 'Linking resource abundance and environmental stochasticity with animal space use using continuous-time stochastic processes'
+TITLE <- 'Linking environmental stochasticity with animal movement using continuous-time stochastic processes'
 knitr::opts_chunk$set(echo = FALSE, out.extra = '')
 library('dplyr')
 ```
@@ -98,7 +101,7 @@ A THESIS SUBMITTED IN PARTIAL FULFILLMENT OF
 
 THE REQUIREMENTS FOR THE DEGREE OF
 
-MASTER OF SCIENCE
+DOCTOR OF PHILOSOPHY
 
 in
 
@@ -136,26 +139,29 @@ THE UNIVERSITY OF BRITISH COLUMBIA
 
 \setcounter{page}{2} <!-- cover page is page i, so start from ii -->
 
-\textbf{The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis entitled:\newline
+\noindent\textbf{The following individuals certify that they have read, and recommend to the College of Graduate Studies for acceptance, a thesis entitled:\newline
 \textit{`r TITLE`},\newline
-submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Master of Science.}
+submitted by Stefano Mezzini in partial fulfillment of the requirements of the degree of Doctor of Philosophy.}
 
 \bigskip
 
-**Michael J. Noonan** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+\noindent \textbf{Michael J. Noonan} \hfill`r paste0(rep('_', 30), collapse = '')`\newline
 Supervisor
 
-**Adam T. Ford** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+\noindent \textbf{Mathieu Bourbonnais} \hfill`r paste0(rep('_', 30), collapse = '')`\newline
 Supervisory Committee Member
 
-**Jason Pither** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+\noindent \textbf{Adam T. Ford} \hfill`r paste0(rep('_', 30), collapse = '')`\newline
+Supervisory Committee Member
+
+\noindent \textbf{Jason Pither} \hfill`r paste0(rep('_', 30), collapse = '')`\newline
 Supervisory Committee Member
 
 <!--
-**University Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+**University Examiner.** \hfill`r paste0(rep('_', 30), collapse = '')`\newline
 University Examiner
 
-**External Examiner.** \hfill`r paste0(rep('_', 20), collapse = '')`\newline
+**External Examiner.** \hfill`r paste0(rep('_', 30), collapse = '')`\newline
 External Examiner
 -->
 
@@ -174,16 +180,24 @@ Supervisory Committee Member.-->
 <!-- The abstract is a concise and accurate summary of the research contained in the thesis. It states the problem, the methods of investigation, and the general conclusions. It should not contain tables, graphs or illustrations. It must not exceed 350 words, and should contain relevant keywords that will facilitate automated information retrieval. There may only be one abstract for the entire thesis. -->
 
 ```{r}
-abstract <- "The ability to move allows animals to access more resources and decrease the risk of mortality or injury from various threats, including predation and competition. However, most motile animals depend on movement to achieve an energetic balance, survive, and reproduce. Animals' spatial needs depend on a multitute of factors, including resource abundance, competitive pressure, predation, weather, and climate. The effects of many of these factors have been studied extensively, but the effects of environmental heterogeneity and unpredictability remain largely understudied. This thesis aims to quantify how resource abundance and environmental variation affect animals' spatial needs using theoretical arguments, computational simulations, and a large animal movement dataset of over 1500 individuals from more than 75 species. To this end, this thesis will produce a new global measure of environmental variance which will be used to quantify the effect of environmental heterogeneity and stochasticity on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The animals' movement will be modeled using continuous-time stochastic movement models. The effects of environmental variance on animal's spatial needs will be estimated using hierarchical generalized additive models that account for common trends between taxonomic groups and populations. The work will be carried out within a framework that recognizes the value of different forms of knowledge, including Traditional Indigenous Knowledge, and it will incorporate Traditional Indigenous Knowledge when possible. Overall, I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance. However, I also expect the effects of resource abundance and environmental variance to depend on the species and ecosystems of interest. Thus, the average trends between species may not be representative of individual populations and species."
+# abstract <- "The ability to move allows motile organisms to access more resources and decrease the risk of mortality or injury from various threats, including predation, competition, and extreme events such as floods and fires. Many animals depend on movement to achieve an energetic balance, survive, and reproduce. Animals' spatial needs depend on a multitude of factors, including resource abundance, competitive pressure, predation, weather, and climate. The effects of many of these factors have been studied extensively, but the effects of resource stochasticity remain largely understudied. This thesis aims to quantify how resource abundance and stochasticity affect animals' spatial needs using theoretical arguments, computational simulations, and a large animal movement dataset of over 3000 individuals from more than 85 globally-distributed species. To this end, this thesis will produce a new global measure of resource variance which will be used to quantify the effect of environmental heterogeneity and stochasticity on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The animals' movement will be modeled using continuous-time stochastic movement models. The effects of environmental variance on animal's spatial needs will be estimated using hierarchical generalized additive models that account for common trends between taxonomic groups and populations. The work will be carried out within a framework that recognizes the value of different forms of knowledge, including Traditional Indigenous Knowledge, and it will incorporate Traditional Indigenous Knowledge when possible. Overall, I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance. However, I also expect the effects of resource abundance and environmental variance to depend on the species and ecosystems of interest. Thus, the average trends between species may not be representative of individual populations and species."
+
+abstract <- paste0("Animals adapt their movement in response to many factors, including resource abundance, competitive pressure, predation, weather, and climate. While the effects of many of these factors have been studied extensively, little is known about how animals respond to environmental stochasticity. This thesis will quantify how environmental stochasticity, specifically stochasticity in resources and climate, affect where, how, when, and how much animals move. It will begin by proposing new, foundational hypotheses of how resource abundance and stochasticity affect animals' spatial needs, and it will support such hypotheses using quantitative simulations. Next, it will quantify resource abundance and stochasticity worldwide during the last five decades using the Normalized Difference Vegetation Index (NDVI) and a location-scale hierarchical generalized additive model. It will then test the again hypotheses using tracking data from over 3000 mammals across more than 85 globally-distributed species. Finally, it will assess how temperature, precipitation, and snow depth alter when, how fast, and where mammals moved in what is often referred to as British Columbia, Canada.",
+                   "\n",
+                   "Each of the chapters will create products that will be of direct use to Land Protectors, conservationists, and fellow scientists. The introductory chapter's conceptual framework will be useful for assessing how animals' spatial needs change in response to changes in resource abundance, including following unpredictable events such as firest and floods. The second chapter's model of mean and variance in NDVI will be available for managers to evaluate the quality and stability of lands and for scientists to use in their own research. The third chapter will contain appendices for reproducing the analyses with other datasets. Finally, the fourth chapter will present maps of current BC habitat quality and predictions in 2100 based on climate change projections. With the exception of sensitive data, all code and raw data will be made openly and freely available on GitHub, such that all who are interested can reproduce, evaluate, and learn from the work. Additionally, each project will be carried out in close contact with conservation experts and organizations to ensure the work is relevant and directly applicable in conservation.")
+
+if(FALSE) {
+  stringi::stri_count_words(abstract)
+}
 
 abstract <- if_else(stringi::stri_count_words(abstract) < 350,
                     abstract,
                     paste0('# ABSTRACT IS LONGER THAN 350 WORDS (',
-                          stringi::stri_count_words(abstract),
-                          ' WORDS).'))
+                           stringi::stri_count_words(abstract),
+                           ' WORDS).'))
 ```
 
-`r abstract`
+\noindent `r abstract`
 
 \newpage
 
@@ -192,14 +206,20 @@ abstract <- if_else(stringi::stri_count_words(abstract) < 350,
 <!-- The lay summary explains the key goals and contributions of the research/scholarly work in terms that can be understood by the general public. It does not use technical terms and discipline-specific language. It must not exceed 150 words in length. -->
 
 ```{r}
-lay_summary <- "Many factors affect how much space animals need to survive and reproduce. The effects of many factors have been studied extensively, such as resource abundance, competitive pressure, predation, weather, and climate. However, the effects of environmental heterogeneity and unpredictability remain understudied. This thesis aims to quantify how resource abundance and environmental variation affect animals' spatial needs using a large animal movement dataset. This thesis will produce a global measure of environmental variance which will be used to quantify the effect of such variance on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The work will be carried out while recognizing the value of different forms of knowledge, including Traditional Indigenous Knowledge. I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance, although this will likely depend on the species and ecosystems of interest."
+# lay_summary <- "Many factors affect how much space animals need to survive and reproduce. The effects of many factors have been studied extensively, such as resource abundance, competitive pressure, predation, weather, and climate. However, the effects of environmental stochasticity remain understudied. This thesis aims to quantify how resource abundance and variability affect mammals' spatial needs using simulations and a large animal tracking dataset. This thesis will produce a global measure of environmental variance which will be used to quantify the effect of such variance on animals' spatial needs while accounting for spatiotemporal trends and correlations within populations and species. The work will be carried out while recognizing the value of different forms of knowledge, including Traditional Indigenous Knowledge. I expect spatial needs to be lower in areas with higher resource abundance and lower environmental variance, although this will likely depend on the species and ecosystems of interest."
+
+lay_summary <- "Animals adapt their movement in response to many factors, including resource abundance, competitive pressure, predation, weather, and climate. While the effects of many of these factors have been studied extensively, little is known about how animals respond to environmental unpredictability. This thesis aims to quantify how unpredictability in resources and climate affect animal movement. It will begin by proposing new hypotheses of how resource abundance and unpredictability affect animals' spatial needs, and it will support the hypotheses using simulations. Next, it will quantify resource abundance and unpredictability worldwide during the last five decades using satellite-derived measures of habitat greenness. It will then test the hypotheses again using tracking data from over 3000 mammals across more than 85 globally-distributed species. Finally, it will assess how temperature, precipitation, and snow depth alter when, how fast, and where mammals moved in what is often referred to as British Columbia, Canada."
+
+if(FALSE) {
+  stringi::stri_count_words(lay_summary)
+}
 
 lay_summary <- if_else(stringi::stri_count_words(lay_summary) < 150,
                        lay_summary,
                        '# LAY SUMMARY IS LONGER THAN 150 WORDS.')
 ```
 
-`r lay_summary`
+\noindent `r lay_summary`
 
 \newpage
 
@@ -218,15 +238,11 @@ The preface is a statement indicating the relative contributions of all collabor
 \newpage
 -->
 
-# Foreword {-}
+# Foreword: Recognizing Traditional Indigenous Knowledge {-}
 
-## Two-eyed seeing: Recognizing Traditional Indigenous Knowledge {-}
+\noindent The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies or conserved by Western organizations. While acknowledging that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many different Peoples hold great knowledge on how to safeguard habitats, protect biodiversity, and live sustainably as an integral part of Nature [@schuster_vertebrate_2019], and that many have been doing so for millennia [@bennett_evidence_2021]. While Indigenous leaders, representatives, and Knowledge keepers have recently taken a more active role in conservation-related decision-making, their perspective is often still not valued [@lamb_braiding_2023]. Instead, many Western institutions continue to dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and and other colonized Peoples [@smith_decolonizing_2021; @kimmerer_braiding_2020]. Consequently, the development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized Peoples hold. Western science is often viewed as more objective, more methodical, and more unbiased than Traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2021]. However, the refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds for the Western institutions as well as severe (and potentially irreparable) damage to the Land and to those who inhabit the It [@smith_decolonizing_2021]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved, and reinforces "research" as the 'dirtiest word' for many Indigenous Peoples [see page 1 of @smith_decolonizing_2021]. <!--The sharing, development, recognition, and ownership (or lack thereof) of knowledge (and Sacred Knowledge) are core aspects of imperialism [@smith_decolonizing_2021, p. xii].-->
 
-The lands managed and protected by Indigenous Peoples are often markedly different from those inhabited by urban societies. While recognizing that there is great diversity between Indigenous Peoples (as well as other colonized Peoples), it is important to recognize that many hold great knowledge on how to live sustainably, safeguard environments, and protect biodiversity [@schuster_vertebrate_2019], and have been doing so for millennia. Yet, their leaders and representatives are seldom included in conservation-related decision-making. Instead, many Western institutions often dismiss, ignore, and contradict the ancestral and traditional Knowledge of Indigenous and colonized Peoples [@smith_decolonizing_2021; @kimmerer_braiding_2020]. The development of Western science is frequently assumed to clash with the (often sacred) Knowledge many colonized People hold. Western science is often viewed as more objective, methodical, and unbiased than traditional Knowledge, and as such Western institutions and people often consider it to be superior to Indigenous Knowledge [@smith_decolonizing_2021]. However, it is common for Western institutions to (reluctantly) reach similar, if not identical, conclusions as those held by Indigenous people [@bennett_evidence_2021; @smith_decolonizing_2021; @kimmerer_braiding_2020]. The refusal to recognize traditional Knowledge and cooperate with non-Western institutions often results in a loss of time, resources, and funds to the Western institutions and severe damage to the Land the institution operated on, as well as to the people who's ancestors inhabited the region for millennia [@smith_decolonizing_2021]. The development of Western science at the exclusion of Indigenous Peoples perpetuates colonialism and brings harm all parties involved.
-
-The concept of *two-eye seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. One possibility, however, is to use Traditional Knowledge to create properly informed Bayesian priors [@bolstad_introduction_2017]. The validity of the priors can be ensured using prior predictive modeling [@mcelreath_statistical_2016] to select priors that align with the Traditional Knowledge. This practice is not new [@girondot_bayesian_2015; @belisle_local_2018], but it is rarely used, despite it aligning well with the philosophy of Bayesian statistics.
-
-Although this project does not focus on Indigenous Knowledge or Data, I intend to carryout the work with an anti-imperial and anti-colonial stance, to combat problematic and questionable practices and views (rather than risking perpetuating them). I recognize my ignorance in the field in the hopes of receiving valuable critiques, direction, and suggestions. During the project, I intend connecting with local Indigenous groups and Nations (including Westbank First Nation) to offer help in related fields and exchange knowledge (while recognizing that I do not have the right to all knowledge and that many forms and sources of Knowledge are sacred). Regardless of whether collaborations will be possible, I will actively work on removing any form of colonial bias in my work and perspectives while also combating colonialism, imperialism, and other forms of oppression.
+The concept of *two-eyed seeing* refers to an approach to knowledge and growth that braids Indigenous Knowledge and science together with Western science [@kutz_two-eyed_2019; @kimmerer_braiding_2020]. Since Traditional Indigenous Knowledge tends to be qualitative, while biological sciences tend to be quantitative, connecting the two is not always simple [@bowles_threepronged_2021]. Although this project does not focus on Indigenous Knowledge or Data, I intend to carryout the work with an anti-imperial and anti-colonial sentiment. I recognize my ignorance in the field in the hopes of receiving valuable critiques, direction, and suggestions. During the project, I intend connecting with local Indigenous groups and Nations to offer help, develop relationshipts, and exchange knowledge (while recognizing that I do not have the right to all knowledge and that many forms and sources of Knowledge are sacred and private).
 
 <!--
 - https://focus.science.ubc.ca/stats-660805dd930a
@@ -258,9 +274,9 @@ Although this project does not focus on Indigenous Knowledge or Data, I intend t
 
 <!-- In this section you can acknowledge the extent to which assistance has been given by members of staff, fellow students, data technicians, editors, and/or others; recognize the supervision and advice given by your supervisor and committee members; acknowledge colleagues with whom you have written journal articles. -->
 
-I would like to thank Dr. Noonan for offering me the opportunity to pursue a Master's degree with such an interesting project with cutting-edge statistical methods for movement ecology. I have already learned a lot and I expect I will learn much more.
+\noindent I would like to thank Dr. Noonan for offering me the opportunity to pursue a PhD with such an interesting project and cutting-edge statistical methods for movement ecology. I have already learned much and I expect to learn much more.
 
-I would like to thank Dr. Ford and Dr. Pither for agreeing to be on my committee. Your feedback and mentorship will help me ensure this project is relevant and directly applicable to current issues regarding conservation and biogeography.
+I would like to thank Dr. Bourbonnais, Dr. Ford, and Dr. Pither for agreeing to be on my committee. Your feedback and mentorship will help me ensure this project is relevant and directly applicable to current issues regarding quantitative biology, conservation, and biogeography.
 
 I would like to thank Sandra Fox for providing me with resources to ensure my perspective and work are inclusive and supportive of different ways of knowing, including Indigenous Knowledge, and that my attitude remains anti-colonial and anti-imperial.
 
@@ -270,7 +286,11 @@ I would like to thank Sandra Fox for providing me with resources to ensure my pe
 
 <!-- The dedication is usually quite short, and is a personal rather than academic recognition. You can use any font or language you wish for the dedication page. -->
 
-To the Lands that have nourished me and given me a place to live, learn, and play.
+\noindent *A is Terras chi m'ant imbuconau e m'ant donau su logu aundi bivi, imparai e giogai.*
+
+\noindent *Alle Terre che mi hanno nutrito e dato un luogo dove vivere, imparare e giocare.*
+
+\noindent To the Lands that have nourished me and given me a place to live, learn, and play.
 
 \newpage
 

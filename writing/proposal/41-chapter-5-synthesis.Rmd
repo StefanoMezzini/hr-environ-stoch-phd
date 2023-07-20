@@ -1,0 +1,19 @@
+\newpage
+
+# Chapter 5: Synthesis {#synthesis}
+
+<!--
+- why is this work important? 
+- so what?
+- now what?
+-->
+
+\noindent The effect of environmental stochasticity on animals' spatial needs and movement at large has received little to no attention. However, recent increases in weather and climate stochasticity [@@intergovernmental_panel_on_climate_change_climate_2023], including an increase in the frequency and intensity of extreme events [@yao_emergence_2022] demonstrates that the topic is of high importance. Failure to account for the effects of environmental stochasticity will hinder our ability to make informed conservation decisions and take effective actions. This thesis will provide foundational framework with easily employable estimates of how mammal movement is affected by resource abundance, resource stochasticity, and changes in climate, with a focus on large-scale mammalian energetics.
+
+<!-- **Chapter 1** will contain a literature review of the currently available knowledge on animals' energetics and responses to changes in resource abundance and stochasticity. It will also provide the theoretical background which the subsequent chapters build upon, including numerical simulations of how animals' movement and space use are affected by resource abundance and stochasticity. **Chapter \@ref(var-raster)** will estimate resource abundance and stochasticity worldwide using NDVI as a proxy for resource abundance. **Chapter \@ref(movement)** will use the products from chapter \@ref(var-raster) and movement data from an unprecedented and conservation-relevant animal tracking dataset (>3000 animals from 87 globally-distributed species) to investigate how animals' spatial needs and behaviors change with resource abundance and stochasticity. Finally, **Chapter \@ref(cc-mammals)** will estimate how recent changes in climate have affected mammals' movement and space use and will provide conservation-relevant predictions of how mammal movement will change in BC in the coming years. -->
+
+The findings produced by this thesis will offer important considerations regarding the amount and quality of habitat mammals require to survive in heterogeneous, changing, and stochastic environments. Although the focus of this thesis will be on (large) mammals, the ideas and methods presented here can easily be applied to non-mammalian data. In addition, the global measure of environmental variance produced in **Chapter \@ref(var-raster)** will be designed so it is applicable to other fields of biology other than animal movement ecology, such as animal behavior, phenology, and forestry.
+
+<!-- Aim for ca. 1/2 a page on how you expect to tie everything together. -->
+
+<!-- tie the foreword to the summary -->

@@ -1,5 +1,5 @@
 output_dir: '.' # print the book in the current folder
-book_filename: 'mezzini-stefano-msc-thesis.Rmd' # specify the name of the final 
+book_filename: 'mezzini-stefano-phd-proposal.Rmd' # specify the name of the final file
 delete_merged_file: true
-# before_chapter_script: ["script1.R", "script2.R"]
-# after_chapter_script: "script3.R"
+# before_chapter_script: ["script1.R", "script2.R"] # example
+# after_chapter_script: "script3.R" # example
