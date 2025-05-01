@@ -1,55 +1,46 @@
-section,task,start,end
-Chapter 1,Chapter 1: Literature review and simulations,,
-Chapter 1,Literature review: surveyed the current knowledge,2021-12-01,2022-11-15
-Chapter 1,Developed simulation models with theoretical framework,2022-01-01,2022-09-15
-Chapter 1,Test simulation models with empirical data,2022-05-15,2022-09-15
-Chapter 1,Write chapter 1,2022-01-01,2023-06-30
-Chapter 1,"Open science: update READMEs, ensure work is reproducible",2023-06-01,2023-07-01
-Chapter 2,Chapter 2: A new global measure of stochasticity,,
-Chapter 2,Collect NDVI data,2022-06-01,2023-10-31
-Chapter 2,Model NDVI data,2022-06-01,2024-03-31
-Chapter 2,Write chapter 2,2023-09-01,2024-05-31
-Chapter 2,"Open science: update READMEs, ensure work is reproducible",2023-11-01,2023-12-31
-Chapter 3,Chapter 3: Modeling animal movement,,
-Chapter 3,"Clean, organize, and merge movement data",2024-01-01,2024-02-28
-Chapter 3,Model animal tracking data,2024-03-01,2024-05-31
-Chapter 3,Estimate stochasticity effects,2024-04-01,2024-12-31
-Chapter 3,Write chapter 3,2024-06-01,2025-04-30
-Chapter 3,"Open science: update READMEs, ensure work is reproducible",2025-04-01,2025-04-30
-Chapter 4,Chapter 4: Animal movement in a changing climate,,
-Chapter 4,Collect telemtry data,2022-11-15,2023-02-28
-Chapter 4,Collect historical climate data,2022-11-15,2023-02-28
-Chapter 4,Model animal movement,2022-11-15,2023-03-15
-Chapter 4,Write Living Labs report,2023-02-01,2023-03-25
-Chapter 4,Write chapter 4,2023-04-01,2023-09-30
-Chapter 4,"Open science: update READMEs, ensure work is reproducible",2023-03-01,2023-03-25
-Chapter 5,Chapter 5: Summary,,
-Chapter 5,Write chapter 5,2025-05-01,2025-08-31
-Coursework,Coursework,,
-Coursework,Living Data Project Working group: calculate new Canadian Living Planet Index (cLPI),2021-08-30,2021-09-03
-Coursework,"BIOL 501 Seminar Course: guest spekers, presenting research, creating presentations",2021-09-01,2021-12-07
-Coursework,Productivity and Reproducibility in Ecology and Evolution,2021-09-07,2021-09-28
-Coursework,Scientific Collaboration in Ecology and Evolution,2021-09-07,2021-09-28
-Coursework,Scientific Data Management for Ecology and Evolution,2021-10-05,2021-11-04
-Coursework,Synthesis Statistics for Ecology and Evolution,2021-10-05,2021-11-04
-Other,Other related efforts,,
-Other,TAship (BIOL 202: Intro to Biostatistics),2021-09-01,2021-12-15
-Other,TAship (BIOL 125: Biology for Science majors II),2022-01-01,2022-04-15
-Other,TAship (BIOL 116: Biology for Science majors I),2022-05-16,2022-06-17
-Other,TAship (BIOL 125: Biology for Science majors II),2022-07-07,2022-08-11
-Other,TAship (BIOL 202: Intro to Biostatistics),2022-09-01,2022-12-15
-Other,Research Data Consultant,2023-01-01,2024-03-31
-Other,Data analyst: estimated effects of human activity on tapir movement,2021-05-01,2022-01-31
-Other,LDP WG: estimating minimum sample for an accurate cLPI,2021-08-30,2022-03-31
-Other,"LDP WG: estimating bias in the cLPI, calculating the cLPI with non-Gaussian models",2021-08-30,2022-03-31
-Other,Biol 417 -- Guest lecturer,2022-03-01,2022-03-03
-Other,Biol 417 -- Guest lecturer,2023-02-26,2023-02-28
-Other,Biology Graduate Research Symposium -- Presenter,2022-10-10,2022-10-12
-Other,BCPARF 2023 Conference -- Presenter,2022-12-12,2022-12-14
-Other,3 Minute Thesis -- Presenter,2023-02-21,2023-02-23
-Other,Gordon Research Seminar: Theory and Hypothesis-Testing in Movement Ecology -- Presenter,2023-05-27,2023-05-28
-Other,Gordon Research Conference: Theory and Hypothesis-Testing in Movement Ecology -- Presenter,2023-05-29,2023-06-02
-Preparatory,Preparatory,,
-Preparatory,Worte MSc Proposal,2022-01-01,2022-03-15
-Preparatory,Open Science: Created and organized GitHub repository,2021-10-22,2021-12-10
-Preparatory,Wrote PhD Proposal,2023-04-28,2023-05-05
+section,task,start,end,bold
+Chapter 1,Chapter 1: Resource stochasticity and range sizes (simulations),,,TRUE
+Chapter 1,Literature review: surveyed the current knowledge,2021-12-01,2022-11-15,FALSE
+Chapter 1,Developed simulation models with theoretical framework,2022-01-01,2022-09-15,FALSE
+Chapter 1,Test simulation models with empirical data,2022-05-15,2022-09-15,FALSE
+Chapter 1,Write chapter 1,2022-01-01,2024-10-30,FALSE
+Chapter 1,Published manuscript,2025-03-18,2025-03-22,TRUE
+Chapter 2,Chapter 2: DENVar: A global Dynamic Estimate of NDVI Variance,,,TRUE
+Chapter 2,Collect NDVI AVHRR/VIIRS data,2022-06-01,2025-03-21,FALSE
+Chapter 2,Model NDVI data,2022-06-01,2025-08-31,FALSE
+Chapter 2,Write chapter 2,2023-09-01,2025-08-31,FALSE
+Chapter 2,Submit manuscript for publication,2025-08-15,2025-08-30,TRUE
+Chapter 3,Chapter 3: Resource stochasticity and range sizes (empirical),,,TRUE
+Chapter 3,"Clean, organize, and merge movement data",2025-05-15,2025-06-30,FALSE
+Chapter 3,Model animal tracking data,2025-05-30,2025-08-31,FALSE
+Chapter 3,Estimate stochasticity effects,2025-08-01,2025-08-31,FALSE
+Chapter 3,Write chapter 3,2025-08-31,2025-09-30,FALSE
+Chapter 3,Submit manuscript for publication,2025-09-15,2025-09-30,TRUE
+Chapter 4,Chapter 4: Mammal movement in a changing climate,,,TRUE
+Chapter 4,Collect telemtry data,2022-11-15,2024-02-28,FALSE
+Chapter 4,Collect historical climate data,2022-11-15,2023-02-28,FALSE
+Chapter 4,Model animal movement,2022-11-15,2025-03-01,FALSE
+Chapter 4,Write Living Labs report,2023-02-01,2023-03-25,FALSE
+Chapter 4,Write chapter 4,2023-04-01,2025-05-30,FALSE
+Chapter 4,Submit manuscript for publication,2025-05-15,2025-05-30,TRUE
+Chapter 5,Chapter 5: Summary,,,TRUE
+Chapter 5,Write chapter 5,2025-09-01,2025-09-30,FALSE
+Other,Other related efforts,,,TRUE
+Other,Graduate Teaching Assistant,2021-09-01,2022-12-15,FALSE
+Other,Graduate Research Assistant,2025-05-01,2026-01-01,FALSE
+Other,Research Data Consultant,2023-01-01,2025-04-30,FALSE
+Other,Data analyst: estimated effects of human activity on tapir movement,2021-05-01,2022-01-31,FALSE
+Other,LDP WG: estimating minimum sample for an accurate cLPI,2021-08-30,2022-03-31,FALSE
+Other,"LDP WG: estimating bias in the cLPI, calculating the cLPI with non-Gaussian models",2021-08-30,2022-03-31,FALSE
+Other,Biol 417 -- Guest lecturer,2022-03-01,2022-03-03,FALSE
+Other,Biol 417 -- Guest lecturer,2023-02-26,2023-02-28,FALSE
+Other,Biol 417 -- Guest lecturer,2024-02-04,2024-02-06,FALSE
+Other,Biology Graduate Research Symposium -- Presenter,2022-10-10,2022-10-12,FALSE
+Other,BCPARF 2023 Conference -- Presenter,2022-12-12,2022-12-14,FALSE
+Other,3 Minute Thesis -- Presenter,2023-02-21,2023-02-23,FALSE
+Other,Gordon Research Seminar: Theory and Hypothesis-Testing in Movement Ecology -- Presenter,2023-05-27,2023-05-28,FALSE
+Other,Gordon Research Conference: Theory and Hypothesis-Testing in Movement Ecology -- Presenter,2023-05-29,2023-06-02,FALSE
+Preparatory,Preparatory,,,TRUE
+Preparatory,Coursework,2021-08-30,2021-11-04,FALSE
+Preparatory,Worte MSc Proposal,2022-01-01,2022-03-15,FALSE
+Preparatory,Wrote PhD Proposal,2023-04-28,2023-05-05,FALSE

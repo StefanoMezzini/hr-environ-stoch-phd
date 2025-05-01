@@ -2,7 +2,7 @@
 
 # Project timeline {#timeline}
 
-```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my Master\'s project.', fig.width=14, fig.height=8, message=FALSE, out.width='100%'}
+```{r, echo = FALSE, fig.cap='Visual representation of the estimated timeline for my PhD project.', fig.width=14, fig.height=8, message=FALSE, out.width='100%'}
 library('tibble')    # for fancy data frames
 library('dplyr')     # for piping and data wrangling
 library('lubridate') # for working with dates
@@ -19,13 +19,18 @@ pal <- c('#4477AA', '#ff8c00', '#66CCEE', '#009900',
 
 t_breaks <- tibble(dates = date(c('2021-09-01',
                                   '2022-01-01', '2022-05-01', '2022-09-01',
-                                  '2023-01-01', '2023-05-01', '2023-09-01')),
+                                  '2023-01-01', '2023-05-01', '2023-09-01',
+                                  '2024-01-01', '2024-05-01', '2024-09-01',
+                                  '2025-01-01', '2025-05-01', '2025-09-01',
+                                  '2026-01-01')),
                    dec = decimal_date(dates),
                    strings = paste(month.abb[month(dates)], year(dates)))
 
 tasks <-
-  readr::read_csv('../thesis/timeline.csv', col_types = 'ccDD') %>%
+  readr::read_csv('~/GitHub/hr-environ-stoch-phd/writing/thesis/timeline.csv',
+                  col_types = 'ccDDl') %>%
   mutate(header = purrr::map2_lgl(section, task, grepl),
+         color = header | grepl('publi', tolower(task)),
          section = factor(section,
                           levels = c('Other', 'Chapter 5', 'Chapter 4',
                                      'Chapter 3', 'Chapter 2', 'Chapter 1',
@@ -37,28 +42,22 @@ tasks <-
          task = factor(task, levels = unique(task)),
          id = 1:n(),
          completed = end <= Sys.Date(),
-         # task = stri_replace_all(task, regex = ':', replacement = ':\n'),
-         # re-format all special characters (only needed if parse = TRUE)
-         # task = stri_replace_all(task, regex = ' ', replacement = '~'),
-         # task = stri_replace_all(task, regex = '\'', replacement = "\\'"),
-         # task = stri_replace_all(task, regex = '~in~', replacement='~\'in\'~'),
-         # task = stri_replace_all(task, regex = ',', replacement = ''),
-         # task = stri_replace_all(task, regex ='for~', replacement='\'for\'~'),
-         # make headers bold (removed because numbers cannot be bold)
-         #task = if_else(header, paste0('bold(', task, ')'), task),
-         )
+         # to avoid issues with special characters and non-bold numbers
+         task = paste0('\'', task, '\''),
+         # make headers bold
+         task = if_else(bold, paste0('bold(', task, ')'), task))
 
-# tasks %>%
-#   transmute(Task = task, `Start date` = start, `End date` = end) %>%
-#   knitr::kable(caption = 'Estimated timeline for my Master\'s project.')
 ggplot(tasks, aes(y = id)) +
-  geom_hline(aes(yintercept = id + 0.5), filter(tasks, header), alpha = 0.15) +
-  geom_vline(xintercept = decimal_date(Sys.Date()), lty = 'dashed', alpha = 0.5) +
+  geom_vline(xintercept = decimal_date(as.Date(paste0(2021:2025, '-09-01'))),
+             alpha = 0.15, lwd = 0.25) +
+  geom_hline(aes(yintercept = id + 0.5), filter(tasks, header)[-7, ], alpha = 0.5) +
+  geom_hline(aes(yintercept = id - 0.5), tasks, alpha = 0.05) +
+  geom_vline(xintercept = decimal_date(Sys.Date()), lty = 'dashed') +
   geom_errorbar(aes(xmin = dec_start, xmax = dec_end, color = section),
                 width = 0, lwd = 2, alpha = 0.75) +
-  #' use `ggrepel::geom_label_repel()` for repelling labels
-  geom_text(aes(2020.3, label = task, color = header), hjust = 'left', size = 3,
-            parse = FALSE) +
+  geom_text(aes(2020, label = task, color = color), tasks,
+            hjust = 'left', size = 3, parse = TRUE) +
+  annotate(geom = 'point', x = 2026.1, y = 1, color = 'transparent') +
   scale_x_continuous(NULL, breaks = t_breaks$dec, labels = t_breaks$strings,
                      expand = c(0, 0)) +
   scale_y_continuous(NULL, breaks = NULL) +
