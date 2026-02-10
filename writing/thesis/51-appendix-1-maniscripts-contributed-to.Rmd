@@ -1,0 +1,33 @@
+\newpage
+
+# Appendix 1: Manuscripts contributed to during the doctorate {-}
+
+\begin{etaremune}
+
+\item \textbf{Mezzini S}, Marcus R, Desai D, \& Noonan MJ (2026). Environmental variability shapes biodiversity and potected area priorities in Canada. In press in Nature Communications Earth and Environment. \href{https://doi.org/10.1038/s43247-025-03166-4}{https://doi.org/10.1038/s43247-025-03166-4}
+
+\item \textbf{Mezzini S}, Fleming CH, Medici EP \& Noonan MJ (2025). How resource abundance and resource stochasticity affect organisms' range sizes. Movement Ecology 13, 20. \href{https://doi.org/10.1186/s40462-025-00546-5}{https://doi.org/10.1186/s40462-025-00546-5}
+
+\item \textbf{Mezzini S}, DeNicola VL, Cagnacci F, \& Fleming CH (2025). Are your Data too Coarse for Speed Estimation? Diffusion Rates as an Alternative Measure of Animal Movement. Submitted for publication. BioR$\chi$iv preprint: \href{https://doi.org/10.1101/2025.07.17.665364}{https://doi.org/10.1101/2025.07.17.665364}
+
+\item DeNicola VL, \textbf{Mezzini S}, Bursać P, Minasandra P \& Cagnacci F (2025). Effects of vasectomy on breeding-related movement and activity in free-ranging white-tailed deer. Movement Ecology 13, 34. \href{https://doi.org/10.1186/s40462-025-00554-5}{https://doi.org/10.1186/s40462-025-00554-5}
+
+\item DeNicola VL, \textbf{Mezzini S}, \& Cagnacci F (2025). Monitoring the effects of ovariectomy on seasonal movement behavior in suburban female white‐tailed deer using internet of things‐enabled devices. Wildlife Biology, Early View. \href{https://doi.org/10.1002/wlb3.01512}{https://doi.org/10.1002/wlb3.01512}
+
+\item Gaynor KM, Wooster EIF, Martinig AR, ..., \textbf{Mezzini S}, Marley J, \& Noonan MJ (2025). The human shield hypothesis: does predator avoidance of humans create refuges for prey? Ecology Letters 28, 6. \href{https://doi.org/10.1111/ele.70138}{https://doi.org/10.1111/ele.70138}
+
+\item Shaw AK, Fouda L, \textbf{Mezzini S}, Kim D, Chatterjee N, Wolfson D, et al. (2025). Perceived and observed biases within scientific communities: a case study in movement ecology. Proc. R. Soc. B. 29220, 250679. \href{https://doi.org/10.1098/rspb.2025.0679}{https://doi.org/10.1098/rspb.2025.0679}
+
+\item Gushulak CAC, Chegoonian AM, Wolfe J, Gray K, \textbf{Mezzini S}, Wissel B, et al. (2024). Impacts of hydrologic management on the eutrophication of shallow lakes in an intensive agricultural landscape (Saskatchewan, Canada). Freshwater Biology 69, 7. \href{https://doi.org/10.1111/fwb.14260}{https://doi.org/10.1111/fwb.14260}
+
+\item Weststrate DK, Chhen A, \textbf{Mezzini S}, Safford K \& Noonan MJ (2024). How climate change and population growth will shape attendance and human-wildlife interactions at British Columbia parks. Journal of Sustainable Tourism 33, 2. \href{https://doi.org/10.1080/09669582.2024.2331228}{https://doi.org/10.1080/09669582.2024.2331228}
+
+\item Gushulak CAC, \textbf{Mezzini S}, Moir KE, Simpson GL, Bunting L, Wissel B, et al. (2024). Impacts of a century of land‐use change on the eutrophication of large, shallow, prairie Lake Manitoba in relation to adjacent Lake Winnipeg (Manitoba, Canada). Freshwater Biology 69, 1. \href{https://doi.org/10.1111/fwb.14192}{https://doi.org/10.1111/fwb.14192}
+
+\item Medici EP, \textbf{Mezzini S}, Fleming CH, Calabrese JM \& Noonan MJ (2022). Movement ecology of vulnerable lowland tapirs between areas of varying human disturbance. Movement Ecology 10, 14. \href{https://doi.org/10.1186/s40462-022-00313-w}{https://doi.org/10.1186/s40462-022-00313-w}
+
+\item Bjorndahl JA, Gushulak CAC, \textbf{Mezzini S}, Simpson GL, Haig HA, Leavitt PR, Finlay K. (2022). Abrupt changes in the physical and biological structure of endorheic upland lakes due to 8‐m lake‐level variation during the 20 th century. Limnology and Oceanography 67, 5. \href{https://doi.org/10.1002/lno.12054}{https://doi.org/10.1002/lno.12054}
+
+\item Currie J, Burant JB, Marconi V, ..., \textbf{Mezzini S}, Pata P., \& Freeman R. (2022). Assessing the representation of species included within the Canadian Living Planet Index. FACETS 7, 1. \href{https://doi.org/10.1139/facets-2022-0063}{https://doi.org/10.1139/facets-2022-0063}
+
+\end{etaremune}
