@@ -1,0 +1,25 @@
+\clearpage
+
+# Introduction
+
+Movement allows animals to respond rapidly and continuously to a wide variety of stimuli in within the environment and within their body [@nathan_movement_2008].
+Animals may move to escape predators or avoid competitors but also search for resources (e.g., food, water, heat, a new den or nesting spot), a mate, or a new group, and defend such resources and conspecifics.
+
+Within the last two centuries, widespread changes in climate [@ipcc_climate_2023] and increases in anthropogenic activity [@tucker_moving_2018] have had profound effects on species' movement behavior and their ability to adapt to and respond to change [@diffenbaugh_changes_2013; @woo-durand_increasing_2020; @sih_evolution_2011; @hirt_environmental_2021].
+Consequently, many researchers have studied species' ability to respond to change in the short term [@southwood_habitat_1977], the long term [@levins_evolution_1974], and the when changes are too severe to respond to [@botero_evolutionary_2015].
+In particular, the field of movement ecology has focused on animals' responses to change trough movement [@nathan_movement_2008] while formalizing core theory presented by previous foundational work [e.g., @burt_territoriality_1943; @southwood_habitat_1977].
+Most of the work addresses animals' responses to changes in mean conditions, although some work has addressed animals' responses to stochastic (i.e., unpredictable) change [@lande_risks_1993; @bull_metapopulation_2007; @fung_quantifying_2018].
+
+In this thesis, I build on such work by presenting results on four projects, each in a separate chapter.
+The first three chapters focus on quantfying envirnomental stochasticity and species' (mainly mammals') response to changes in resource abundance and unpredictability, while the fourth chapter illustrates addresses the effects of air temperature on mammals' movement rates and habitat selection.
+In Chapter 1, I illustrate how animals' spatial needs depend on both the abundance and unpredictability of resources through simulations.
+I demonstrate that both variables have nonlinear effects on animals' range sizes, and I provide a case study illustrating how the concepts can be applied to real-world telemetry data on a lowland tapir (*Tapirus terrestris*) from the Brazilian Cerrado [@medici_movement_2022].
+In Chapter 2, I produce a model for quantifying mean and variance in NDVI from 1981 to 2025 throughout the Nearctic and Palearctic.
+In Chapter 3, I leverage the estimates produced in Chapter 2 as proxies of resource abundance and stochasticity to test the hypotheses presented in chapter 1 using telemetry data on ***XXX*** individuals across ***XXX*** species throughout the Nearctic and Palearctic.
+In Chapter 4, I quantify the effects of air temperature on the movement rates and habitat selection of six species of mammals within the north-western Nearctic.
+Finally, in Chapter 5, I summarize the work I presented in this thesis and I demonstrate its significance within the larger picture of movement ecology, conservation, and quantitative zoology.
+
+I wrote each chapter in this thesis as a standalone publication, so the following chapters do not assume readers are familiar with any previous chapters nor this introduction.
+Additionally, the chapters occasionally use the plural first person ("we") as as common practice with scientific papers with more than one author.
+While each chapter is designed to address each objective independently, together they provide convergent evidence towards the role of stochasticity and change in shaping animal movement behavior.
+**Appendix 1** contains details on published works I made substantial contributions to during the course of my doctorate.
