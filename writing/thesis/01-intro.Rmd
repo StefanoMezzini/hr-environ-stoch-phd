@@ -2,7 +2,34 @@
 
 # Introduction
 
-Movement allows animals to respond rapidly and continuously to a wide variety of stimuli in within the environment and within their body [@nathan_movement_2008].
+## TODO:
+
+15-20 pages double spaced:
+
+- situate the thesis within the field
+- movement changing as a response to environmental stochasticity
+- Ideal Free Distribution and how it's changed over time: when does it not work and when does need to be modified?
+- confusion between stochasticity and seasonality
+- stochasticity affects many things, but focusing on movement because it's easier to track and understand
+- move all info from "current knowledge" to intro
+- add appendix B (resources as random variables) from the movement ecology paper to intro; add some concrete examples to explain within the context of ecology
+- define all terms clearly
+- add all material on scale (not present in chaper 1)
+
+chapters:
+- the ME chapter can become chapter 1 as is
+- chapter 3:
+..- use already calculated HR estimates and UDs (Mike to send data soon)
+..- predict long-term raster from N/S america model to fit models
+..- write and complete since it's easy
+- chapter 4: mike writing some edits, then can add directly as is
+- intro: look at chapter 1 from MSc thesis (see above and `C:\Users\stefa\Documents\GitHub\hr-environ-stoch-phd\writing\proposal\msc-proposal\mezzini-stefano-msc-proposal.pdf`)
+- write summary chapter (~ synth all findings in context of the field at the end of the intro)
+- chapter 2: write in terms of North and South America; keep fitting in background
+
+## text
+
+Movement allows animals to respond rapidly and continuously to a wide variety of stimuli from the external environment and within their body [@nathan_movement_2008].
 Animals may move to escape predators or avoid competitors but also search for resources (e.g., food, water, heat, a new den or nesting spot), a mate, or a new group, and defend such resources and conspecifics.
 
 Within the last two centuries, widespread changes in climate [@ipcc_climate_2023] and increases in anthropogenic activity [@tucker_moving_2018] have had profound effects on species' movement behavior and their ability to adapt to and respond to change [@diffenbaugh_changes_2013; @woo-durand_increasing_2020; @sih_evolution_2011; @hirt_environmental_2021].
@@ -10,8 +37,10 @@ Consequently, many researchers have studied species' ability to respond to chang
 In particular, the field of movement ecology has focused on animals' responses to change trough movement [@nathan_movement_2008] while formalizing core theory presented by previous foundational work [e.g., @burt_territoriality_1943; @southwood_habitat_1977].
 Most of the work addresses animals' responses to changes in mean conditions, although some work has addressed animals' responses to stochastic (i.e., unpredictable) change [@lande_risks_1993; @bull_metapopulation_2007; @fung_quantifying_2018].
 
-In this thesis, I build on such work by presenting results on four projects, each in a separate chapter.
-The first three chapters focus on quantfying envirnomental stochasticity and species' (mainly mammals') response to changes in resource abundance and unpredictability, while the fourth chapter illustrates addresses the effects of air temperature on mammals' movement rates and habitat selection.
+Despite having received limited attention within ecology and conservation [@marcus_changing_2023], environmental stochasticity can have substantial impacts on an ecosystem's stability [@ref] and energetic balance [@ref]. 
+
+In this thesis, ***I extend the work on the effects of stochasticity*** on four projects, each in a separate chapter.
+The first three chapters focus on quantifying environmental stochasticity and species' (mainly mammals') response to changes in resource abundance and unpredictability, while the fourth chapter illustrates addresses the effects of air temperature on mammals' movement rates and habitat selection.
 In Chapter 1, I illustrate how animals' spatial needs depend on both the abundance and unpredictability of resources through simulations.
 I demonstrate that both variables have nonlinear effects on animals' range sizes, and I provide a case study illustrating how the concepts can be applied to real-world telemetry data on a lowland tapir (*Tapirus terrestris*) from the Brazilian Cerrado [@medici_movement_2022].
 In Chapter 2, I produce a model for quantifying mean and variance in NDVI from 1981 to 2025 throughout the Nearctic and Palearctic.
